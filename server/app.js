@@ -16,7 +16,7 @@ const MONGO_URL = 'mongodb://Ed:drowssap1@ds058739.mlab.com:58739/flex';
 var db;
 
 //connect to database and run app
-mongodb.MongoClient.connect(MONGO_URL, function (err, database) {
+mongodb.MongoClient.connect(MONGO_URL, { useNewUrlParser: true }, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
