@@ -1,32 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import router from './router'
+import router from './router/index'
 
-
-Vue.config.productionTip = false
-
-
+// Enable devTools
+if (window.location.hostname.indexOf('local') > -1) {
+  Vue.config.devtools = true
+}
 
 new Vue({
-  created: function(){
-  	const axios = require('axios');
-	   //Make a request for a user with a given ID
-	   axios.get('http://localhost:3000/')
-  	.then(function (response) {
-    	// handle success
-    	console.log(response);
-  	})
-  	.catch(function (error) {
-    	// handle error
-    	console.log(error);
-  	})
-  },
+  router,
+  el: '#app',
   render: h => h(App)
-}).$mount('#app')
-
-// new Vue({
-//   el: '#app',
-//   router,
-//   template: '<App/>',
-//   components: { App }
-// })
+})
