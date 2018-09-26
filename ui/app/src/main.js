@@ -14,8 +14,27 @@ if (window.location.hostname.indexOf('local') > -1) {
   Vue.config.devtools = true
 }
 
+// var pUpdates = [
+// 	{
+//     	patient: "Steve",
+//     	update: 'Broke his arm in 12 places',
+//   	},
+//   	{
+//     	patient: "Steve",
+//     	update: 'Broke his arm in 12 places',
+//   	},
+//   	{
+//     	patient: "Steve",
+//     	update: 'Broke his arm in 12 places',
+//   	},
+// ]
+
 new Vue({
   router,
   el: '#app',
+  data: {
+    	title: "Sample Vue app",
+    	user: ""
+  	},
   render: h => h(App)
 })

@@ -7,6 +7,10 @@
 <script>
   export default {
     name: 'app',
+    data: {
+    	title: "Sample Vue app",
+    	user: ""
+  	}
   }
 </script>
 

@@ -3,11 +3,15 @@ import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import UserHome from '../components/UserHome'
 import PatientSummary from '../components/PatientSummary'
+import UpdateFeed from '../components/UpdateFeed'
+import PatientMessages from '../components/PatientMessages'
+
 Vue.use(Router)
+let obj = "something";
 export default new Router({
   routes: [
     {
-      path: '/fuck',
+      path: '/',
       name: 'Hello',
       component: HelloWorld
     },
@@ -19,7 +23,20 @@ export default new Router({
     {
       path: '/doctor',
       name: 'doctor',
+      component: UpdateFeed,
+      props:{
+        word:"text"
+      }
+    },
+    {
+      path: '/psummary',
+      name: 'psummary',
       component: PatientSummary
     },
+    {
+      path: '/pmessage',
+      name: 'pmessage',
+      component: PatientMessages
+    }
   ]
 })
