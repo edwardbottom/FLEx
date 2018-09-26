@@ -47,7 +47,7 @@
       <b-collapse id="accordion3" visible accordion="my-accordion" role="tabpanel">
         <b-card-body>
           <ul class="card-text">
-            <li>Age: 37</li>
+            <li>Age: 39</li>
             <li>Height: 6'0 Weight: 190 lbs</li>
             <li>1st Visit: 1/1/1999 Last Visit: 1/1/1997</li>
             <li>injury: Broken Shoulder</li>
@@ -65,7 +65,23 @@
 
 <script>
 export default {
-  name: 'PatientSummary'
+  name: 'PatientSummary',
+  props: {
+    summaries:[
+      {
+        age: Number,
+        height: String,
+        weight: Number,
+        injury: String,
+        currentStatus: Number,
+        averageStatus: Number,
+        lastUsed: String,
+        insuraceProvider: String,
+        contatct: String,
+        nextVisit: String
+      }
+    ]
+  }
 }
 </script>
 

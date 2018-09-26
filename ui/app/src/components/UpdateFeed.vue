@@ -5,7 +5,7 @@
     <p class="card-text">
       <b-card>
         <p class="card-text">
-          {{ title }}
+          This is an update
         </p>
         <b-button href="#" variant="primary">View Profile</b-button>
       </b-card>

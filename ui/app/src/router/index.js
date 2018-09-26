@@ -5,9 +5,9 @@ import UserHome from '../components/UserHome'
 import PatientSummary from '../components/PatientSummary'
 import UpdateFeed from '../components/UpdateFeed'
 import PatientMessages from '../components/PatientMessages'
+import DoctorScreen from '../components/DoctorScreen'
 
 Vue.use(Router)
-let obj = "something";
 export default new Router({
   routes: [
     {
@@ -36,7 +36,7 @@ export default new Router({
     {
       path: '/pmessage',
       name: 'pmessage',
-      component: PatientMessages
+      component: DoctorScreen
     }
   ]
 })

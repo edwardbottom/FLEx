@@ -6,11 +6,7 @@
 
 <script>
   export default {
-    name: 'app',
-    data: {
-    	title: "Sample Vue app",
-    	user: ""
-  	}
+    name: 'app'
   }
 </script>
 
