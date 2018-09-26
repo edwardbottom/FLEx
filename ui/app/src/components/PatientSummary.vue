@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div v-for="patient in patients" class="PatientSummary">
   <b-btn v-b-toggle.collapse1 variant="primary">Toggle Collapse</b-btn>
     <b-collapse id="collapse1" class="mt-2">
@@ -7,14 +7,14 @@
       </b-card>
   </b-collapse>
   </div>
-</template>
+</template> -->
 
 <script>
 export default {
   name: 'PatientSummary',
   props: {
     patients:[
-      p1:{
+      {
         name:"steve",
         age:37,
         height:"6'0",
