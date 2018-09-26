@@ -1,18 +1,14 @@
-<!-- <template>
-  <div v-for="patient in patients" class="PatientSummary">
-  <b-btn v-b-toggle.collapse1 variant="primary">Toggle Collapse</b-btn>
-    <b-collapse id="collapse1" class="mt-2">
-      <b-card>
-        <p class="card-text">Collapse contents Here</p>
-      </b-card>
-  </b-collapse>
+<template>
+  <div class="PatientSummary">
+    <p> {{ test }} </p>
   </div>
-</template> -->
+</template>
 
 <script>
 export default {
   name: 'PatientSummary',
   props: {
+    test:"text",
     patients:[
       {
         name:"steve",
