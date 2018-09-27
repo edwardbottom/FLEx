@@ -6,6 +6,8 @@ import PatientSummary from '../components/PatientSummary'
 import UpdateFeed from '../components/UpdateFeed'
 import PatientMessages from '../components/PatientMessages'
 import DoctorScreen from '../components/DoctorScreen'
+import Login from '../components/Login'
+import CreateAccount from '../components/CreateAccount'
 
 Vue.use(Router)
 export default new Router({
@@ -27,6 +29,16 @@ export default new Router({
       props:{
         word:"text"
       }
+    },
+    {
+      path: '/Login',
+      name: '/Login',
+      component: Login
+    },
+    {
+      path: '/CreateAccount',
+      name: '/CreateAccount',
+      component: CreateAccount
     }
   ]
 })
