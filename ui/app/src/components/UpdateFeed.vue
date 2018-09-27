@@ -7,7 +7,7 @@
         <p class="card-text">
           This is an update
         </p>
-        <b-button href="#" variant="primary">View Profile</b-button>
+        <a href="#">View Profile</a>
       </b-card>
     </p>
   </b-card>

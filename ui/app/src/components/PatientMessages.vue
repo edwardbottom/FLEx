@@ -4,9 +4,9 @@
     <div role="tablist">
       <b-card no-body class="mb-1">
         <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-btn block href="#" v-b-toggle.accordion1 variant="success">New Message from: someone</b-btn>
+          <b-btn block href="#" v-b-toggle.accordion7>New Message from: someone</b-btn>
         </b-card-header>
-        <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse id="accordion7" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <ul class="card-text">
               <li> text </li>

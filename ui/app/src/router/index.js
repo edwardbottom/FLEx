@@ -23,20 +23,10 @@ export default new Router({
     {
       path: '/doctor',
       name: 'doctor',
-      component: UpdateFeed,
+      component: DoctorScreen,
       props:{
         word:"text"
       }
-    },
-    {
-      path: '/psummary',
-      name: 'psummary',
-      component: PatientSummary
-    },
-    {
-      path: '/pmessage',
-      name: 'pmessage',
-      component: DoctorScreen
     }
   ]
 })
