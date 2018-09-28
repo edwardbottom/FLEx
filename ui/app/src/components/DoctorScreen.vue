@@ -9,7 +9,7 @@
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="4">
-          <UpdateFeed></UpdateFeed>
+          <UpdateFeed v-bind:updates= "['img/da-slide1.png', 'img/da-slide2.png']"></UpdateFeed>
           <br/>
           <PatientMessages></PatientMessages>
         </b-col>
@@ -26,16 +26,36 @@
   import PatientMessages from "./PatientMessages.vue";
   import UpdateFeed from "./UpdateFeed.vue";
   import PatientSummary from "./PatientSummary.vue";
+  
 export default {
   name: 'UserHome',
-  // props: {
-  //   msg: String
-  // },
   components: {
     PageHeader,
     PatientMessages,
     UpdateFeed,
     PatientSummary
+  },
+  data () {
+    return {
+      summaries: {},
+      messages: {},
+      updates:[
+      {
+        patient:"steve",
+        update:"broke his arm in 100 places"
+      },
+      {
+        patient:"steve",
+        update:"broke his arm in 100 places"
+      },
+      {
+        patient:"steve",
+        update:"broke his arm in 100 places"
+      }
+      ]
+    }
+  },
+  mounted() {
   }
 }
 </script>

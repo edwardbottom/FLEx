@@ -22,23 +22,10 @@
 
 <script>
 export default {
-  name: 'PatientMessages'
-  // props:{
-  //   messages:[
-  //     {
-  //       patient: String,
-  //       message: String
-  //     },
-  //     {
-  //       patient: String,
-  //       message: String
-  //     },
-  //     {
-  //       patient: String,
-  //       message: String
-  //     }
-  //   ]
-  // }   
+  name: 'PatientMessages',
+  props: {
+    messages: Array
+  }
 }
 </script>
 

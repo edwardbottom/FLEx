@@ -67,20 +67,21 @@
 export default {
   name: 'PatientSummary',
   props: {
-    summaries:[
-      {
-        age: Number,
-        height: String,
-        weight: Number,
-        injury: String,
-        currentStatus: Number,
-        averageStatus: Number,
-        lastUsed: String,
-        insuraceProvider: String,
-        contatct: String,
-        nextVisit: String
-      }
-    ]
+    summaries: Array
+    // summaries:[
+    //   // {
+    //   //   age: Number,
+    //   //   height: String,
+    //   //   weight: Number,
+    //   //   injury: String,
+    //   //   currentStatus: Number,
+    //   //   averageStatus: Number,
+    //   //   lastUsed: String,
+    //   //   insuraceProvider: String,
+    //   //   contatct: String,
+    //   //   nextVisit: String
+    //   // }
+    // ]
   }
 }
 </script>
