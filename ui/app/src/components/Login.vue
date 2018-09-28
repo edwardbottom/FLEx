@@ -1,19 +1,39 @@
 <template>
   <div class="Login">
-    <PageHeader></PageHeader> 
-        <div class="container h-100">
-          <div class="row h-100"></div>
-        </br>
-          <div class="row h-100 justify-content-center align-items-center">
-            <div class="col">
-              <b-card border-variant="secondary"
-                  align="center"
-                  style="max-width: 20rem;">
-                  <p>Login</p>
+  </br>
+    <b-row class="justify-content-md-center">
+      <h1>FLEx</h1>
+    </b-row>
+    <b-row class="justify-content-md-center">
+      <img width="100px" height="80px" src="../images/dumbbell.png"></img>
+    </b-row>
+    <b-row class="justify-content-md-center">
+              <b-card border-variant="secondary">
+                  <p>Username or email address</p>
+                  <b-form-input></b-form-input>
+                </br>
+                <b-row>
+                  <b-col>
+                  <p align="left">Password</p>
+                </b-col>
+                <b-col>
+                  <b-button size="sm">Forgot Password?</b-button>
+                </b-col>
+              </b-row>
+                  <b-form-input></b-form-input> 
+                </br>
+                  <b-button class="btn-block" variant="success">Sign In</b-button>
+                </br>
+                  <b-row>
+                    <b-col>
+                  <p>New to FLEx?</p>
+                </b-col>
+                <b-col>
+                  <b-button variant="success">Create an account</b-button>
+                </b-col>
+              </b-row>
               </b-card>
-            </div>
-          </div>
-        </div>       
+    </b-row>     
   </div>
 </template>
 
