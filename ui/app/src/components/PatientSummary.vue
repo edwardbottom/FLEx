@@ -9,9 +9,7 @@
           <b-card v-for="summary in this.summaries" >
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-btn v-if="summary.variant === 'success'" block href="#" v-b-toggle.accordion3 variant="success">{{summary.patient}}</b-btn>
-                <b-btn v-else-if="summary.variant === 'warning'" block href="#" v-b-toggle.accordion3 variant="warning">{{summary.patient}}</b-btn>
-                <b-btn v-else-if="summary.variant === 'danger'" block href="#" v-b-toggle.accordion3 variant="danger">{{summary.patient}}</b-btn>
+                <b-btn block href="#" v-b-toggle.accordion3 v-bind:variant="summary.variant">{{summary.patient}}</b-btn>
               </b-card-header>
               <b-collapse id="accordion3" visible accordion="my-accordion" role="tabpanel">
               <b-card-body>

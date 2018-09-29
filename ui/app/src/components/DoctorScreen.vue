@@ -48,7 +48,9 @@ export default {
         insuraceProvider: "United Dan Evans",
         contact: "314-555-5555",
         nextVisit: "yesterday",
-        variant: "success"
+        variant: "success",
+        accordionToggle: "v-b-toggle.accordion1",
+        accordionId: "accordion1"
       },
       {
         patient:"Dan",
@@ -62,7 +64,9 @@ export default {
         insuraceProvider: "United Dan Evans",
         contact: "314-555-5555",
         nextVisit: "yesterday",
-        variant: "warning"
+        variant: "warning",
+        accordionToggle: "v-b-toggle.accordion2",
+        accordionId: "accordion2"
       },
       {
         patient:"Dan",
@@ -76,7 +80,9 @@ export default {
         insuraceProvider: "United Dan Evans",
         contact: "314-555-5555",
         nextVisit: "yesterday",
-        variant: "danger"
+        variant: "danger",
+        accordionToggle: "v-b-toggle.accordion3",
+        accordionId: "accordion3"
       }
     ],
       messages: [
@@ -117,11 +123,7 @@ export default {
   },
   mounted() {
     //call the method that makes the request to set the state before rendering
-  },
-  methods: {
-    async getPosts () {
-      //put an method for an axios request to set a state here
-    }
+    
   }
 }
 </script>
