@@ -2,8 +2,34 @@
   <div class="topBar">
     <PageHeader></PageHeader>
     <br>
-            
-      
+    
+    <center>
+      <b-card>
+        <h2>Today's Report</h2>
+    <div>
+      <VueSlideBar
+        v-model="value2"
+        :min="1"
+        :max="10"
+        :processStyle="slider.processStyle"
+        :lineHeight="slider.lineHeight"
+        :tooltipStyles="{ backgroundColor: 'blue', borderColor: 'blue' }">
+      </VueSlideBar>
+      <center><h2>Value: {{value2}}</h2></center>
+    </div>
+
+    <div>
+    <b-form-textarea id="textarea1"
+                     v-model="text"
+                     placeholder="Enter something"
+                     :rows="3"
+                     :max-rows="6">
+    </b-form-textarea>
+    <pre class="mt-3">{{ text }}</pre>
+  </div>
+  <b-button>Submit Report</b-button>
+</b-card>
+    </center>
 
 <b-container class="bv-example-row" >
     <b-row>
@@ -16,7 +42,7 @@
                   class="mb-2">
             <p class="card-text">
               <div>
-                <b-dropdown id="ddown1" text="Dropdown Button" class="m-md-2">
+                <b-dropdown id="ddown1" text="Select Doctor" class="m-md-2">
                   <b-dropdown-item>Doctor Dan</b-dropdown-item>
                   <b-dropdown-item>Doctor Pletzberg</b-dropdown-item>
                 </b-dropdown>
@@ -128,13 +154,15 @@
 
 <script>
   import PageHeader from "./PageHeader.vue";
+  import VueSlideBar from 'vue-slide-bar'
 export default {
   name: 'UserHome',
   props: {
     msg: String
   },
   components: {
-    PageHeader
+    PageHeader,
+    VueSlideBar,
   },
   data () {
     return {
@@ -144,7 +172,16 @@ export default {
         {text: 'Apple', value: 'apple'},
         {text: 'Pineapple', value: 'pineapple'},
         {text: 'Grape', value: 'grape'}
-      ]
+      ],
+      value2: 8,
+      slider: {
+        lineHeight: 10,
+        processStyle: {
+          backgroundColor: 'blue'
+        }
+      },
+      text:''
+
     }
   }
   
