@@ -21,7 +21,9 @@
               <em>User</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Signout</b-dropdown-item>
+            <b-dropdown-item href="#"
+            v-on:click="goToLogin()"
+            >Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
@@ -37,6 +39,7 @@
 
 <script>
   import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
+  import router from "../router";
 export default {
   name: 'PageHeader',
   props: {
@@ -44,7 +47,13 @@ export default {
   },
   components: {
     Datepicker
-  }
+  },
+  methods:{
+    goToLogin()
+    {
+      router.push({path:"/Login"});
+    }
+  }  
 }
 </script>
 
