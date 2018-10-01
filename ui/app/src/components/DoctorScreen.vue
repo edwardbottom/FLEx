@@ -25,6 +25,7 @@
   import UpdateFeed from "./UpdateFeed.vue";
   import PatientSummary from "./PatientSummary.vue";
   
+  
 export default {
   name: 'UserHome',
   components: {

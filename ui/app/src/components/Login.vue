@@ -10,7 +10,7 @@
     <b-row class="justify-content-md-center">
               <b-card border-variant="secondary">
                   <p>Username or email address</p>
-                  <b-form-input></b-form-input>
+                  <b-form-input v-model="username" type="text"></b-form-input>
                 </br>
                 <b-row>
                   <b-col>
@@ -20,7 +20,7 @@
                   <b-button size="sm">Forgot Password?</b-button>
                 </b-col>
               </b-row>
-                  <b-form-input></b-form-input> 
+                  <b-form-input v-model="password" type="text"></b-form-input> 
                 </br>
                   <b-button class="btn-block" 
                   v-on:click="goToUserPage()"
@@ -50,6 +50,12 @@ export default {
   components: {
     PageHeader
   },
+  data(){
+    return{
+      username: '',
+      password: ''
+    }
+  },
   methods:{
     goToCreateAccount()
     {
@@ -57,6 +63,16 @@ export default {
     },
     goToUserPage()
     {
+      this.axios.post('http://localhost:3000/login', {
+        username: this.username,
+        password: this.password
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       router.push({path:"/UserHome"});
     }
   }  

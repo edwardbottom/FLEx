@@ -57,13 +57,13 @@ app.get('/db', (req, res) =>{
 
 
 app.post('/login',function(req,res){
-  const user_name=req.body.user;
+  const username=req.body.user;
   const password=req.body.password;
   console.log("User name = "+user_name+", password is "+password);
   res.end("login");
-});
+})
 
-app.post('/register',function(req,res)){
+app.post('/register',function(req,res){
   const type = req.body.type;
   const first_name = req.body.first_name;
   const middle_name = req.body.middle_name;
@@ -76,4 +76,4 @@ app.post('/register',function(req,res)){
   const therapist_id = req.body.therapist_id;
   console.log("User name = "+user_name+", password is "+password);
   res.end("yes");
-}
+})
