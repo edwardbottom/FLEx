@@ -22,14 +22,16 @@
               </b-row>
                   <b-form-input></b-form-input> 
                 </br>
-                  <b-button class="btn-block" variant="success">Sign In</b-button>
+                  <b-button class="btn-block" 
+                  v-on:click="goToUserPage()"
+                  variant="success">Sign In</b-button>
                 </br>
                   <b-row>
                     <b-col>
                   <p>New to FLEx?</p>
                 </b-col>
                 <b-col>
-                  <b-button variant="success">Create an account</b-button>
+                  <b-button variant="success" v-on:click="goToCreateAccount()">Create an account</b-button>
                 </b-col>
               </b-row>
               </b-card>
@@ -39,6 +41,7 @@
 
 <script>
     import PageHeader from "./PageHeader.vue";
+    import router from '../router';
 export default {
   name: 'Login',
   props: {
@@ -46,7 +49,17 @@ export default {
   },
   components: {
     PageHeader
-  }
+  },
+  methods:{
+    goToCreateAccount()
+    {
+      router.push({path:"/CreateAccount"});
+    },
+    goToUserPage()
+    {
+      router.push({path:"/UserHome"});
+    }
+  }  
 }
 </script>
 
