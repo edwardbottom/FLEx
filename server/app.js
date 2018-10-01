@@ -9,6 +9,9 @@ var ObjectID = mongodb.ObjectID;
 
 //set up cors requests
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 //mongo credentials
 const MongoClient = require('mongodb').MongoClient;
@@ -51,3 +54,26 @@ app.get('/db', (req, res) =>{
     });
 	res.send("this path works")
 })
+
+
+app.post('/login',function(req,res){
+  const user_name=req.body.user;
+  const password=req.body.password;
+  console.log("User name = "+user_name+", password is "+password);
+  res.end("login");
+});
+
+app.post('/register',function(req,res)){
+  const type = req.body.type;
+  const first_name = req.body.first_name;
+  const middle_name = req.body.middle_name;
+  const last_name = req.body.last_name;
+  const user_name = req.body.user_name;
+  const password = req.body.password;
+  const re_password = req.body.re_password;
+  const email_address = req.body.email_address;
+  const provider_id = req.body.provider_id;
+  const therapist_id = req.body.therapist_id;
+  console.log("User name = "+user_name+", password is "+password);
+  res.end("yes");
+}
