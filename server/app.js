@@ -57,9 +57,15 @@ app.get('/db', (req, res) =>{
 
 
 app.post('/login',function(req,res){
-  const username=req.body.user;
-  const password=req.body.password;
-  console.log("User name = "+user_name+", password is "+password);
+  const username_text=req.body.username;
+  const password_guess=req.body.password;
+  // const user = db.collection('Users').find({'username':username_text});
+  // console.log(user['username']);
+   db.collection('Users').find({username: username_text}).toArray(function (err, result) {
+    if (err) throw err
+      
+    console.log(result)
+  })
   res.end("login");
 })
 
