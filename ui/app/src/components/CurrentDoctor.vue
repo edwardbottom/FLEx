@@ -54,7 +54,7 @@
 export default {
   name: 'CurrentDoctor',
   props: {
-    doctorInfo: String
+    doctorInfo: Array
   },
 
 }
