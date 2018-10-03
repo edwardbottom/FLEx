@@ -50,6 +50,33 @@ function decrypt(text)
   return decrypted;
 }
 
+/**
+ * generates random string of characters i.e salt
+ * @function
+ * @param {number} length - Length of the random string.
+ */
+var genRandomString = function(length){
+    return crypto.randomBytes(Math.ceil(length/2))
+            .toString('hex') /** convert to hexadecimal format */
+            .slice(0,length);   /** return required number of characters */
+};
+
+/**
+ * hash password with sha512.
+ * @function
+ * @param {string} password - List of required fields.
+ * @param {string} salt - Data to be validated.
+ */
+var sha512 = function(password, salt){
+    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+    hash.update(password);
+    var value = hash.digest('hex');
+    return {
+        salt:salt,
+        passwordHash:value
+    };
+};
+
 //hello world get request
 var testCipher = encrypt('Hello World!')
 //app.get('/', (req, res) => res.send(testCipher))
@@ -90,7 +117,7 @@ app.post('/login',function(req,res){
 })
 
 app.post('/register',function(req,res){
-  const type = req.body.type;
+  // const type = req.body.type;
   const first_name = req.body.first_name;
   const middle_name = req.body.middle_name;
   const last_name = req.body.last_name;
@@ -100,6 +127,34 @@ app.post('/register',function(req,res){
   const email_address = req.body.email_address;
   const provider_id = req.body.provider_id;
   const therapist_id = req.body.therapist_id;
-  console.log("User name = "+user_name+", password is "+password);
-  res.end("yes");
+
+  if(password != re_password){
+    res.send("passwords dont match")
+  }
+  else{
+    var salt = genRandomString(16); /** Gives us salt of length 16 */
+    var passwordData = sha512(password, salt);
+
+    db.collection('UserProfile').insertOne(
+    {
+          user:user_name,
+          passwordData:passwordData,
+          first_name:first_name,
+          middle_name:middle_name,
+          last_name:last_name,
+          email_address:email_address,
+          provider_id:provider_id,
+          therapist_id:therapist_id
+      },
+      //catch errors
+      function (err, res) {
+          if (err) {
+            // db.close();
+            res.send("it done fucked up")
+          }
+          // Success
+          // db.close();  
+      });
+    res.send("this path works")
+    }
 })
