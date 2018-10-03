@@ -106,12 +106,24 @@ app.get('/db', (req, res) =>{
 app.post('/login',function(req,res){
   const username_text=req.body.username;
   const password_guess=req.body.password;
-  // const user = db.collection('Users').find({'username':username_text});
-  // console.log(user['username']);
-   db.collection('Users').find({username: username_text}).toArray(function (err, result) {
+  db.collection('UserProfile').find({user : username_text}).toArray(function (err, result) {
     if (err) throw err
       
     console.log(result)
+    let salt = result[0].passwordData.salt;
+    console.log("the salt is " + salt)
+    let password_hash = result[0].passwordData.passwordHash;
+    console.log("the password hash is " + password_hash);
+    let password_guess_hash = sha512(password_guess, salt);
+    console.log(password_guess_hash.passwordData + " is the p word hash guess");
+    if(password_guess_hash == password_hash){
+      console.log("that wasword was correct");
+    }
+    else{
+      console.log("not a valid password")
+    }
+
+    // console.log(result.passwordData.salt + " is the password salt");
   })
   res.end("login");
 })

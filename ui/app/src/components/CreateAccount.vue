@@ -152,7 +152,7 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
-      router.push({path:"/UserHome"});
+      router.push({path:"/Login"});
     }
   },
   data(){
