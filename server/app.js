@@ -6,6 +6,9 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
+var crypto = require('crypto'),
+    algorithm = 'aes-256-ctr',
+    password = 'FLEx-password';
 
 //set up cors requests
 app.use(cors())
@@ -31,9 +34,26 @@ mongodb.MongoClient.connect(MONGO_URL, { useNewUrlParser: true }, function (err,
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 })
 
+function encrypt(text)
+{
+  var cipher = crypto.createCipher(algorithm,password)
+  var encrypted = cipher.update(text,'utf8','hex')
+  encrypted += cipher.final('hex');
+  return encrypted;
+}
+
+function decrypt(text)
+{
+  var decipher = crypto.createDecipher(algorithm,password)
+  var decrypted = decipher.update(text,'hex','utf8')
+  decrypted += decipher.final('utf8');
+  return decrypted;
+}
 
 //hello world get request
-app.get('/', (req, res) => res.send('Hello World!'))
+var testCipher = encrypt('Hello World!')
+//app.get('/', (req, res) => res.send(testCipher))
+app.get('/', (req, res) => res.send(decrypt(testCipher)))
 
 
 //places a single json object in the database
