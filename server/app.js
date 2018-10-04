@@ -114,18 +114,24 @@ app.post('/login',function(req,res){
     console.log("the salt is " + salt)
     let password_hash = result[0].passwordData.passwordHash;
     console.log("the password hash is " + password_hash);
-    let password_guess_hash = sha512(password_guess, salt);
-    console.log(password_guess_hash.passwordData + " is the p word hash guess");
-    if(password_guess_hash == password_hash){
-      console.log("that wasword was correct");
+    let password_guess_hash = sha512(password_guess, salt).passwordHash;
+    console.log(password_guess_hash + " is the p word hash guess");
+    //if login fails
+    if(password_guess_hash != password_hash){
+      console.log("login FAILED");
+      let loginObject = new Object();
+      loginObject.username = username_text;
+      loginObject.status = "failed";
+      res.send(loginObject)
     }
-    else{
-      console.log("not a valid password")
-    }
+    //if login works
+    console.log("LOGIN WORKED");
+    let loginObject = new Object();
+    loginObject.username = username_text;
+    loginObject.status = "success";
+    res.send(loginObject)
 
-    // console.log(result.passwordData.salt + " is the password salt");
   })
-  res.end("login");
 })
 
 app.post('/register',function(req,res){

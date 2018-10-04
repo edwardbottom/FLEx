@@ -63,17 +63,26 @@ export default {
     },
     goToUserPage()
     {
+      var self = this
       this.axios.post('http://localhost:3000/login', {
         username: this.username,
         password: this.password
       })
       .then(function (response) {
         console.log(response);
+        if(response.data.status == "success"){
+          self.$session.start();
+          self.$session.set("username", response.username);
+          //this.$session.start("")
+          router.push({path:"/UserHome"});
+        }
+        else{
+          alert("not a valid login");
+        }
       })
       .catch(function (error) {
         console.log(error);
       });
-      router.push({path:"/UserHome"});
     }
   }  
 }

@@ -7,12 +7,16 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import DatePicker from 'vuejs-datepicker'
 import VueAxios from 'vue-axios'
- 
+import VueSession from 'vue-session'
 
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(DatePicker);
+var options = {
+    persist: true
+}
+Vue.use(VueSession, options);
 
 
 // Enable devTools
