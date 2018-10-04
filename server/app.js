@@ -129,6 +129,7 @@ app.post('/login',function(req,res){
     let loginObject = new Object();
     loginObject.username = username_text;
     loginObject.status = "success";
+    loginObject.isValidated = true;
     res.send(loginObject)
 
   })
