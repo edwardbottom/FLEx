@@ -177,3 +177,34 @@ app.post('/register',function(req,res){
     res.send("this path works")
     }
 })
+
+app.post('/submitReport',function(req,res){
+  // const type = req.body.type;
+  const value = req.body.value;
+  // const reportText = req.body.reportText;
+  const completedExercises = req.body.completedExercises;
+  var today = new Date();
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const user = req.body.user;
+
+
+
+    db.collection('Reports').insertOne(
+    {
+          user:user,
+          value:value,
+          reportText:reportText,
+          completedExercises:completedExercises,
+          date:date
+      },
+      //catch errors
+      function (err, res) {
+          if (err) {
+            // db.close();
+            res.send("it done fucked up")
+          }
+          // Success
+          // db.close();  
+      });
+    res.send("this path works")
+})
