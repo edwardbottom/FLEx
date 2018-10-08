@@ -2,8 +2,9 @@
    <!-- TODO THING -->
    <div>
           <center>
+            {{selectedOption}}
                 <b-form-group label="Current Exercises" >
-                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" v-on:click="exerciseUpdate()">
+                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" v-on:input="exerciseUpdate()">
                   </b-form-checkbox-group>
                 </b-form-group>
               </center>
@@ -22,7 +23,8 @@ export default {
   },
   methods:{
     exerciseUpdate(){
-      this.$emit("clicked", selectedOption)
+      this.$emit("clicked", this.selectedOption)
+      console.log(this.selectedOption)
     }
   },
   data () {

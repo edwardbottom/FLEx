@@ -33,7 +33,7 @@
   import UserExercises from './UserExercises.vue';
   import PastExercises from './PastExercises.vue';
   import UserExerciseReport from './UserExerciseReport.vue';
-      import router from '../router';
+  import router from '../router';
 export default {
   name: 'UserHome',
   props: {
