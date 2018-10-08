@@ -11,7 +11,7 @@
 
       </b-col>
       <b-col>    
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions"></UserExercises>
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" @clicked="exerciseUpdated"></UserExercises>
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
@@ -21,7 +21,7 @@
     </b-row>
 </b-container>
     <center>
-      <UserExerciseReport></UserExerciseReport>
+      <UserExerciseReport @clicked="submitReport"></UserExerciseReport>
         
     </center>
   </div>
@@ -50,11 +50,11 @@ export default {
   },
   methods:
       {
-        submitReport(){
+        submitReport(info){
               this.axios.post('http://localhost:3000/submitReport', {
                 user:"user",
-                value: this.value2,
-                // reportText: this.reportText,
+                value: info.value2,
+                reportText: info.reportText,
                 completedExercises: this.selectedOption,
           })
           .then(function (response) {
@@ -64,10 +64,14 @@ export default {
             console.log(error);
           });
           router.push({path:"/UserHome"});
+        },
+        exerciseUpdated(info){
+          this.selectedOption = info;
         }
       },
   data(){
     return{
+      selectedOption:[],
       doctorInfo: 
         [
         {
@@ -94,19 +98,19 @@ export default {
           description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
         },
         {
-          date: '2/3/2017',
+          date: '2/4/2017',
           rating: '7.7',
           completion: '100%',
           description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
         },
         {
-          date: '2/3/2017',
+          date: '2/5/2017',
           rating: '7.7',
           completion: '100%',
           description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
         },
         {
-          date: '2/3/2017',
+          date: '2/6/2017',
           rating: '7.7',
           completion: '100%',
           description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
@@ -118,9 +122,6 @@ export default {
 
     }
   },
-  rules: {
-        'no-console': 'off',
-    },
   mounted(){
         console.log("hi")
       }

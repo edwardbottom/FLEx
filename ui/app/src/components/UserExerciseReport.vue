@@ -15,15 +15,15 @@
 
     <div>
     <b-form-textarea id="textarea1"
-                     v-model="text"
+                     v-model="reportText"
                      placeholder="Enter something"
                      :rows="3"
                      :max-rows="6">
     </b-form-textarea>
-    <pre class="mt-3">{{ text }}</pre>
-    <b-button v-on:click="submitReport()">Submit Report</b-button>
+    <pre class="mt-3">{{ reportText }}</pre>
+    
   </div>
-
+<b-button v-on:click="submitReport()">Submit Report</b-button>
 </b-card>
 </template>
 
@@ -39,7 +39,11 @@ export default {
   },
   methods:{
     submitReport(){
-
+      var info = {
+        value2: this.value2,
+        reportText: this.reportText,
+      }
+      this.$emit("clicked", info);
     }
   },
   data () {
