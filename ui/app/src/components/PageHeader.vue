@@ -18,11 +18,11 @@
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">
-              <em>User</em>
+              <em>{{this.$session.get("username")}}</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#"
-            v-on:click="goToLogin()"
+            v-on:click="logout()"
             >Signout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -49,8 +49,9 @@ export default {
     Datepicker
   },
   methods:{
-    goToLogin()
+    logout()
     {
+      this.$session.destroy();
       router.push({path:"/Login"});
     }
   }  

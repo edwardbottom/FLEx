@@ -17,10 +17,10 @@
                   <p align="left">Password</p>
                 </b-col>
                 <b-col>
-                  <b-button size="sm">Forgot Password?</b-button>
+                  <b-button size="sm" v-on:click="forgotPassword()">Forgot Password?</b-button>
                 </b-col>
               </b-row>
-                  <b-form-input v-model="password" type="text"></b-form-input> 
+                  <b-form-input v-model="password" type="password"></b-form-input> 
                 </br>
                   <b-button class="btn-block" 
                   v-on:click="goToUserPage()"
@@ -72,9 +72,17 @@ export default {
         console.log(response);
         if(response.data.status == "success"){
           self.$session.start();
-          self.$session.set("username", response.username);
-          //this.$session.start("")
-          router.push({path:"/UserHome"});
+          self.$session.set("username", response.data.username);
+          self.$session.set("isValidated", response.data.isValidated);
+          self.$session.set("accountType", response.data.accountType);
+          
+          console.log(response.data.accountType + " is type is");
+          if(response.data.accountType == "therapist"){
+            router.push({path:"/doctor"});
+          }
+          else{
+            router.push({path:"/UserHome"});
+          }
         }
         else{
           alert("not a valid login");
@@ -83,6 +91,9 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    forgotPassword(){
+      alert("Dumbass, why did you forget your password!?!?!?!?!?!")
     }
   }  
 }

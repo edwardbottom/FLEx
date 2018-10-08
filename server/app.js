@@ -126,10 +126,12 @@ app.post('/login',function(req,res){
     }
     //if login works
     console.log("LOGIN WORKED");
+    console.log(result.account_type + " is account type");
     let loginObject = new Object();
     loginObject.username = username_text;
     loginObject.status = "success";
     loginObject.isValidated = true;
+    loginObject.accountType = result[0].account_type;
     res.send(loginObject)
 
   })

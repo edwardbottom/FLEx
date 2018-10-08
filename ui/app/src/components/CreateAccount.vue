@@ -4,13 +4,15 @@
     <br>
     <div class="center-block">
     <b-container class="bv-example-row">
-        <b-row class="justify-content-md-center">
+      <b-row class="justify-content-md-center">
+        <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
           <b-col cols="1">
-            <b-button>Therapist</b-button>            
+            <b-form-radio value="therapist">Therapist</b-form-radio>            
           </b-col>
           <b-col cols="1">
-            <b-button>Patient</b-button>
+            <b-form-radio value="patient">Patient</b-form-radio> 
           </b-col>
+        </b-form-radio-group>
         </b-row> 
         <br> 
         <div class="FormRow">        
@@ -64,7 +66,7 @@
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
-                <b-form-input v-model="password"></b-form-input>
+                <b-form-input v-model="password" type="password"></b-form-input>
               </b-col>
             </b-row>  
         </div>    
@@ -75,7 +77,7 @@
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
-                <b-form-input v-model="re_password"></b-form-input>
+                <b-form-input v-model="re_password" type="password"></b-form-input>
               </b-col>
             </b-row>  
         </div>    
@@ -134,6 +136,7 @@ export default {
   methods:{
     register()
     {
+      console.log("accont type is " + this.account_type)
       this.axios.post('http://localhost:3000/register', {
         first_name: this.first_name,
         middle_name: this.middle_name,
@@ -143,7 +146,8 @@ export default {
         re_password: this.re_password,
         email_address: this.email_address,
         provider_id: this.provider_id,
-        therapist_id: this.therapist_id
+        therapist_id: this.therapist_id,
+        account_type: this.account_type
 
       })
       .then(function (response) {
@@ -165,13 +169,11 @@ export default {
       re_password:'',
       email_address:'',
       provider_id:'',
-      therapist_id:''
-
-
+      therapist_id:'',
+      account_type:''
     }
   },
     mounted(){
-      console.log(this.first_name)
 
     },
 
