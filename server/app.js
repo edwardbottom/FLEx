@@ -146,6 +146,7 @@ app.post('/register',function(req,res){
   const email_address = req.body.email_address;
   const provider_id = req.body.provider_id;
   const therapist_id = req.body.therapist_id;
+  const account_type = req.body.account_type;
 
   if(password != re_password){
     res.send("passwords dont match")
@@ -163,7 +164,8 @@ app.post('/register',function(req,res){
           last_name:last_name,
           email_address:email_address,
           provider_id:provider_id,
-          therapist_id:therapist_id
+          therapist_id:therapist_id,
+          account_type:account_type
       },
       //catch errors
       function (err, res) {
