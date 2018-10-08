@@ -5,12 +5,12 @@
                   tag="article"
                   style="max-width: 100%;"
                   class="mb-2"
-                  v-for="info in this.doctorInfo">
+                  v-for="info in this.doctorInfo" :key="info.firstVisit">
 
               <div>
                 <b-dropdown id="ddown1" text="Select Doctor" class="m-md-2">
                   <b-dropdown-item>Doctor Dan</b-dropdown-item>
-                  <b-dropdown-item>Doctor Pletzberg</b-dropdown-item>
+                  <b-dropdown-item>Doctor Pletzbert</b-dropdown-item>
                 </b-dropdown>
               </div>  
               <b>First Visit</b>
@@ -19,27 +19,27 @@
               <br>
               <b>Last Visit</b>
               <br>
-              2/22/2018
+              {{info.lastVisit}}
               <br>
               <b>Next Visit</b>
               <br>
-              9/30/2018
+              {{info.nextVisit}}
               <br>
               <b>Days Since Last Visit</b>
               <br>
-              217 Days
+              {{info.daysSinceVisit}}
               <br>
               <b># of Visit</b>
               <br>
-              13
+              {{info.visit}}
               <br>
               <b>Provider</b>
               <br>
-              Stretch Physical Therapy
+              {{info.provider}}
               <br>
               <b>Phone #</b>
               <br>
-              (555)555-5555
+              {{info.phone}}
               <br>
             <b-button href="#" variant="primary">Go somewhere</b-button>
           </b-card>

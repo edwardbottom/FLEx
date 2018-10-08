@@ -2,8 +2,8 @@
    <!-- TODO THING -->
    <div>
           <center>
-                <b-form-group label="Stacked (vertical) button style checkboxes" >
-                  <b-form-checkbox-group buttons class="d-block" v-model="selected" stacked :options="options" >
+                <b-form-group label="Current Exercises" >
+                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" >
                   </b-form-checkbox-group>
                 </b-form-group>
               </center>
@@ -17,17 +17,12 @@
 export default {
   name: 'UserExercises',
   props: {
-    msg: String
+    //exerciseInfo: String,
+    exerciseOptions: Array
   },
   data () {
     return {
-      selected: [], // Must be an array reference!
-      options: [
-        {text: 'Orange', value: 'orange'},
-        {text: 'Apple', value: 'apple'},
-        {text: 'Pineapple', value: 'pineapple'},
-        {text: 'Grape', value: 'grape'}
-      ],
+      selectedOption: [], // Must be an array reference!
 
     }
   }

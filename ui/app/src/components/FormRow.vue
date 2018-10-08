@@ -16,7 +16,8 @@
 export default {
   name: 'FormRow',
   props: {
-    msg: String
+    msg: String,
+    //state_data:String
   }
 }
 </script>

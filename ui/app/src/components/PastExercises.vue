@@ -7,47 +7,23 @@
               <p class="card-text">
                 
                 <b-container class="bv-example-row">
+                  <div v-for="info in this.pastExercises" :key="info.date">
+                    
                   <b-row>
                       <b-col>
-                        <b>2/3/2017</b><br>
+                        <b>{{info.date}}</b><br>
                         
-                        <b>Rating:</b> 7.7<br>
+                        <b>Rating:</b> {{info.rating}}<br>
                         
-                        <b>Completion:</b> 100%<br>
+                        <b>Completion:</b> {{info.completion}}<br>
 
                         <b>Description:</b><br>
-                        Very very hard but it went well overall. Pretty tight and couldn't complete xyz exercise.<br>
+                        {{info.description}}<br>
                         <b-button href="#" variant="primary">Open Full Report</b-button>
                       </b-col>
                   </b-row>
                   <hr />
-                  <b-row>
-                      <b-col>
-                        <b>2/3/2017</b><br>
-                        
-                        <b>Rating:</b> 7.7<br>
-                        
-                        <b>Completion:</b> 100%<br>
-
-                        <b>Description:</b><br>
-                        Very very hard but it went well overall. Pretty tight and couldn't complete xyz exercise.<br>
-                        <b-button href="#" variant="primary">Open Full Report</b-button>
-                      </b-col>
-                  </b-row>
-                  <hr />
-                  <b-row>
-                      <b-col>
-                        <b>2/3/2017</b><br>
-                        
-                        <b>Rating:</b> 7.7<br>
-                        
-                        <b>Completion:</b> 100%<br>
-
-                        <b>Description:</b><br>
-                        Very very hard but it went well overall. Pretty tight and couldn't complete xyz exercise.<br>
-                        <b-button href="#" variant="primary">Open Full Report</b-button>
-                      </b-col>
-                  </b-row>
+                </div>
               </b-container>
               </p>
               
@@ -61,7 +37,7 @@
 export default {
   name: 'PastExercises',
   props: {
-    msg: String
+    pastExercises: Array
   },
 
 }

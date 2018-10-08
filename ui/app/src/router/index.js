@@ -40,5 +40,6 @@ export default new Router({
       name: '/CreateAccount',
       component: CreateAccount
     }
+
   ]
 })

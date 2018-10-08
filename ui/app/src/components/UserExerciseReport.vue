@@ -21,8 +21,9 @@
                      :max-rows="6">
     </b-form-textarea>
     <pre class="mt-3">{{ text }}</pre>
+    <b-button v-on:click="submitReport()">Submit Report</b-button>
   </div>
-  <b-button>Submit Report</b-button>
+
 </b-card>
 </template>
 
@@ -34,7 +35,12 @@ export default {
     msg: String
   },
   components: {
-  	VueSlideBar,
+    VueSlideBar,
+  },
+  methods:{
+    submitReport(){
+
+    }
   },
   data () {
     return {
@@ -45,7 +51,7 @@ export default {
           backgroundColor: 'blue'
         }
       },
-      text:''
+      reportText:''
 
     }
 }

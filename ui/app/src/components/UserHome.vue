@@ -11,17 +11,18 @@
 
       </b-col>
       <b-col>    
-        <UserExercises></UserExercises>
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions"></UserExercises>
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
-          <PastExercises></PastExercises>
+          <PastExercises v-bind:pastExercises="this.pastExercises"></PastExercises>
           </b-card-body>
         </b-col>
     </b-row>
 </b-container>
     <center>
       <UserExerciseReport></UserExerciseReport>
+        
     </center>
   </div>
 </template>
@@ -31,11 +32,14 @@
   import CurrentDoctor from './CurrentDoctor.vue';
   import UserExercises from './UserExercises.vue';
   import PastExercises from './PastExercises.vue';
-  import UserExerciseReport from './UserExerciseReport.vue'
+  import UserExerciseReport from './UserExerciseReport.vue';
+      import router from '../router';
 export default {
   name: 'UserHome',
   props: {
-    msg: String
+    //selectedOption: Array,
+    //value2: String,
+    // reportText: String
   },
   components: {
     PageHeader,
@@ -44,6 +48,24 @@ export default {
     PastExercises,
     UserExerciseReport,
   },
+  methods:
+      {
+        submitReport(){
+              this.axios.post('http://localhost:3000/submitReport', {
+                user:"user",
+                value: this.value2,
+                // reportText: this.reportText,
+                completedExercises: this.selectedOption,
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          router.push({path:"/UserHome"});
+        }
+      },
   data(){
     return{
       doctorInfo: 
@@ -57,10 +79,51 @@ export default {
           provider: 'Stretch Physical Therapy',
           phone: '(555)555-5555'
         }
-        ]
+        ],
+        exerciseOptions: [
+        {text: 'Jumping Jacks x15', value: 'Jumping Jacks x15'},
+        {text: 'Squats x20', value: 'Squats x20'},
+        {text: 'Toe Touches x10', value: 'Toe Touches x10'},
+        {text: 'Plank 1 Min', value: 'Plank 1 Min'}
+      ],
+      pastExercises:[
+        {
+          date: '2/3/2017',
+          rating: '7.7',
+          completion: '100%',
+          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
+        },
+        {
+          date: '2/3/2017',
+          rating: '7.7',
+          completion: '100%',
+          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
+        },
+        {
+          date: '2/3/2017',
+          rating: '7.7',
+          completion: '100%',
+          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
+        },
+        {
+          date: '2/3/2017',
+          rating: '7.7',
+          completion: '100%',
+          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
+        }
+
+      ],
+      
+
+
     }
-  }
-  
+  },
+  rules: {
+        'no-console': 'off',
+    },
+  mounted(){
+        console.log("hi")
+      }
   
 }
 </script>
