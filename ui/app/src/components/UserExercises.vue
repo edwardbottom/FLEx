@@ -3,7 +3,7 @@
    <div>
           <center>
                 <b-form-group label="Current Exercises" >
-                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" >
+                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" v-on:click="exerciseUpdate()">
                   </b-form-checkbox-group>
                 </b-form-group>
               </center>
@@ -19,6 +19,11 @@ export default {
   props: {
     //exerciseInfo: String,
     exerciseOptions: Array
+  },
+  methods:{
+    exerciseUpdate(){
+      this.$emit("clicked", selectedOption)
+    }
   },
   data () {
     return {
