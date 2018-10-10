@@ -82,8 +82,20 @@ var sha512 = function(password, salt){
 //hello world get request
 var testCipher = encrypt('Hello World!')
 //app.get('/', (req, res) => res.send(testCipher))
-app.get('/', (req, res) => res.send(decrypt(testCipher)))
+//app.get('/', (req, res) => res.send(decrypt(testCipher)))
 
+
+app.post('/UserHome', function(req,res) {
+  const username_text=req.body.username;
+  console.log(username_text + " is the username searched for")
+  db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
+  {
+    if (err) throw err
+      
+      console.log(result + " is the result")
+      res.send(result)
+  });
+});
 
 //places a single json object in the database
 app.get('/db', (req, res) =>{

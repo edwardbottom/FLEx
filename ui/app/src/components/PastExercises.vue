@@ -13,12 +13,12 @@
                       <b-col>
                         <b>{{info.date}}</b><br>
                         
-                        <b>Rating:</b> {{info.rating}}<br>
+                        <b>Rating:</b> {{info.value}}<br>
                         
-                        <b>Completion:</b> {{info.completion}}<br>
+                        <b>Comments:</b> {{info.reportText}}<br>
 
-                        <b>Description:</b><br>
-                        {{info.description}}<br>
+                        <b>Completed Exercises:</b><br>
+                        {{info.completedExercises}}<br>
                         <b-button href="#" variant="primary">Open Full Report</b-button>
                       </b-col>
                   </b-row>

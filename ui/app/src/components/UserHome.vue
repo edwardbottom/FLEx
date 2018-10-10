@@ -90,42 +90,25 @@ export default {
         {text: 'Toe Touches x10', value: 'Toe Touches x10'},
         {text: 'Plank 1 Min', value: 'Plank 1 Min'}
       ],
-      pastExercises:[
-        {
-          date: '2/3/2017',
-          rating: '7.7',
-          completion: '100%',
-          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
-        },
-        {
-          date: '2/4/2017',
-          rating: '7.7',
-          completion: '100%',
-          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
-        },
-        {
-          date: '2/5/2017',
-          rating: '7.7',
-          completion: '100%',
-          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
-        },
-        {
-          date: '2/6/2017',
-          rating: '7.7',
-          completion: '100%',
-          description: 'Very very hard but it went well overall. Pretty tight and couldn\'t complete xyz exercise.',
-        }
-
-      ],
+      pastExercises:[],
       
 
 
     }
   },
   mounted(){
-        console.log("hi")
-      }
-  
+      var self = this
+      console.log(self.$session.get("username"))
+      this.axios.post('http://localhost:3000/UserHome', {
+        username: self.$session.get("username")
+      })
+      .then(function (response) {
+        self.pastExercises = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });      
+  }
 }
 </script>
 
