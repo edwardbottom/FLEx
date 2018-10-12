@@ -9,9 +9,9 @@
           <b-card v-for="summary in this.summaries" >
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-btn block href="#" v-b-toggle.accordion3 v-bind:variant="summary.variant">{{summary.patient}}</b-btn>
+                <b-btn block href="#" v-bind:variant="summary.variant" v-b-toggle.accordion="summary.accordionId">{{summary.patient}}</b-btn>
               </b-card-header>
-              <b-collapse id="accordion3" visible accordion="my-accordion" role="tabpanel">
+              <b-collapse v-bind:id="summary.accordionId" visible accordion="my-accordion" role="tabpanel">
               <b-card-body>
                 <ul class="card-text">
                   <li>Age: {{summary.age}}</li>

@@ -8,9 +8,9 @@
         <p class="card-text">
           <b-card v-for="message in this.messages" >
               <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-btn block href="#" v-b-toggle.accordion7>New Message from: {{message.patient}}</b-btn>
+                <b-btn block href="#" v-b-toggle.accordion="message.id">New Message from: {{message.patient}}</b-btn>
               </b-card-header>
-              <b-collapse id="accordion7"  visible accordion="my-accordion" role="tabpanel">
+              <b-collapse v-bind:id="message.id"  visible accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <ul class="card-text">
                     <li> {{message.message}}</li>

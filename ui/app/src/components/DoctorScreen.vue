@@ -36,56 +36,7 @@ export default {
   },
   data () {
     return {
-      summaries:[
-      {
-        patient:"Dan",
-        age: 20,
-        height: "6'2",
-        weight: 190,
-        injury: "Twisted his arm a full 720 degrees",
-        currentStatus: "dead/dying",
-        averageStatus: "better than you would think",
-        lastUsed: "11/20/1997",
-        insuraceProvider: "United Dan Evans",
-        contact: "314-555-5555",
-        nextVisit: "yesterday",
-        variant: "success",
-        accordionToggle: "v-b-toggle.accordion1",
-        accordionId: "accordion1"
-      },
-      {
-        patient:"Dan",
-        age: 20,
-        height: "6'2",
-        weight: 190,
-        injury: "Twisted his arm a full 720 degrees",
-        currentStatus: "dead/dying",
-        averageStatus: "better than you would think",
-        lastUsed: "11/20/1997",
-        insuraceProvider: "United Dan Evans",
-        contact: "314-555-5555",
-        nextVisit: "yesterday",
-        variant: "warning",
-        accordionToggle: "v-b-toggle.accordion2",
-        accordionId: "accordion2"
-      },
-      {
-        patient:"Dan",
-        age: 20,
-        height: "6'2",
-        weight: 190,
-        injury: "Twisted his arm a full 720 degrees",
-        currentStatus: "dead/dying",
-        averageStatus: "better than you would think",
-        lastUsed: "11/20/1997",
-        insuraceProvider: "United Dan Evans",
-        contact: "314-555-5555",
-        nextVisit: "yesterday",
-        variant: "danger",
-        accordionToggle: "v-b-toggle.accordion3",
-        accordionId: "accordion3"
-      }
-    ],
+      summaries:[],
       messages: [
       {
         patient:"steve",
@@ -95,12 +46,12 @@ export default {
       {
         patient:"steve",
         message:"I broke his arm in 100 places",
-        id:"accordion11"
+        id:"accordion12"
       },
       {
         patient:"steve",
         message:"I broke his arm in 100 places",
-        id:"accordion11"
+        id:"accordion13"
       }
       ],
       updates:[
@@ -122,10 +73,21 @@ export default {
       ]
     }
   },
-  mounted() {
+  created() {
     //call the method that makes the request to set the state before rendering
-    
-  }
+    var self = this;
+    this.axios.post('http://localhost:3000/getPatients', {
+      doctorId: 1111
+    })
+    .then(function (response) {
+      console.log(response.data)
+      self.summaries = response.data;
+      console.log(self.summaries + "is the summary")
+      })
+    .catch(function (error) {
+      console.log(error);
+      });
+    },
 }
 </script>
 <style>

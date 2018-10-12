@@ -34,6 +34,7 @@ mongodb.MongoClient.connect(MONGO_URL, { useNewUrlParser: true }, function (err,
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 })
 
+//takes in text and encrpyts the message
 function encrypt(text)
 {
   var cipher = crypto.createCipher(algorithm,password)
@@ -42,6 +43,7 @@ function encrypt(text)
   return encrypted;
 }
 
+//takes in text and decrypts the message
 function decrypt(text)
 {
   var decipher = crypto.createDecipher(algorithm,password)
@@ -183,7 +185,6 @@ app.post('/register',function(req,res){
 })
 
 app.post('/submitReport',function(req,res){
-  // const type = req.body.type;
   const value = req.body.value;
   const reportText = req.body.reportText;
   const completedExercises = req.body.completedExercises;
@@ -211,4 +212,16 @@ app.post('/submitReport',function(req,res){
           // db.close();  
       });
     res.send("this path works")
+})
+
+app.post('/getPatients',function(req,res){
+    // const type = req.body.type;
+  const doctorIdVal = req.body.doctorId;
+  console.log(doctorIdVal + " is passed in id")
+   db.collection('UserDescription').find({doctorID:doctorIdVal}).toArray(function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result);
+
+  })
 })
