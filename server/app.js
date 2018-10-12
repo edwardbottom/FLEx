@@ -215,13 +215,28 @@ app.post('/submitReport',function(req,res){
 })
 
 app.post('/getPatients',function(req,res){
-    // const type = req.body.type;
   const doctorIdVal = req.body.doctorId;
-  console.log(doctorIdVal + " is passed in id")
    db.collection('UserDescription').find({doctorID:doctorIdVal}).toArray(function (err, result) {
     if (err) throw err
     console.log(result)
     res.send(result);
+  })
+})
 
+app.post('/getMessages', function(req,res){
+  const doctorIdVal = req.body.doctorId;
+  db.collection('Messages').find({doctorID:doctorIdVal}).toArray(function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result);
+  })
+})
+
+app.post('/getUpdates', function(req,res){
+  const doctorIdVal = req.body.doctorId;
+  db.collection('PatientUpdates').find({doctorID:doctorIdVal}).toArray(function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result);
   })
 })

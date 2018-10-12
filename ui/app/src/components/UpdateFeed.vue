@@ -8,8 +8,7 @@
         <p class="card-text">
           <b-card v-for="update in this.updates" >
               <strong>{{update.patient}}</strong></br>
-              {{update.update}}
-            </br>
+              <p>{{update.text}}</p>
             <a href="update.path">View Profile</a>
           </b-card>
         </p>

@@ -37,44 +37,12 @@ export default {
   data () {
     return {
       summaries:[],
-      messages: [
-      {
-        patient:"steve",
-        message:"I broke his arm in 100 places",
-        id:"accordion11"
-      },
-      {
-        patient:"steve",
-        message:"I broke his arm in 100 places",
-        id:"accordion12"
-      },
-      {
-        patient:"steve",
-        message:"I broke his arm in 100 places",
-        id:"accordion13"
-      }
-      ],
-      updates:[
-      {
-        patient:"steve",
-        update:"broke his arm in 100 places",
-        path:"#/path"
-      },
-      {
-        patient:"steve",
-        update:"broke his arm in 100 places",
-        path:"#/path"
-      },
-      {
-        patient:"steve",
-        update:"broke his arm in 100 places",
-        path:"#/path"
-      }
-      ]
+      messages: [],
+      updates:[]
     }
   },
   created() {
-    //call the method that makes the request to set the state before rendering
+    //get the patient summarues
     var self = this;
     this.axios.post('http://localhost:3000/getPatients', {
       doctorId: 1111
@@ -87,6 +55,33 @@ export default {
     .catch(function (error) {
       console.log(error);
       });
+
+    //get messages
+    this.axios.post('http://localhost:3000/getMessages', {
+      doctorId: 1111
+    })
+    .then(function (response) {
+      console.log(response.data)
+      self.messages = response.data;
+      console.log(self.summaries + "is the summary")
+      })
+    .catch(function (error) {
+      console.log(error);
+      });
+
+    //get messages
+    this.axios.post('http://localhost:3000/getUpdates', {
+      doctorId: 1111
+    })
+    .then(function (response) {
+      console.log(response.data)
+      self.updates = response.data;
+      console.log(self.summaries + "is the summary")
+      })
+    .catch(function (error) {
+      console.log(error);
+      });
+
     },
 }
 </script>
