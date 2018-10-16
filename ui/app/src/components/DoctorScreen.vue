@@ -44,8 +44,10 @@ export default {
   created() {
     //get the patient summarues
     var self = this;
+    console.log(self.$session.get("therapistId") + " is the therapis id");
+    console.log(self.$session.get("username") + " is the username in the session");
     this.axios.post('http://localhost:3000/getPatients', {
-      doctorId: 1111
+      doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
       console.log(response.data)
@@ -58,7 +60,7 @@ export default {
 
     //get messages
     this.axios.post('http://localhost:3000/getMessages', {
-      doctorId: 1111
+      doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
       console.log(response.data)
@@ -71,7 +73,7 @@ export default {
 
     //get messages
     this.axios.post('http://localhost:3000/getUpdates', {
-      doctorId: 1111
+      doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
       console.log(response.data)

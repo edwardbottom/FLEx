@@ -72,9 +72,12 @@ export default {
         console.log(response);
         if(response.data.status == "success"){
           self.$session.start();
+          console.log(response.data.therapist_id);
           self.$session.set("username", response.data.username);
           self.$session.set("isValidated", response.data.isValidated);
           self.$session.set("accountType", response.data.accountType);
+          self.$session.set("therapistId", response.data.therapistId);
+          self.$session.set("providerId", response.data.providerId);
           
           console.log(response.data.accountType + " is type is");
           if(response.data.accountType == "therapist"){

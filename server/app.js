@@ -134,6 +134,9 @@ app.post('/login',function(req,res){
     loginObject.status = "success";
     loginObject.isValidated = true;
     loginObject.accountType = result[0].account_type;
+    loginObject.therapistId = result[0].therapist_id;
+    loginObject.providerId = result[0].provider_id;
+    console.log(loginObject);
     res.send(loginObject)
 
   })
