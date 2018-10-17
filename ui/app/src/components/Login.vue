@@ -96,7 +96,7 @@ export default {
       });
     },
     forgotPassword(){
-      alert("Dumbass, why did you forget your password!?!?!?!?!?!")
+      alert("Not implemented, see future sprint")
     }
   }  
 }

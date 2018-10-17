@@ -4,6 +4,7 @@ import UserHome from '../components/UserHome'
 import DoctorScreen from '../components/DoctorScreen'
 import Login from '../components/Login'
 import CreateAccount from '../components/CreateAccount'
+import PatientProfile from '../components/PatientProfile'
 
 Vue.use(Router)
 export default new Router({
@@ -31,6 +32,11 @@ export default new Router({
       path: '/CreateAccount',
       name: 'CreateAccount',
       component: CreateAccount
+    },
+    {
+      path: '/PatientProfile',
+      name: 'PatientProfile',
+      component: PatientProfile
     }
 
   ]

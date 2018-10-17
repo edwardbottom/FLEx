@@ -23,6 +23,9 @@
                   <li>insurance provider: {{summary.insuranceProvider}}</li>
                   <li>Contact {{summary.contact}}</li>
                   <li>Next Visit: {{summary.nextVisit}}</li>
+                  <b-button :size="sm" :variant="secondary" v-on:click="loadPatientProfile">
+                      View Profile
+                  </b-button>
                 </ul>
             </b-card-body>
             </b-collapse>
@@ -34,11 +37,20 @@
   </div>
 </template>
 
+
 <script>
+import router from '../router';
+
 export default {
   name: 'PatientSummary',
   props: {
     summaries: Array
+  },
+  methods: {
+    loadPatientProfile: function() {
+      alert("handler works")
+      router.push({path:'/PatientProfile'});
+    }
   }
 }
 </script>
