@@ -7,7 +7,7 @@
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
       <datepicker placeholder="Select Date"></datepicker>
-      <b-button v-if="ok" class="ml-2">Add Exercise</b-button>
+      <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
       <b-collapse is-nav id="nav_collapse">
 
         <!-- Right aligned nav items -->
@@ -54,7 +54,11 @@ export default {
     {
       this.$session.destroy();
       router.push({path:"/Login"});
-    }
+    },
+    createExercise()
+    {
+      router.push({path:"/CreateExercise"});
+    }  
   }  
 }
 </script>
