@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader></PageHeader>
+    <PageHeader ok="true"></PageHeader>
     <br/>
     <b-container class="bv-example-row">
       <b-row>

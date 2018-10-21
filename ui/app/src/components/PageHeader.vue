@@ -7,7 +7,7 @@
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
       <datepicker placeholder="Select Date"></datepicker>
-
+      <b-button v-if="ok" class="ml-2">Add Exercise</b-button>
       <b-collapse is-nav id="nav_collapse">
 
         <!-- Right aligned nav items -->
@@ -43,7 +43,8 @@
 export default {
   name: 'PageHeader',
   props: {
-    msg: String
+    msg: String,
+    ok: Boolean
   },
   components: {
     Datepicker
