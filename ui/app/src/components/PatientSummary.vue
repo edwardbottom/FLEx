@@ -23,7 +23,7 @@
                   <li>insurance provider: {{summary.insuranceProvider}}</li>
                   <li>Contact {{summary.contact}}</li>
                   <li>Next Visit: {{summary.nextVisit}}</li>
-                  <b-button :size="sm" :variant="secondary" v-on:click="loadPatientProfile">
+                  <b-button :size="sm" :variant="secondary" v-on:click="loadPatientProfile(summary.username)">
                       View Profile
                   </b-button>
                 </ul>
@@ -47,8 +47,8 @@ export default {
     summaries: Array
   },
   methods: {
-    loadPatientProfile: function() {
-      alert("handler works")
+    loadPatientProfile: function(username) {
+      this.$session.set("selectedProfile", username)
       router.push({path:'/PatientProfile'});
     }
   }

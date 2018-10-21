@@ -255,3 +255,11 @@ app.post('/getUpdates', function(req,res){
     res.send(result);
   })
 })
+
+app.post('/getProfile', function(req,res){
+  const reqUser = req.body.reqUser;
+  db.collection('PatientProfile').find({'user':reqUser}).toArray(function (err, result) {
+    if (err) throw err
+    res.send(result[0]);
+  })
+})
