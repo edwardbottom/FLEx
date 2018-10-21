@@ -199,6 +199,27 @@ app.post('/register',function(req,res){
     }
 })
 
+app.post('/createNewExercise',function(req,res){
+    const name = req.body.name;
+    const description = req.body.description;
+
+    db.collection('Exercises').insertOne(
+    {
+        name:name,
+        description:description
+    },
+    //catch errors
+    function (err, res) {
+        if (err) {
+          // db.close();
+          res.send("broken path")
+        }
+        // Success
+        // db.close();  
+    });
+    res.send("this path works")  
+})
+
 app.post('/submitReport',function(req,res){
   const value = req.body.value;
   const reportText = req.body.reportText;
@@ -221,7 +242,7 @@ app.post('/submitReport',function(req,res){
       function (err, res) {
           if (err) {
             // db.close();
-            res.send("it done fucked up")
+            res.send("broken path")
           }
           // Success
           // db.close();  

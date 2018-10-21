@@ -2,6 +2,8 @@
   <div class="CreateExercise">    
     <PageHeader></PageHeader>    
     <br>
+    <div class="center-block">
+    <b-container class="bv-example-row">
       <div class="FormRow">        
           <b-row class="justify-content-md-center">
             <b-col cols="2">
@@ -23,15 +25,48 @@
               <b-form-input v-model="description"></b-form-input>
             </b-col>
           </b-row>  
-      </div>           
+      </div>     
+      <br>        
+      <b-row class="justify-content-md-center">
+          <b-button v-on:click="createNewExercise()">Submit</b-button>
+      </b-row>              
+      </b-container>
+    </div>  
   </div>
 </template>
 
 <script>
   import PageHeader from "./PageHeader.vue";
-
+  import FormRow from "./FormRow.vue";
+  import router from '../router';
 export default {
   name: 'CreateExercise',
-  components: {PageHeader}
+  components: {
+    PageHeader,
+    FormRow
+  },
+  methods: 
+  {
+    createNewExercise()
+    {
+      this.axios.post('http://localhost:3000/createNewExercise', {
+        name: this.name,
+        description: this.description
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      router.push({path:"/doctor"});
+    },
+    data(){
+      return{
+        name:'',
+        description:''
+      }
+    },    
+  }   
 }
 </script>
