@@ -6,6 +6,7 @@ import Login from '../components/Login'
 import CreateAccount from '../components/CreateAccount'
 import PatientProfile from '../components/PatientProfile'
 import CreateExercise from '../components/CreateExercise'
+import CreatePlanScreen from '../components/CreatePlanScreen'
 
 Vue.use(Router)
 export default new Router({
@@ -43,7 +44,11 @@ export default new Router({
       path: '/CreateExercise',
       name: 'CreateExercise',
       component: CreateExercise
+    },
+    {
+      path: '/CreatePlan',
+      name: 'CreatePlan',
+      component: CreatePlanScreen
     }    
-
   ]
 })

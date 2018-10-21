@@ -2,7 +2,11 @@
   <div>
     <PageHeader></PageHeader>
     <br/>
-    <h2>{{this.userData.name}}</h2>
+    <h2>{{this.userData.name}}
+      <b-button size="small" variant="primary" v-on:click="createPlan()">
+        Create New Plan
+      </b-button>
+    </h2>
     <p> Height: {{this.userData.height}} </p>
     <p> Weight: {{this.userData.weight}} </p>
     <p> Injury: {{this.userData.injury}} </p>
@@ -19,7 +23,7 @@
 
 <script>
  import PageHeader from "./PageHeader.vue" 
-  
+ import router from '../router';
 export default {
   name: 'UserHome',
   components: {
@@ -44,6 +48,12 @@ export default {
       console.log(error);
       });
 
+  },
+   methods:{
+    createPlan()
+    {
+      router.push({path:"/CreatePlan"});
+    }
   }
 }
 </script>

@@ -284,3 +284,12 @@ app.post('/getProfile', function(req,res){
     res.send(result[0]);
   })
 })
+
+// app.get('/getAllExercises', (req, res) =>{
+//   res.send("fuck")
+//   // db.collection('Exercises').find().toArray(function (err, result) {
+//   //   if (err) throw err
+//   //   res.send("fuck")
+//   //   // res.send(result);
+//   // })
+// })
