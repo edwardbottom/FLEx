@@ -97,6 +97,18 @@ app.post('/UserHome', function(req,res) {
   });
 });
 
+app.post('/currExercises', function(req,res) {
+  const username_text=req.body.username;
+  console.log(username_text + " is the username searched for")
+  db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
+  {
+    if (err) throw err
+      
+      console.log(result + " is the result")
+      res.send(result)
+  });
+});
+
 //places a single json object in the database
 app.get('/db', (req, res) =>{
 	//insert a user into the databse
@@ -224,9 +236,9 @@ app.post('/submitReport',function(req,res){
   const value = req.body.value;
   const reportText = req.body.reportText;
   const completedExercises = req.body.completedExercises;
-  var today = new Date();
-  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const date = req.body.date;
   const user = req.body.user;
+  const exerciseOptions = req.body.exerciseOptions;
 
 
 
@@ -236,6 +248,7 @@ app.post('/submitReport',function(req,res){
           value:value,
           reportText:reportText,
           completedExercises:completedExercises,
+          exerciseOptions:exerciseOptions,
           date:date
       },
       //catch errors

@@ -6,7 +6,7 @@
 
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
-      <datepicker placeholder="Select Date"></datepicker>
+      <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker>
       <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
       <b-collapse is-nav id="nav_collapse">
 
@@ -58,7 +58,20 @@ export default {
     createExercise()
     {
       router.push({path:"/CreateExercise"});
-    }  
+    },
+    dateChanged(){
+      this.$emit("closed", this.date)
+    } 
+  },
+  data () {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth(); //January is 0!
+    var yyyy = today.getFullYear();
+    return {
+      date: new Date(yyyy, mm,  dd), // Must be an array reference!
+
+    }
   }  
 }
 </script>
