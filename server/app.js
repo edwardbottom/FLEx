@@ -298,11 +298,9 @@ app.post('/getProfile', function(req,res){
   })
 })
 
-// app.get('/getAllExercises', (req, res) =>{
-//   res.send("fuck")
-//   // db.collection('Exercises').find().toArray(function (err, result) {
-//   //   if (err) throw err
-//   //   res.send("fuck")
-//   //   // res.send(result);
-//   // })
-// })
+app.get('/getAllExercises', (req, res) =>{
+  db.collection('Exercises').find().toArray(function (err, result) {
+    if (err) throw err
+    res.send(result);
+  })
+})
