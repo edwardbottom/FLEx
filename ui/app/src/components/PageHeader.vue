@@ -7,6 +7,7 @@
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
       <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker>
+      <b-button v-on:click="returnHome()" class="ml-2">HOME</b-button>
       <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
       <b-collapse is-nav id="nav_collapse">
 
@@ -61,6 +62,14 @@ export default {
     },
     dateChanged(){
       this.$emit("closed", this.date)
+    },
+    returnHome(){
+      if(this.$session.get("accountType") == "therapist"){
+        router.push({path:"/doctor"});
+      }
+      else{
+        router.push({path:"/UserHome"});
+      }
     } 
   },
   data () {
@@ -72,7 +81,7 @@ export default {
       date: new Date(yyyy, mm,  dd), // Must be an array reference!
 
     }
-  }  
+  }
 }
 </script>
 
