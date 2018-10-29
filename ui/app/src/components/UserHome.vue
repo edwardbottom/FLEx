@@ -1,8 +1,7 @@
 <template>
   <div class="userHome">
-    <PageHeader></PageHeader>
+    <PageHeader @closed="dateUpdated"></PageHeader>
     <br>
-
     <b-container class="statusReports" >
     <b-row>
       <b-col>  
@@ -52,10 +51,12 @@ export default {
       {
         submitReport(info){
               this.axios.post('http://localhost:3000/submitReport', {
-                user:"user",
+                user:this.$session.get("username"),
                 value: info.value2,
                 reportText: info.reportText,
                 completedExercises: this.selectedOption,
+                exerciseOptions: this.exerciseOptions,
+                date: this.date
           })
           .then(function (response) {
             console.log(response);
@@ -67,9 +68,16 @@ export default {
         },
         exerciseUpdated(info){
           this.selectedOption = info;
+        },
+        dateUpdated(info){
+          this.date = info;
         }
       },
   data(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth(); //January is 0!
+    var yyyy = today.getFullYear();
     return{
       selectedOption:[],
       doctorInfo: 
@@ -85,12 +93,13 @@ export default {
         }
         ],
         exerciseOptions: [
-        {text: 'Jumping Jacks x15', value: 'Jumping Jacks x15'},
-        {text: 'Squats x20', value: 'Squats x20'},
-        {text: 'Toe Touches x10', value: 'Toe Touches x10'},
-        {text: 'Plank 1 Min', value: 'Plank 1 Min'}
+        // {text: 'Jumping Jacks x15', value: 'Jumping Jacks x15'},
+        // {text: 'Squats x20', value: 'Squats x20'},
+        // {text: 'Toe Touches x10', value: 'Toe Touches x10'},
+        // {text: 'Plank 1 Min', value: 'Plank 1 Min'}
       ],
       pastExercises:[],
+      date: new Date(yyyy, mm,  dd), 
       
 
 
@@ -107,7 +116,19 @@ export default {
       })
       .catch(function (error) {
         console.log(error);
-      });      
+      });   
+
+      this.axios.post('http://localhost:3000/exercisePlan', {
+        username: self.$session.get("username")
+      })
+      .then(function (response) {
+        self.exerciseOptions = response.exercisePlan;
+        console.log(self.exerciseOptions)
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+        
   }
 }
 </script>

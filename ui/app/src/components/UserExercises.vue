@@ -2,7 +2,6 @@
    <!-- TODO THING -->
    <div>
           <center>
-            {{selectedOption}}
                 <b-form-group label="Current Exercises" >
                   <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" v-on:input="exerciseUpdate()">
                   </b-form-checkbox-group>
