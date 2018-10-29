@@ -92,12 +92,7 @@ export default {
           phone: '(555)555-5555'
         }
         ],
-        exerciseOptions: [
-        // {text: 'Jumping Jacks x15', value: 'Jumping Jacks x15'},
-        // {text: 'Squats x20', value: 'Squats x20'},
-        // {text: 'Toe Touches x10', value: 'Toe Touches x10'},
-        // {text: 'Plank 1 Min', value: 'Plank 1 Min'}
-      ],
+        exerciseOptions: [],
       pastExercises:[],
       date: new Date(yyyy, mm,  dd), 
       
@@ -122,7 +117,8 @@ export default {
         username: self.$session.get("username")
       })
       .then(function (response) {
-        self.exerciseOptions = response.exercisePlan;
+        console.log(response)
+        self.exerciseOptions = response.data.exercisePlan;
         console.log(self.exerciseOptions)
       })
       .catch(function (error) {
