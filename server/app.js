@@ -99,13 +99,13 @@ app.post('/UserHome', function(req,res) {
 
 app.post('/exercisePlan', function(req,res) {
   const username_text=req.body.username;
-  // console.log(username_text + " is the username searched for")
+  console.log(username_text + " is the username searched for")
   db.collection('ExercisePlans').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
       
-      console.log(result + " is the result!!!!!")
-      res.send(result)
+      console.log(result[0] + " is the result!!!!!")
+      res.send(result[0])
   });
 });
 
