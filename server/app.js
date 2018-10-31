@@ -273,8 +273,9 @@ app.post('/getPatients',function(req,res){
 })
 
 app.post('/getMessages', function(req,res){
-  const doctorIdVal = req.body.doctorId;
-  db.collection('Messages').find({doctorID:doctorIdVal}).toArray(function (err, result) {
+  const rec = req.body.rec;
+  console.log("!!!!!!!!!" + rec);
+  db.collection('Messages').find({receiver:rec}).toArray(function (err, result) {
     if (err) throw err
     console.log(result)
     res.send(result);
@@ -303,4 +304,32 @@ app.get('/getAllExercises', (req, res) =>{
     if (err) throw err
     res.send(result);
   })
+})
+
+app.post('/sendMessage', function(req,res){
+  const message = req.body.message;
+  const sender = req.body.sender;
+  const receiver = req.body.receiver;
+  const id = req.body.id
+
+  console.log("send messaged reached");
+  db.collection('Messages').insertOne(
+    {
+        message:message,
+        sender:sender,
+        receiver:receiver,
+        id:id
+    },
+    //catch errors
+    function (err, res) {
+        if (err) {
+          // db.close();
+          console.log("error reached")
+          res.send("failure");
+        }
+        // Success
+        // db.close();  
+    })
+    res.send("success");
+
 })

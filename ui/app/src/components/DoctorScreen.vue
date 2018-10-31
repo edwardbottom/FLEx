@@ -13,6 +13,7 @@
           <UpdateFeed v-bind:updates= "this.updates"></UpdateFeed>
           <br/>
           <PatientMessages v-bind:messages="this.messages"></PatientMessages>
+          <br/>
         </b-col>
       </b-row>
     </b-container>
@@ -44,8 +45,6 @@ export default {
   created() {
     //get the patient summarues
     var self = this;
-    console.log(self.$session.get("therapistId") + " is the therapis id");
-    console.log(self.$session.get("username") + " is the username in the session");
     this.axios.post('http://localhost:3000/getPatients', {
       doctorId: self.$session.get("therapistId")
     })
@@ -60,7 +59,7 @@ export default {
 
     //get messages
     this.axios.post('http://localhost:3000/getMessages', {
-      doctorId: self.$session.get("therapistId")
+      rec: self.$session.get("username")
     })
     .then(function (response) {
       console.log(response.data)
@@ -71,7 +70,7 @@ export default {
       console.log(error);
       });
 
-    //get messages
+    //get updates
     this.axios.post('http://localhost:3000/getUpdates', {
       doctorId: self.$session.get("therapistId")
     })

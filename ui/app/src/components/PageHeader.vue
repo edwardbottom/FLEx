@@ -9,6 +9,7 @@
       <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker>
       <b-button v-on:click="returnHome()" class="ml-2">HOME</b-button>
       <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
+      <b-button v-on:click="sendMessageScreen()" class="ml-2">Send Message</b-button>
       <b-collapse is-nav id="nav_collapse">
 
         <!-- Right aligned nav items -->
@@ -70,6 +71,9 @@ export default {
       else{
         router.push({path:"/UserHome"});
       }
+    },
+    sendMessageScreen(){
+      router.push({path:"/SendMessage"});
     } 
   },
   data () {
