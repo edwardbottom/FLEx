@@ -87,25 +87,25 @@ var testCipher = encrypt('Hello World!')
 
 app.post('/UserHome', function(req,res) {
   const username_text=req.body.username;
-  console.log(username_text + " is the username searched for")
+  // console.log(username_text + " is the username searched for")
   db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
       
-      console.log(result + " is the result")
+      // console.log(result + " is the result")
       res.send(result)
   });
 });
 
-app.post('/currExercises', function(req,res) {
+app.post('/exercisePlan', function(req,res) {
   const username_text=req.body.username;
   console.log(username_text + " is the username searched for")
-  db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
+  db.collection('ExercisePlans').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
       
-      console.log(result + " is the result")
-      res.send(result)
+      console.log(result[0] + " is the result!!!!!")
+      res.send(result[0])
   });
 });
 
@@ -135,13 +135,13 @@ app.post('/login',function(req,res){
   db.collection('UserProfile').find({user : username_text}).toArray(function (err, result) {
     if (err) throw err
       
-    console.log(result)
+    // console.log(result)
     let salt = result[0].passwordData.salt;
-    console.log("the salt is " + salt)
+    // console.log("the salt is " + salt)
     let password_hash = result[0].passwordData.passwordHash;
-    console.log("the password hash is " + password_hash);
+    // console.log("the password hash is " + password_hash);
     let password_guess_hash = sha512(password_guess, salt).passwordHash;
-    console.log(password_guess_hash + " is the p word hash guess");
+    // console.log(password_guess_hash + " is the p word hash guess");
     //if login fails
     if(password_guess_hash != password_hash){
       console.log("login FAILED");
@@ -160,7 +160,7 @@ app.post('/login',function(req,res){
     loginObject.accountType = result[0].account_type;
     loginObject.therapistId = result[0].therapist_id;
     loginObject.providerId = result[0].provider_id;
-    console.log(loginObject);
+    // console.log(loginObject);
     res.send(loginObject)
 
   })
@@ -263,11 +263,32 @@ app.post('/submitReport',function(req,res){
     res.send("this path works")
 })
 
+app.post('/submitExercisePlan',function(req,res){
+  const user = req.body.user;
+  const exercisePlan = req.body.exercisePlan;
+  // console.log(user)
+  db.collection('ExercisePlans').insertOne(
+    {
+          user:user,
+          exercisePlan:exercisePlan
+      },
+  function (err, res) {
+          if (err) {
+            // db.close();
+            res.send("broken path")
+          }
+          // Success
+          // db.close();  
+      });
+    res.send("this path works")
+
+})
+
 app.post('/getPatients',function(req,res){
   const doctorIdVal = req.body.doctorId;
    db.collection('UserDescription').find({doctorID:doctorIdVal}).toArray(function (err, result) {
     if (err) throw err
-    console.log(result)
+    // console.log(result)
     res.send(result);
   })
 })
@@ -277,7 +298,7 @@ app.post('/getMessages', function(req,res){
   console.log("!!!!!!!!!" + rec);
   db.collection('Messages').find({receiver:rec}).toArray(function (err, result) {
     if (err) throw err
-    console.log(result)
+    // console.log(result)
     res.send(result);
   })
 })
@@ -286,7 +307,7 @@ app.post('/getUpdates', function(req,res){
   const doctorIdVal = req.body.doctorId;
   db.collection('PatientUpdates').find({doctorID:doctorIdVal}).toArray(function (err, result) {
     if (err) throw err
-    console.log(result)
+    // console.log(result)
     res.send(result);
   })
 })

@@ -11,14 +11,14 @@
                     
                   <b-row>
                       <b-col>
-                        <b>{{info.date}}</b><br>
+                        <b>{{info.date.substring(0,info.date.indexOf("T"))}}</b><br>
                         
                         <b>Rating:</b> {{info.value}}<br>
                         
                         <b>Comments:</b> {{info.reportText}}<br>
 
                         <b>Completed Exercises:</b><br>
-                        {{info.completedExercises}}<br>
+                        {{Math.round(info.completedExercises.length/info.exerciseOptions.length * 100 * 100)/100}}%<br>
                         <b-button href="#" variant="primary">Open Full Report</b-button>
                       </b-col>
                   </b-row>
