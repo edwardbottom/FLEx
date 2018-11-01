@@ -88,11 +88,12 @@ var testCipher = encrypt('Hello World!')
 app.post('/UserHome', function(req,res) {
   const username_text=req.body.username;
   // console.log(username_text + " is the username searched for")
+  console.log(username_text)
   db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
       
-      // console.log(result + " is the result")
+      console.log(result + " is the result")
       res.send(result)
   });
 });
