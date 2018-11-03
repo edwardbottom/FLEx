@@ -37,12 +37,10 @@
 <script>
  import PageHeader from "./PageHeader.vue" 
  import router from '../router';
- import ExerciseSet from "./ExerciseSet.vue"
 export default {
   name: 'UserHome',
   components: {
-    PageHeader,
-    ExerciseSet
+    PageHeader
   },
   methods:{
     submitExercisePlan(info){
