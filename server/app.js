@@ -303,13 +303,25 @@ app.post('/getMessages', function(req,res){
   })
 })
 
-app.post('/getUpdates', function(req,res){
+
+//todo: fix array error
+app.post('/getPatientNames', function(req,res){
   const doctorIdVal = req.body.doctorId;
-  db.collection('PatientUpdates').find({doctorID:doctorIdVal}).toArray(function (err, result) {
-    if (err) throw err
-    // console.log(result)
-    res.send(result);
+  console.log("get patient names entered")
+  var updates = [];
+  let hasRun = false;
+  db.collection('UserProfile').find({therapist_id:doctorIdVal}).toArray(function(err,result){
+    if(err) throw err
+      console.log("results sent");
+      res.send(result);
   })
+})
+
+//todo: fix array error
+app.get('/getDoctorUpdates', function(req,res){
+  //const patientNames = req.body.patientNames;
+  console.log("FUCK!!!!!!!!!!");
+  res.send("words");
 })
 
 app.post('/getProfile', function(req,res){
@@ -344,13 +356,11 @@ app.post('/sendMessage', function(req,res){
     //catch errors
     function (err, res) {
         if (err) {
-          // db.close();
           console.log("error reached")
           res.send("failure");
         }
-        // Success
-        // db.close();  
     })
     res.send("success");
 
 })
+

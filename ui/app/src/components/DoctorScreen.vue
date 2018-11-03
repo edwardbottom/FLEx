@@ -70,20 +70,28 @@ export default {
       console.log(error);
       });
 
-    //get updates
-    this.axios.post('http://localhost:3000/getUpdates', {
+    //get patient usernames
+    this.axios.post('http://localhost:3000/getPatientNames', {
       doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
-      console.log(response.data)
-      self.updates = response.data;
-      console.log(self.summaries + "is the summary")
-      })
+      console.log(response.data);
+      self.$session.set("patientNames", response.data);
+    })
     .catch(function (error) {
       console.log(error);
-      });
+    });
 
-    },
+    //get updates
+    this.axios.get('http://localhost:3000/getDoctorUpdates')
+      .then(function (response) {
+      console.log(response);
+      alert("success")
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 }
 </script>
 <style>

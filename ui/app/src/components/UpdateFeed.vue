@@ -24,7 +24,6 @@ export default {
     updates: Array
   },
   mounted () {
-    //console.log(this.updates);
   }
 }
 </script>
