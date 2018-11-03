@@ -134,34 +134,34 @@ app.post('/login',function(req,res){
   const password_guess=req.body.password;
   db.collection('UserProfile').find({user : username_text}).toArray(function (err, result) {
     if (err) throw err
-      
-    // console.log(result)
-    let salt = result[0].passwordData.salt;
-    // console.log("the salt is " + salt)
-    let password_hash = result[0].passwordData.passwordHash;
-    // console.log("the password hash is " + password_hash);
-    let password_guess_hash = sha512(password_guess, salt).passwordHash;
-    // console.log(password_guess_hash + " is the p word hash guess");
-    //if login fails
-    if(password_guess_hash != password_hash){
-      console.log("login FAILED");
+    
+    if(result.length == 0){
+      res.send("user not found");
+    }
+    else{
+      let salt = result[0].passwordData.salt;
+      let password_hash = result[0].passwordData.passwordHash;
+      let password_guess_hash = sha512(password_guess, salt).passwordHash;
+      if(password_guess_hash != password_hash){
+        console.log("login FAILED");
+        let loginObject = new Object();
+        loginObject.username = username_text;
+        loginObject.status = "failed";
+        res.send(loginObject)
+      }
+      //if login works
+      console.log("LOGIN WORKED");
+      console.log(result.account_type + " is account type");
       let loginObject = new Object();
       loginObject.username = username_text;
-      loginObject.status = "failed";
+      loginObject.status = "success";
+      loginObject.isValidated = true;
+      loginObject.accountType = result[0].account_type;
+      loginObject.therapistId = result[0].therapist_id;
+      loginObject.providerId = result[0].provider_id;
       res.send(loginObject)
     }
-    //if login works
-    console.log("LOGIN WORKED");
-    console.log(result.account_type + " is account type");
-    let loginObject = new Object();
-    loginObject.username = username_text;
-    loginObject.status = "success";
-    loginObject.isValidated = true;
-    loginObject.accountType = result[0].account_type;
-    loginObject.therapistId = result[0].therapist_id;
-    loginObject.providerId = result[0].provider_id;
-    // console.log(loginObject);
-    res.send(loginObject)
+    
 
   })
 })
@@ -295,19 +295,17 @@ app.post('/getPatients',function(req,res){
 
 app.post('/getMessages', function(req,res){
   const rec = req.body.rec;
-  console.log("!!!!!!!!!" + rec);
   db.collection('Messages').find({receiver:rec}).toArray(function (err, result) {
     if (err) throw err
     // console.log(result)
-    res.send(result);
+    res.send(result.reverse());
   })
 })
 
 
-//todo: fix array error
+//working
 app.post('/getPatientNames', function(req,res){
   const doctorIdVal = req.body.doctorId;
-  console.log("get patient names entered")
   var updates = [];
   let hasRun = false;
   db.collection('UserProfile').find({therapist_id:doctorIdVal}).toArray(function(err,result){
@@ -317,11 +315,24 @@ app.post('/getPatientNames', function(req,res){
   })
 })
 
-//todo: fix array error
-app.get('/getDoctorUpdates', function(req,res){
-  //const patientNames = req.body.patientNames;
-  console.log("FUCK!!!!!!!!!!");
-  res.send("words");
+app.post('/getDoctorUpdates', function(req,res){
+  let patientNames = req.body.patientNames;
+  for(let i = 0; i < patientNames.length; i++){
+    patientNames[i] = patientNames[i].user;
+  }
+
+  let returnArray = [];
+  db.collection('Reports').find().toArray(function (err, result) {
+    if (err) throw err
+    for(let i = 0; i < result.length; i++){
+      if(patientNames.includes(result[i].user) && result[i].reportText !== ""){
+        returnArray.push(result[i]);
+      }
+    }
+    res.send(returnArray.reverse());
+  })
+
+  //res.send("words");
 })
 
 app.post('/getProfile', function(req,res){
@@ -343,7 +354,7 @@ app.post('/sendMessage', function(req,res){
   const message = req.body.message;
   const sender = req.body.sender;
   const receiver = req.body.receiver;
-  const id = req.body.id
+  const id = genRandomString(30);
 
   console.log("send messaged reached");
   db.collection('Messages').insertOne(
