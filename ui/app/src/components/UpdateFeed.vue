@@ -7,9 +7,9 @@
       <b-card-body id="nav-scroller" ref="content" style="position:relative; height:250px; overflow-y:scroll;">
         <p class="card-text">
           <b-card v-for="update in this.updates" >
-              <strong>{{update.patient}}</strong></br>
-              <p>{{update.text}}</p>
-            <a href="update.path">View Profile</a>
+              <strong>{{update.user}}</strong></br>
+              <p>{{update.reportText}}</p>
+            <!-- <a href="update.path">View Profile</a> -->
           </b-card>
         </p>
       </b-card-body>

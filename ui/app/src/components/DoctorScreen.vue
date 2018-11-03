@@ -9,7 +9,6 @@
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="4">
-          <!-- <UpdateFeed v-bind:updates= "['img/da-slide1.png', 'img/da-slide2.png']"></UpdateFeed> -->
           <UpdateFeed v-bind:updates= "this.updates"></UpdateFeed>
           <br/>
           <PatientMessages v-bind:messages="this.messages"></PatientMessages>
@@ -75,7 +74,7 @@ export default {
       doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
-      console.log(response.data);
+      console.log(response);
       self.$session.set("patientNames", response.data);
     })
     .catch(function (error) {
@@ -83,14 +82,17 @@ export default {
     });
 
     //get updates
-    this.axios.get('http://localhost:3000/getDoctorUpdates')
+    this.axios.post('http://localhost:3000/getDoctorUpdates',{
+      patientNames : self.$session.get("patientNames")
+    })
       .then(function (response) {
-      console.log(response);
-      alert("success")
+      console.log(response.data)
+      self.updates = response.data;
     })
     .catch(function (error) {
       console.log(error);
     });
+
   }
 }
 </script>

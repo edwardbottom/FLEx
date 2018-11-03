@@ -15,7 +15,6 @@
               <ul class="card-text">
                 <b-form-input v-model="receiver" type="text" placeholder="Receiver Username"></b-form-input><br/>
                 <b-form-input v-model="message" type="text" placeholder="Message"></b-form-input><br/>
-                <b-form-input v-model="security" type="text" placeholder="Security"></b-form-input><br/>
                 <b-button v-on:click="sendMessage()">Send</b-button>
               </ul>
             </b-card-body>
@@ -38,8 +37,7 @@ export default {
   data(){
     return{
       receiver: '',
-      message: '',
-      security: ''
+      message: ''
     }
   },
   methods:{
@@ -48,8 +46,7 @@ export default {
       this.axios.post('http://localhost:3000/sendMessage', {
         receiver: self.receiver,
         message: self.message,
-        sender: self.$session.get("username"),
-        id: "accordion" + self.security
+        sender: self.$session.get("username")
       })
       .then(function (response) {
         console.log(response);
