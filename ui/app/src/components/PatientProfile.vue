@@ -18,20 +18,27 @@
     <p> Contact: {{this.userData.contact}} </p>
     <p> Next Visit: {{this.userData.nextVisit}} </p>
     <p> Summary: {{this.userData.summary}} </p>
+    <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
+          <PastExercises v-bind:pastExercises="this.pastExercises"></PastExercises>
+    </b-card-body>
   </div>
 </template>
 
 <script>
  import PageHeader from "./PageHeader.vue" 
  import router from '../router';
+ import PastExercises from './PastExercises.vue';
+
 export default {
   name: 'UserHome',
   components: {
-    PageHeader
+    PageHeader,
+    PastExercises
   },
   data () {
     return {
-      userData: Object
+      userData: Object,
+      pastExercises:[]
     }
   },
   created() {
@@ -42,10 +49,19 @@ export default {
     .then(function (response) {
       console.log(response.data)
       self.userData = response.data;
-      this.$session.remove("selectedProfile")
       })
     .catch(function (error) {
       console.log(error);
+      });
+
+      this.axios.post('http://localhost:3000/UserHome', {
+        username: self.$session.get("selectedProfile")
+      })
+      .then(function (response) {
+        self.pastExercises = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
       });
 
   },
@@ -55,6 +71,7 @@ export default {
       router.push({path:"/CreatePlan"});
     }
   }
+
 }
 </script>
 <style>
