@@ -233,6 +233,29 @@ app.post('/createNewExercise',function(req,res){
     res.send("this path works")  
 })
 
+app.post('/createNewExerciseSet',function(req,res){
+    const exercise = req.body.exercise;
+    const repetitions = req.body.repetitions;
+    const sets = req.body.sets;
+
+    db.collection('ExerciseSet').insertOne(
+    {
+        exercise:exercise,
+        repetitions:repetitions,
+        sets:sets
+    },
+    //catch errors
+    function (err, res) {
+        if (err) {
+          // db.close();
+          res.send("broken path")
+        }
+        // Success
+        // db.close();  
+    });
+    res.send("this path works")  
+})
+
 app.post('/submitReport',function(req,res){
   const value = req.body.value;
   const reportText = req.body.reportText;
