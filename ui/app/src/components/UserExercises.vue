@@ -2,11 +2,19 @@
    <!-- TODO THING -->
    <div>
           <center>
-                <b-form-group label="Current Exercises" >
-                  <b-form-checkbox-group buttons class="d-block" v-model="selectedOption" stacked :options="exerciseOptions" v-on:input="exerciseUpdate()">
-                  </b-form-checkbox-group>
-                </b-form-group>
-              </center>
+            <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
+                
+               <div v-for="info in exerciseOptions" :key="info.exercise">
+                <b-form-checkbox :value="info">
+                  <b-row class="justify-content-left">
+                    <b-col><p>{{info.exercise}}</p></b-col>
+                    <b-col><p>{{info.repetitions}}</p></b-col><b-col><p>{{info.sets}}</p></b-col>    
+                  </b-row>
+                </b-form-checkbox>
+              </div>     
+            
+            </b-form-checkbox-group>                
+          </center>
     </div>
 </template>
 

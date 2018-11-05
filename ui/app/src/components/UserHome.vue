@@ -10,7 +10,7 @@
 
       </b-col>
       <b-col>    
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" @clicked="exerciseUpdated"></UserExercises>
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" @clicked="exerciseUpdated"></UserExercises>       
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
