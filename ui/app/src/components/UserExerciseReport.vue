@@ -10,7 +10,7 @@
         :lineHeight="slider.lineHeight"
         :tooltipStyles="{ backgroundColor: 'blue', borderColor: 'blue' }">
       </VueSlideBar>
-      <center><h2>Value: {{value2}}</h2></center>
+      <center><h2>Pain Rating: {{value2}}</h2></center>
     </div>
 
     <div>
