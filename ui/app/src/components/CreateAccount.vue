@@ -1,6 +1,12 @@
 <template>
   <div class="CreateAccount">
-    <PageHeader></PageHeader> 
+<!--     <PageHeader></PageHeader>  -->
+<b-navbar toggleable="md" type="dark" variant="primary">
+
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+      <b-navbar-brand href="#">FLEx</b-navbar-brand>
+      </b-navbar>
     <br>
     <div class="center-block">
     <b-container class="bv-example-row">
