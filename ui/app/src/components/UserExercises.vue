@@ -1,6 +1,13 @@
 <template>
    <!-- TODO THING -->
-   <div>
+   <div> 
+    <b-card title="Assigned Exercises"
+                    tag="article"
+                    style="max-width: 100%;"
+                    class="mb-2">
+              <p class="card-text">
+                
+                <b-container class="bv-example-row">
           <center>
             <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
                 
@@ -15,6 +22,9 @@
             
             </b-form-checkbox-group>                
           </center>
+        </b-container>
+      </p>
+        </b-card>
     </div>
 </template>
 
@@ -39,7 +49,8 @@ export default {
       selectedOption: [], // Must be an array reference!
 
     }
-  }
+  },
+
   
 }
 </script>

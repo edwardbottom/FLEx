@@ -51,7 +51,9 @@ export default {
       this.$session.set("selectedProfile", username)
       router.push({path:'/PatientProfile'});
     }
-  }
+  },
+  
 }
+
 </script>
 

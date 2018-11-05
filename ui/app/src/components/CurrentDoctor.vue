@@ -1,17 +1,18 @@
 <template>
   <!--Doctor Thing -->
   <div>
-          <b-card 
+          <b-card title="Doctor Phil"
                   tag="article"
                   style="max-width: 100%;"
                   class="mb-2"
                   v-for="info in this.doctorInfo" :key="info.firstVisit">
 
               <div>
-                <b-dropdown id="ddown1" text="Select Doctor" class="m-md-2">
+              <!--   <b-dropdown id="ddown1" text="Select Doctor" class="m-md-2">
                   <b-dropdown-item>Doctor Dan</b-dropdown-item>
                   <b-dropdown-item>Doctor Pletzbert</b-dropdown-item>
-                </b-dropdown>
+                </b-dropdown> -->
+              
               </div>  
               <b>First Visit</b>
               <br>

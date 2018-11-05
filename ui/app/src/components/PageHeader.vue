@@ -22,7 +22,7 @@
             <template slot="button-content">
               <em>{{this.$session.get("username")}}</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
             <b-dropdown-item href="#"
             v-on:click="logout()"
             >Signout</b-dropdown-item>
