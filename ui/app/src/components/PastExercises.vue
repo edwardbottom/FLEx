@@ -18,8 +18,8 @@
                         <b>Comments:</b> {{info.reportText}}<br>
 
                         <b>Completed Exercises:</b><br>
-                        {{Math.round(info.completedExercises.length/info.exerciseOptions.length * 100 * 100)/100}}%<br>
-                        <b-button href="#" variant="primary">Open Full Report</b-button>
+                        {{Math.round(info.completedExercises.length/info.exerciseOptions.length * 100)}}%<br>
+                        <b-button variant="primary" v-on:click="fullReportOpen()">Open Full Report</b-button>
                       </b-col>
                   </b-row>
                   <hr />
@@ -39,6 +39,11 @@ export default {
   props: {
     pastExercises: Array
   },
+  methods:{
+    fullReportOpen(){
+      alert("This will soon display all of the granular detail, see sprint boards for more info")
+    }
+  }
 
 }
 </script>

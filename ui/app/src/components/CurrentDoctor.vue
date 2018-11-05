@@ -42,7 +42,7 @@
               <br>
               {{info.phone}}
               <br>
-            <b-button href="#" variant="primary">Go somewhere</b-button>
+            <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
           </b-card>
         </div>
 

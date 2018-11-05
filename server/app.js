@@ -264,9 +264,12 @@ app.post('/submitReport',function(req,res){
   const date = req.body.date;
   const user = req.body.user;
   const exerciseOptions = req.body.exerciseOptions;
-
-
-
+  var length;
+  db.collection('Reports').find({date: date, user:user}).toArray(function (err, result) {
+    if (err){throw err}
+    // console.log(result)
+    else{
+      if (result.length == 0){
     db.collection('Reports').insertOne(
     {
           user:user,
@@ -285,7 +288,17 @@ app.post('/submitReport',function(req,res){
           // Success
           // db.close();  
       });
-    res.send("this path works")
+    console.log("sending success")
+    res.send("1")
+  }
+  else{
+    console.log("sending fail")
+    res.send("0")
+  }
+    }
+
+  })
+  
 })
 
 app.post('/submitExercisePlan',function(req,res){

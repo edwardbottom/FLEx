@@ -59,12 +59,18 @@ export default {
                 date: this.date
           })
           .then(function (response) {
-            console.log(response);
+            console.log(response.data)
+            if(response.data == "1"){
+              if(alert("Submitted!")){}
+              else {window.location.reload()}
+            }
+            else {alert("Submission already recieved for this date.")}
           })
           .catch(function (error) {
             console.log(error);
           });
-          router.push({path:"/UserHome"});
+          
+
         },
         exerciseUpdated(info){
           this.selectedOption = info;
