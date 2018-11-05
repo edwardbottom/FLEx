@@ -92,9 +92,10 @@ app.post('/UserHome', function(req,res) {
   db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
-      
-      console.log(result + " is the result")
-      res.send(result)
+      const collator = new Intl.Collator('en', {numeric: true, sensitivity: 'base'})
+    const sorted = result.sort((a,b) => collator.compare(b.date,a.date))
+      console.log(sorted + " is the result")
+      res.send(sorted)
   });
 });
 
