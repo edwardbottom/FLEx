@@ -10,16 +10,16 @@
                 <b-container class="bv-example-row">
           <center>
             <b-form-group>
-            <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()" :options="exerciseOptions">
+            <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
                 
-               <!-- <div v-for="info in exerciseOptions" :key="info.exercise">
+               <div v-for="info in exerciseOptions" :key="info.exercise">
                 <b-form-checkbox :value="info">
                   <b-row class="justify-content-left">
                     <b-col><p>{{info.exercise}}</p></b-col>
                     <b-col><p>R: {{info.repetitions}}</p></b-col><b-col><p>S: {{info.sets}}</p></b-col>    
                   </b-row>
                 </b-form-checkbox>
-              </div>  -->    
+              </div>     
             
             </b-form-checkbox-group> 
             </b-form-group>               
