@@ -48,7 +48,7 @@ export default {
   },
   data () {
     return {
-      value2: 8,
+      value2: 5,
       slider: {
         lineHeight: 10,
         processStyle: {
