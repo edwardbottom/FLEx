@@ -49,6 +49,7 @@ export default {
     .then(function (response) {
       console.log(response.data)
       self.userData = response.data;
+      console.log(self.userData)
       })
     .catch(function (error) {
       console.log(error);
