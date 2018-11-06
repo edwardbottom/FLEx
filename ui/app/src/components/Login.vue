@@ -16,9 +16,6 @@
                   <b-col>
                   <p align="left">Password</p>
                 </b-col>
-                <b-col>
-                  <b-button size="sm" v-on:click="forgotPassword()">Forgot Password?</b-button>
-                </b-col>
               </b-row>
                   <b-form-input v-model="password" type="password"></b-form-input> 
                 </br>
@@ -94,9 +91,6 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
-    },
-    forgotPassword(){
-      alert("Not implemented, see future sprint")
     }
   }  
 }
