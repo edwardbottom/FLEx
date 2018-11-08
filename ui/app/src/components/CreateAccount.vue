@@ -142,6 +142,7 @@ export default {
   methods:{
     register()
     {
+      self = this
       console.log("accont type is " + this.account_type)
       this.axios.post('http://localhost:3000/register', {
         first_name: this.first_name,
@@ -158,11 +159,16 @@ export default {
       })
       .then(function (response) {
         console.log(response);
+        if(self.account_type == 'patient'){
+          router.push({path:"/CreateSummary"})
+        }
+        else{
+          router.push({path:"/Login"});
+        }
       })
       .catch(function (error) {
         console.log(error);
       });
-      router.push({path:"/Login"});
     }
   },
   data(){
