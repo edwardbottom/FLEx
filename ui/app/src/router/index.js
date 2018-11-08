@@ -9,6 +9,7 @@ import CreateExercise from '../components/CreateExercise'
 import CreatePlanScreen from '../components/CreatePlanScreen'
 import SendMessage from '../components/SendMessage'
 import CreateSummary from '../components/CreateSummary'
+import EditPatientProfile from '../components/EditPatientProfile'
 
 Vue.use(Router)
 export default new Router({
@@ -61,6 +62,11 @@ export default new Router({
       path: '/CreateSummary',
       name: CreateSummary,
       component: CreateSummary
+    },
+    {
+      path: "/EditPatientProfile",
+      name: EditPatientProfile,
+      component: EditPatientProfile
     }   
   ]
 })

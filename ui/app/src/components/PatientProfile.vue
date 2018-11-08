@@ -18,6 +18,9 @@
     <p> Contact: {{this.userData.contact}} </p>
     <p> Next Visit: {{this.userData.nextVisit}} </p>
     <p> Summary: {{this.userData.summary}} </p>
+    <b-button size="small" variant="primary" v-on:click="edit()">
+        Edit Profile
+      </b-button>
     <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
           <PastExercises v-bind:pastExercises="this.pastExercises"></PastExercises>
     </b-card-body>
@@ -70,6 +73,10 @@ export default {
     createPlan()
     {
       router.push({path:"/CreatePlan"});
+    },
+    edit()
+    {
+      router.push({path:"/EditPatientProfile"});
     }
   }
 
