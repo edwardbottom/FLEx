@@ -415,7 +415,7 @@ app.post('/sendMessage', function(req,res){
 })
 
 app.post('/createSummary', function(req,res){
-  const patient = req.body.patient;
+    const patient = req.body.patient;
     const username = req.body.username;
     console.log("username is " + username)
     const age = req.body.age;
@@ -457,5 +457,36 @@ app.post('/createSummary', function(req,res){
         }
     });
     res.send("success")  
+})
+
+app.post('/updatePatientProfile', function(req,res){
+  console.log("request reached")
+  console.log(req.body.user + " is the username");
+  db.collection("PatientProfile").update(
+   { user:req.body.user},
+   {
+      user: req.body.user,
+      name: req.body.name,
+      height: req.body.height,
+      weight: req.body.weight,
+      injury: req.body.injury,
+      currentStatus: req.body.currentStatus,
+      averageStatus: req.body.averageStatus,
+      worstStatus: req.body.worstStatus,
+      bestStatus: req.body.bestStatus,
+      lastActive: req.body.lastActive,
+      contact: req.body.contact,
+      nextVisit: req.body.nextVisit,
+      summary: req.body.summary
+   },
+   //catch errors
+   function (err, res) {
+        if (err) {
+          console.log("error reached")
+          res.send("broken path")
+        }
+    });
+  console.log("success reached")
+  res.send("success");
 })
 
