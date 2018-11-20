@@ -4,6 +4,27 @@
     <div>
       <center>
         <b-form-group label="Current Exercises" >
+        <b-container class="bv-example-row" style="position:relative; width:500px;" >
+        <b-row>
+          <b-col><p><strong>Exercise</strong></p></b-col>
+          <b-col><p><strong>Repetitions</strong></p></b-col>
+          <b-col><p><strong>Sets</strong></p></b-col>
+        </b-row>
+        <b-form-checkbox-group stacked v-model="selected_exercises">
+          
+         <div v-for="info in this.current_exercises" :key="info.exercise">
+          <b-form-button :value="info">
+            <b-row class="justify-content-left">
+              <b-col><button>Delete</button></b-col>
+              <b-col><p>{{info.exercise}}</p></b-col>
+              <b-col><b-form-input v-model="info.repetitions"></b-form-input></b-col>
+              <b-col><b-form-input v-model="info.sets"></b-form-input></b-col>              
+            </b-row>
+          </b-form-button>
+        </div>     
+      
+        </b-form-checkbox-group>    
+        </b-container>
 <!--           <b-form-checkbox-group buttons class="d-block" v-model="selected_exercises" stacked :options="exercises"> -->
         <b-container class="bv-example-row" style="position:relative; width:500px;" >
         <b-row>
@@ -59,26 +80,45 @@ export default {
         router.push({path:"/doctor"});
         console.log("submitted")
       })
-    this.axios.post('http://localhost:3000/submitExercisePlan', {
-          user:this.$session.get("selectedProfile"),
-          exercisePlan: this.selected_exercises,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        router.push({path:"/doctor"});
-        console.log("submitted")
 
-
-  }
+      if(this.plan === undefined || this.plan.length == 0)
+      {
+        this.axios.post('http://localhost:3000/submitExercisePlan', {
+              user:this.$session.get("selectedProfile"),
+              exercisePlan: this.selected_exercises,
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            router.push({path:"/doctor"});
+            console.log("submitted")
+        
+      } else
+      {
+        this.axios.post('http://localhost:3000/updateExercisePlan', {
+              user:this.$session.get("selectedProfile"),
+              exercisePlan: this.selected_exercises.concat(this.current_exercises),
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            router.push({path:"/doctor"});
+            console.log("submitted")   
+      }
+    }
   },
   data () {
     return {
       exercises: [],
       selected_exercises: [],
+      current_exercises: [],
+      plan: [],
     }
   },
   created() {
@@ -97,6 +137,18 @@ export default {
       console.log(error);
     });
 
+    this.axios.post('http://localhost:3000/getPlan', {
+      user: self.$session.get("selectedProfile")
+    })
+    .then(function (response) {
+      console.log(response.data)
+      self.plan = response.data;
+      self.current_exercises = self.plan[0].exercisePlan;
+      console.log(self.plan[0].exercisePlan[0].repetitions + " is the summary")
+      })
+    .catch(function (error) {
+      console.log(error);
+      });
   },
   
 }
