@@ -152,27 +152,26 @@ app.post('/login',function(req,res){
         let loginObject = new Object();
         loginObject.username = username_text;
         loginObject.status = "failed";
+        res.send("user not found")
+      }
+      else{
+        //if login works
+        console.log("LOGIN WORKED");
+        console.log(result.account_type + " is account type");
+        let loginObject = new Object();
+        loginObject.username = username_text;
+        loginObject.status = "success";
+        loginObject.isValidated = true;
+        loginObject.accountType = result[0].account_type;
+        loginObject.therapistId = result[0].therapist_id;
+        loginObject.providerId = result[0].provider_id;
         res.send(loginObject)
       }
-      //if login works
-      console.log("LOGIN WORKED");
-      console.log(result.account_type + " is account type");
-      let loginObject = new Object();
-      loginObject.username = username_text;
-      loginObject.status = "success";
-      loginObject.isValidated = true;
-      loginObject.accountType = result[0].account_type;
-      loginObject.therapistId = result[0].therapist_id;
-      loginObject.providerId = result[0].provider_id;
-      res.send(loginObject)
     }
-    
-
   })
 })
 
 app.post('/register',function(req,res){
-  // const type = req.body.type;
   const first_name = req.body.first_name;
   const middle_name = req.body.middle_name;
   const last_name = req.body.last_name;
