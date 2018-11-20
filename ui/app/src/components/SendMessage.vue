@@ -1,12 +1,13 @@
 <template>
   <div>
-    <PageHeader></PageHeader>
+    <PageHeader v-if="isTherapist" ok="true"></PageHeader>
+    <PageHeader v-else></PageHeader> 
     <center>
     <b-col cols="6">
     <b-card no-body>
       <b-nav pills slot="header">
         <center>
-          <h3>Send Message</h3>
+          <h3>Send Message {{words}}</h3>
         </center>
       </b-nav>
         <p class="card-text">
@@ -37,8 +38,14 @@ export default {
   data(){
     return{
       receiver: '',
-      message: ''
+      message: '',
+      isTherapist:Boolean
     }
+  },
+  beforeMount(){
+      if(this.$session.get("accountType") == "therapist"){
+        this.isTherapist = true;
+      }
   },
   methods:{
     sendMessage(){

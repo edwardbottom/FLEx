@@ -14,6 +14,7 @@
                 <b-card-body>
                   <ul class="card-text">
                     <li> {{message.message}}</li>
+                    <b-button :size="small" :variant="outline-secondary" v-on:click="goToReply()">Reply</b-button>
                   </ul>
                 </b-card-body>
               </b-collapse>
@@ -25,10 +26,16 @@
 </template>
 
 <script>
+import router from "../router";
 export default {
   name: 'PatientMessages',
   props: {
     messages: Array
+  },
+  methods:{
+    goToReply(){
+      router.push({path:"/SendMessage"});
+    }
   }
 }
 </script>

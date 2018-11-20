@@ -1,9 +1,9 @@
 <template>
   <div class="CreateSummary">
-  <PageHeader></PageHeader>
+  <PageHeader ok="true"></PageHeader>
   </br>
     <b-row class="justify-content-md-center">
-      <h3> {{this.userData.patient}}'s Profile </h3>
+      <h3> {{this.name}}'s Profile </h3>
       <br>
     </b-row>
     <div class="center-block">
@@ -56,7 +56,7 @@
     </b-container> 
     <b-row class="justify-content-md-center">
       <b-button v-on:click="cancel()">Cancel</b-button>
-      <b-button v-on:click="submitInfo()">Submit Changes</b-button>
+      <b-button v-on:click="submitChanges()">Submit Changes</b-button>
     </b-row>   
   </div> 
   </div>
@@ -123,21 +123,21 @@ export default {
     },
     submitChanges(){
       var self = this;
-    this.axios.post('http://localhost:3000/getProfile', {
-      reqUser: this.$session.get("selectedProfile"),
-      user = self.user,
-      name = self.name,
-      height = self.height,
-      weight = self.weight,
-      injury = self.injury,
-      currentStatus = self.currentStatus,
-      averageStatus = self.averageStatus,
-      worstStatus = self.worstStatus,
-      bestStatus = self.bestStatus,
-      lastActive = self.lastActive,
-      contact = self.contact,
-      nextVisit = self.nextVisit,
-      summary = self.summary
+      this.axios.post('http://localhost:3000/updatePatientProfile', {
+        reqUser: this.$session.get("selectedProfile"),
+        user: self.user,
+        name: self.name,
+        height: self.height,
+        weight: self.weight,
+        injury: self.injury,
+        currentStatus: self.currentStatus,
+        averageStatus: self.averageStatus,
+        worstStatus: self.worstStatus,
+        bestStatus: self.bestStatus,
+        lastActive: self.lastActive,
+        contact: self.contact,
+        nextVisit: self.nextVisit,
+        summary: self.summary
     })
     .then(function (response) {
       console.log(response.data)

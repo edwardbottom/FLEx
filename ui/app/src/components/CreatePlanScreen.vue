@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader></PageHeader>
+    <PageHeader ok="true"></PageHeader>
     <div>
       <center>
         <b-form-group label="Current Exercises" >

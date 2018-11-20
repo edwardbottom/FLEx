@@ -41,7 +41,7 @@ export default {
       updates:[]
     }
   },
-  created() {
+  beforeMount() {
     //get the patient summarues
     var self = this;
     this.axios.post('http://localhost:3000/getPatients', {
@@ -56,6 +56,18 @@ export default {
       console.log(error);
       });
 
+    //get updates
+    this.axios.post('http://localhost:3000/getDoctorUpdates',{
+      patientNames : self.$session.get("patientNames")
+    })
+      .then(function (response) {
+      console.log(response.data)
+      self.updates = response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
     //get messages
     this.axios.post('http://localhost:3000/getMessages', {
       rec: self.$session.get("username")
@@ -81,17 +93,6 @@ export default {
       console.log(error);
     });
 
-    //get updates
-    this.axios.post('http://localhost:3000/getDoctorUpdates',{
-      patientNames : self.$session.get("patientNames")
-    })
-      .then(function (response) {
-      console.log(response.data)
-      self.updates = response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="CreateExercise">    
-    <PageHeader></PageHeader>    
+    <PageHeader ok="true">Yes</PageHeader>
     <br>
     <div class="center-block">
     <b-container class="bv-example-row">

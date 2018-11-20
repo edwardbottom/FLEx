@@ -134,6 +134,9 @@ app.get('/db', (req, res) =>{
 app.post('/login',function(req,res){
   const username_text=req.body.username;
   const password_guess=req.body.password;
+  if(username_text == undefined || password_guess == undefined){
+    res.send("user not found");
+  }
   db.collection('UserProfile').find({user : username_text}).toArray(function (err, result) {
     if (err) throw err
     

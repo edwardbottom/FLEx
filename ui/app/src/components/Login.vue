@@ -10,25 +10,25 @@
     <b-row class="justify-content-md-center">
               <b-card border-variant="secondary">
                   <p>Username or email address</p>
-                  <b-form-input v-model="username" type="text"></b-form-input>
-                </br>
+                  <b-form-input v-model="username" type="text" v-on:keyup.enter="goToUserPage()"></b-form-input>
+                <br>
                 <b-row>
                   <b-col>
                   <p align="left">Password</p>
                 </b-col>
               </b-row>
-                  <b-form-input v-model="password" type="password"></b-form-input> 
-                </br>
+                  <b-form-input v-model="password" type="password" v-on:keyup.enter="goToUserPage()"></b-form-input> 
+                <br>
                   <b-button class="btn-block" 
-                  v-on:click="goToUserPage()"
+                  v-on:click="goToUserPage()" 
                   variant="success">Sign In</b-button>
-                </br>
+                <br>
                   <b-row>
                     <b-col>
                   <p>New to FLEx?</p>
                 </b-col>
                 <b-col>
-                  <b-button variant="success" v-on:click="goToCreateAccount()">Create an account</b-button>
+                  <b-button variant="success" v-on:click="goToCreateAccount()" v-on:keyup.enter="goToUserPage()">Create an account</b-button>
                 </b-col>
               </b-row>
               </b-card>
