@@ -324,9 +324,40 @@ app.post('/submitExercisePlan',function(req,res){
 
 })
 
+app.post('/updateExercisePlan',function(req,res){
+  const user = req.body.user;
+  const exercisePlan = req.body.exercisePlan;
+  // console.log(user)
+  db.collection('ExercisePlans').update(
+    {user:user},
+    {
+          user:user,
+          exercisePlan:exercisePlan
+    },
+  function (err, res) {
+          if (err) {
+            // db.close();
+            res.send("broken path")
+          }
+          // Success
+          // db.close();  
+      });
+    res.send("this path works")
+
+})
+
 app.post('/getPatients',function(req,res){
   const doctorIdVal = req.body.doctorId;
    db.collection('UserDescription').find({doctorID:doctorIdVal}).toArray(function (err, result) {
+    if (err) throw err
+    // console.log(result)
+    res.send(result);
+  })
+})
+
+app.post('/getPlan', function(req,res){
+  const userVal = req.body.user;
+  db.collection('ExercisePlans').find({user:userVal}).toArray(function (err, result) {
     if (err) throw err
     // console.log(result)
     res.send(result);
@@ -341,7 +372,6 @@ app.post('/getMessages', function(req,res){
     res.send(result.reverse());
   })
 })
-
 
 //working
 app.post('/getPatientNames', function(req,res){
