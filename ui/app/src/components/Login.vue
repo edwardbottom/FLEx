@@ -8,30 +8,30 @@
       <img width="100px" height="80px" src="../images/dumbbell.png"></img>
     </b-row>
     <b-row class="justify-content-md-center">
-              <b-card border-variant="secondary">
-                  <p>Username or email address</p>
-                  <b-form-input v-model="username" type="text" v-on:keyup.enter="goToUserPage()"></b-form-input>
-                <br>
-                <b-row>
-                  <b-col>
-                  <p align="left">Password</p>
-                </b-col>
-              </b-row>
-                  <b-form-input v-model="password" type="password" v-on:keyup.enter="goToUserPage()"></b-form-input> 
-                <br>
-                  <b-button class="btn-block" 
-                  v-on:click="goToUserPage()" 
-                  variant="success">Sign In</b-button>
-                <br>
-                  <b-row>
-                    <b-col>
-                  <p>New to FLEx?</p>
-                </b-col>
-                <b-col>
-                  <b-button variant="success" v-on:click="goToCreateAccount()" v-on:keyup.enter="goToUserPage()">Create an account</b-button>
-                </b-col>
-              </b-row>
-              </b-card>
+      <b-card border-variant="secondary">
+          <p>Username or email address</p>
+          <b-form-input v-model="username" type="text" v-on:keyup.enter="goToUserPage()"></b-form-input>
+        <br>
+        <b-row>
+          <b-col>
+          <p align="left">Password</p>
+        </b-col>
+      </b-row>
+          <b-form-input v-on:keyup.enter="goToUserPage" v-model="password" type="password"></b-form-input> 
+        <br>
+          <b-button class="btn-block" 
+          v-on:click="goToUserPage()" 
+          variant="success">Sign In</b-button>
+        <br>
+          <b-row>
+            <b-col>
+          <p>New to FLEx?</p>
+        </b-col>
+        <b-col>
+          <b-button variant="success" v-on:click="goToCreateAccount()" v-on:keyup.enter="goToUserPage()">Create an account</b-button>
+        </b-col>
+      </b-row>
+      </b-card>
     </b-row>     
   </div>
 </template>
@@ -60,6 +60,9 @@ export default {
     },
     goToUserPage()
     {
+      if(this.username == "" || this.password == ""){
+        return;
+      }
       var self = this
       this.axios.post('http://localhost:3000/login', {
         username: this.username,
@@ -69,14 +72,12 @@ export default {
         console.log(response);
         if(response.data.status == "success"){
           self.$session.start();
-          console.log(response.data.therapist_id);
           self.$session.set("username", response.data.username);
           self.$session.set("isValidated", response.data.isValidated);
           self.$session.set("accountType", response.data.accountType);
           self.$session.set("therapistId", response.data.therapistId);
           self.$session.set("providerId", response.data.providerId);
-          
-          console.log(response.data.accountType + " is type is");
+
           if(response.data.accountType == "therapist"){
             router.push({path:"/doctor"});
           }

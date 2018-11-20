@@ -387,6 +387,7 @@ app.post('/getPatientNames', function(req,res){
 
 app.post('/getDoctorUpdates', function(req,res){
   let patientNames = req.body.patientNames;
+  console.log("the updates request was received and the patient names array is " + patientNames.toString())
   for(let i = 0; i < patientNames.length; i++){
     patientNames[i] = patientNames[i].user;
   }

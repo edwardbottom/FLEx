@@ -42,8 +42,33 @@ export default {
     }
   },
   beforeMount() {
-    //get the patient summarues
     var self = this;
+
+    //get patient usernames
+    this.axios.post('http://localhost:3000/getPatientNames', {
+      doctorId: self.$session.get("therapistId")
+    })
+    .then(function (response) {
+      console.log(response);
+      self.$session.set("patientNames", response.data);
+
+      //get updates
+      self.axios.post('http://localhost:3000/getDoctorUpdates',{
+        patientNames : self.$session.get("patientNames")
+      })
+      .then(function (response) {
+        console.log(response.data)
+        self.updates = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    //get patient profiles
     this.axios.post('http://localhost:3000/getPatients', {
       doctorId: self.$session.get("therapistId")
     })
@@ -55,18 +80,6 @@ export default {
     .catch(function (error) {
       console.log(error);
       });
-
-    //get updates
-    this.axios.post('http://localhost:3000/getDoctorUpdates',{
-      patientNames : self.$session.get("patientNames")
-    })
-      .then(function (response) {
-      console.log(response.data)
-      self.updates = response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
     
     //get messages
     this.axios.post('http://localhost:3000/getMessages', {
@@ -80,20 +93,6 @@ export default {
     .catch(function (error) {
       console.log(error);
       });
-
-    //get patient usernames
-    this.axios.post('http://localhost:3000/getPatientNames', {
-      doctorId: self.$session.get("therapistId")
-    })
-    .then(function (response) {
-      console.log(response);
-      self.$session.set("patientNames", response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-
   }
 }
 </script>
