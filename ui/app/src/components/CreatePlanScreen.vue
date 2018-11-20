@@ -3,9 +3,12 @@
     <PageHeader ok="true"></PageHeader>
     <div>
       <center>
-        <b-form-group label="Current Exercises" >
-        <b-container class="bv-example-row" style="position:relative; width:500px;" >
+        <b-form-group>
+          <br>
+          <h4><strong>Current Exercise Plan</strong></h4>
+        <b-container class="bv-example-row" style="position:relative; width:600px;" >
         <b-row>
+          <b-col></b-col>
           <b-col><p><strong>Exercise</strong></p></b-col>
           <b-col><p><strong>Repetitions</strong></p></b-col>
           <b-col><p><strong>Sets</strong></p></b-col>
@@ -15,17 +18,18 @@
          <div v-for="info in this.current_exercises" :key="info.exercise">
           <b-form-button :value="info">
             <b-row class="justify-content-left">
-              <b-col><button>Delete</button></b-col>
+              <b-col><button v-on:click="deleteExercise">Delete</button></b-col>
               <b-col><p>{{info.exercise}}</p></b-col>
               <b-col><b-form-input v-model="info.repetitions"></b-form-input></b-col>
               <b-col><b-form-input v-model="info.sets"></b-form-input></b-col>              
             </b-row>
           </b-form-button>
         </div>     
-      
+        <br>
         </b-form-checkbox-group>    
         </b-container>
 <!--           <b-form-checkbox-group buttons class="d-block" v-model="selected_exercises" stacked :options="exercises"> -->
+        <h4><strong>Exercise Database</strong></h4>
         <b-container class="bv-example-row" style="position:relative; width:500px;" >
         <b-row>
           <b-col><p><strong>Exercise</strong></p></b-col>
@@ -63,6 +67,10 @@ export default {
     PageHeader
   },
   methods:{
+    deleteExercise(info){
+
+    },
+    
     submitExercisePlan(info){
       Object.keys(this.selected_exercises).forEach(key=>{
         let val = this.selected_exercises[key]
