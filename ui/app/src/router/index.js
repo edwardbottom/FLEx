@@ -10,6 +10,7 @@ import CreatePlanScreen from '../components/CreatePlanScreen'
 import SendMessage from '../components/SendMessage'
 import CreateSummary from '../components/CreateSummary'
 import EditPatientProfile from '../components/EditPatientProfile'
+import PastExerciseDetail from '../components/PastExerciseDetail'
 
 Vue.use(Router)
 export default new Router({
@@ -67,6 +68,11 @@ export default new Router({
       path: "/EditPatientProfile",
       name: EditPatientProfile,
       component: EditPatientProfile
-    }   
+    },
+    {
+      path: "/PastExerciseDetail",
+      name: PastExerciseDetail,
+      component: PastExerciseDetail
+    }
   ]
 })
