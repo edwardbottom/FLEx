@@ -310,6 +310,7 @@ app.post('/submitExercisePlan',function(req,res){
   db.collection('ExercisePlans').insertOne(
     {
           user:user,
+          text:exercisePlan.exercise + exercisePlan.repetitions + "x" + exercisePlan.sets,
           exercisePlan:exercisePlan
       },
   function (err, res) {
