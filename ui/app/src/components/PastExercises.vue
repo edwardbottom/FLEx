@@ -15,11 +15,11 @@
                         
                         <b>Rating:</b> {{info.value}}<br>
                         
-                        <b>Comments:</b> {{info.reportText}}<br>
+                      <!--   <b>Comments:</b> {{info.reportText}}<br> -->
 
                         <b>Completed Exercises:</b><br>
                         {{Math.round(info.completedExercises.length/info.exerciseOptions.length * 100)}}%<br>
-                        <b-button variant="primary" v-on:click="fullReportOpen()">Open Full Report</b-button>
+                        <b-button variant="primary" v-on:click="fullReportOpen(info)">Open Full Report</b-button>
                       </b-col>
                   </b-row>
                   <hr />
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import router from '../router';
 
 export default {
   name: 'PastExercises',
@@ -40,9 +41,10 @@ export default {
     pastExercises: Array
   },
   methods:{
-    fullReportOpen(){
-      alert("This will soon display all of the granular detail, see sprint boards for more info")
-    }
+    fullReportOpen(info){
+      this.$session.set("exerciseDetail", info)
+      console.log(info + " is the selected info!!!!!!!!!!!1")
+      router.push({path:'/PastExerciseDetail'});    }
   }
 
 }

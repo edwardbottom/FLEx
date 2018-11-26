@@ -1,6 +1,6 @@
 <template>
   <div class="userHome">
-    <PageHeader @closed="dateUpdated"></PageHeader>
+    <PageHeader></PageHeader>
     <br>
     <b-container class="statusReports" >
     <b-row>
@@ -14,13 +14,13 @@
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
-          <PastExercises v-bind:pastExercises="this.pastExercises"></PastExercises>
+          <PastExercises v-bind:pastExercises="this.pastExercises" @closed="dateUpdated"></PastExercises>
           </b-card-body>
         </b-col>
     </b-row>
 </b-container>
     <center>
-      <UserExerciseReport @clicked="submitReport"></UserExerciseReport>
+      <UserExerciseReport @clicked="submitReport" @closed="dateUpdated"></UserExerciseReport>
         
     </center>
   </div>
@@ -32,6 +32,7 @@
   import UserExercises from './UserExercises.vue';
   import PastExercises from './PastExercises.vue';
   import UserExerciseReport from './UserExerciseReport.vue';
+  import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
   import router from '../router';
 export default {
   name: 'UserHome',
@@ -46,6 +47,7 @@ export default {
     UserExercises,
     PastExercises,
     UserExerciseReport,
+    Datepicker,
   },
   methods:
       {

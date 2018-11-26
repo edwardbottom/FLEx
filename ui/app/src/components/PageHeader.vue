@@ -6,7 +6,7 @@
 
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
-      <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker>
+      <!-- <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker> -->
       <b-button v-on:click="returnHome()" class="ml-2">HOME</b-button>
       <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
       <b-button v-on:click="sendMessageScreen()" class="ml-2">Send Message</b-button>
@@ -61,9 +61,9 @@ export default {
     {
       router.push({path:"/CreateExercise"});
     },
-    dateChanged(){
-      this.$emit("closed", this.date)
-    },
+    // dateChanged(){
+    //   this.$emit("closed", this.date)
+    // },
     returnHome(){
       if(this.$session.get("accountType") == "therapist"){
         router.push({path:"/doctor"});
@@ -76,16 +76,16 @@ export default {
       router.push({path:"/SendMessage"});
     } 
   },
-  data () {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth(); //January is 0!
-    var yyyy = today.getFullYear();
-    return {
-      date: new Date(yyyy, mm,  dd), // Must be an array reference!
+  // data () {
+  //   var today = new Date();
+  //   var dd = today.getDate();
+  //   var mm = today.getMonth(); //January is 0!
+  //   var yyyy = today.getFullYear();
+  //   return {
+  //     date: new Date(yyyy, mm,  dd), // Must be an array reference!
 
-    }
-  }
+  //   }
+  // }
 }
 </script>
 

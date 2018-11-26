@@ -10,20 +10,6 @@
     <br>
     <div class="center-block">
     <b-container class="bv-example-row">
-      <b-row class="justify-content-md-center">
-        <b-col cols="1">
-        <b-form-radio-group id="account_type" v-model="account_type" name="radioInline">
-          <b-col cols="1">
-            <b-form-radio value="therapist">Therapist</b-form-radio>            
-          </b-col>
-          <b-col cols="1">
-            <b-form-radio value="patient">Patient</b-form-radio> 
-          </b-col>
-        </b-form-radio-group>
-        </b-col>
-        </b-row> 
-        <br> 
-        <br>
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -123,14 +109,28 @@
               </b-col>
             </b-row>  
         </div>          
-        <br>        
+        <br>   
+              <b-row class="justify-content-md-center">
+        <b-col cols="1">
+        <b-form-radio-group id="account_type" v-model="account_type" name="radioInline">
+          <b-col cols="1">
+            <b-form-radio value="therapist">Therapist</b-form-radio>            
+          </b-col>
+          <b-col cols="1">
+            <b-form-radio value="patient">Patient</b-form-radio> 
+          </b-col>
+        </b-form-radio-group>
+        </b-col>
+        </b-row> 
+        <br>     
         <b-row class="justify-content-md-center">
             <b-button v-on:click="register()">Create Account</b-button>
         </b-row>
         <br>   
         <b-row class="justify-content-md-center">
             <b-button v-on:click="cancel()">Cancel</b-button>
-        </b-row>    
+        </b-row> 
+
     </b-container> 
   </div>
   </div>

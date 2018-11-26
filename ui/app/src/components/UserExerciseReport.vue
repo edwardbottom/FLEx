@@ -1,7 +1,20 @@
 <template>
 	<b-card>
-        <h2>Today's Report</h2>
+        <h2>Today's Report</h2>              
+
+
     <div>
+      <div class="FormRow">        
+            <b-row class="justify-content-md-center">
+              <b-col cols="1">
+                <p>Date:</p>            
+              </b-col>
+              <b-col cols="2">
+      <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker>
+              </b-col>
+            </b-row>  
+        </div>       
+
       <VueSlideBar
         v-model="value2"
         :min="1"
@@ -29,6 +42,8 @@
 
 <script>
 import VueSlideBar from 'vue-slide-bar';
+import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
+
 export default {
   name: 'UserExerciseReport',
   props: {
@@ -36,6 +51,7 @@ export default {
   },
   components: {
     VueSlideBar,
+    Datepicker
   },
   methods:{
     submitReport(){
@@ -44,9 +60,16 @@ export default {
         reportText: this.reportText,
       }
       this.$emit("clicked", info);
-    }
+    },
+    dateChanged(){
+      this.$emit("closed", this.date)
+    },
   },
   data () {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth(); //January is 0!
+    var yyyy = today.getFullYear();
     return {
       value2: 5,
       slider: {
@@ -55,7 +78,8 @@ export default {
           backgroundColor: 'blue'
         }
       },
-      reportText:''
+      reportText:'',
+      date: new Date(yyyy,mm,dd), // Must be an array reference!
 
     }
 }
