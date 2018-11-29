@@ -10,7 +10,7 @@
 
       </b-col>
       <b-col>    
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" @clicked="exerciseUpdated"></UserExercises>       
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" @clicked="exerciseUpdated"></UserExercises>       
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
@@ -101,6 +101,7 @@ export default {
         }
         ],
         exerciseOptions: [],
+        exerciseDescriptions: {},
       pastExercises:[],
       date: new Date(yyyy, mm,  dd), 
       
@@ -108,7 +109,7 @@ export default {
 
     }
   },
-  mounted(){
+  beforeMount(){
       var self = this
       console.log(self.$session.get("username"))
       this.axios.post('http://localhost:3000/UserHome', {
@@ -125,13 +126,33 @@ export default {
         username: self.$session.get("username")
       })
       .then(function (response) {
-        console.log(response)
+        // console.log(response)
         self.exerciseOptions = response.data.exercisePlan;
-        console.log(self.exerciseOptions)
+        console.log(JSON.stringify(self.exerciseOptions))
+
+        
+        
+        for(var i=0; i < self.exerciseOptions.length; ++i){
+          console.log("sending " + self.exerciseOptions[i].exercise)
+          self.axios.post('http://localhost:3000/exerciseDescriptions', {
+          exercises: self.exerciseOptions[i]
+          })
+          .then(function (response2) {
+            console.log(response2.data)
+            self.exerciseDescriptions[response2.data.name] = (response2.data.description);
+          })
+          .catch(function (error2) {
+            console.log(error2);
+          });
+        }
+        console.log(self.exerciseDescriptions)
+        
       })
       .catch(function (error) {
         console.log(error);
       }); 
+
+
         
   }
 }

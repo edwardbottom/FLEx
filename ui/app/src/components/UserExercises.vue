@@ -14,11 +14,12 @@
                 
                <div v-for="info in exerciseOptions" :key="info.exercise">
                 <b-form-checkbox :value="info">
-                  <b-row class="justify-content-left">
+                  <b-row class="justify-content-left" v-b-popover.hover="exerciseDescriptions[info.exercise]" title=Description>
                     <b-col><p>{{info.exercise}}</p></b-col>
                     <b-col><p>R: {{info.repetitions}}</p></b-col><b-col><p>S: {{info.sets}}</p></b-col>    
                   </b-row>
                 </b-form-checkbox>
+
               </div>     
             
             </b-form-checkbox-group> 
@@ -38,7 +39,8 @@ export default {
   name: 'UserExercises',
   props: {
     //exerciseInfo: String,
-    exerciseOptions: Array
+    exerciseOptions: Array,
+    exerciseDescriptions: {},
   },
   methods:{
     exerciseUpdate(){
@@ -52,6 +54,9 @@ export default {
 
     }
   },
+  mounted(){
+    
+  }
 
   
 }
