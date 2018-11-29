@@ -111,6 +111,32 @@ app.post('/exercisePlan', function(req,res) {
   });
 });
 
+app.post('/exerciseDescriptions',function(req,res){
+  console.log("MADESS" + JSON.stringify(req.body))
+  console.log("MADESxx" + req.body.exercises.exercise)
+  var exerciseNames = []
+
+  console.log(req.body.exercises.exercise + "is the item")
+  db.collection('Exercises').find({name : req.body.exercises.exercise}).toArray(function (err, result) 
+  {
+    if (err) throw err
+    console.log(result[0].description + " is the result! (desc)")
+    res.send(result[0])
+  });
+  
+  // for(var i = 0; i <req.body.exercises.length; ++){
+  //   exerciseNames.push(req.body.exercises[i].exercise)
+  // }
+  // var item = req.body.exercises[0].exercise
+  // var stuff = db.collection('Exercises').find({
+  //   exercise: item
+  // })
+
+  // res.send(stuff)
+  // console.log("!!!" + exerciseDescriptions.length)
+  // res.send(exerciseDescriptions)
+})
+
 //places a single json object in the database
 app.get('/db', (req, res) =>{
 	//insert a user into the databse
