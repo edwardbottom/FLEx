@@ -15,10 +15,10 @@
         </b-row>
         <b-form-checkbox-group stacked v-model="selected_exercises">
           
-         <div v-for="info in this.current_exercises" :key="info.exercise">
+         <div v-for="info in this.current_exercises" :key="info._id">
           <b-form-button :value="info">
             <b-row class="justify-content-left">
-              <b-col><button v-on:click="deleteExercise">Delete</button></b-col>
+              <b-col><button v-on:click="deleteExercise(info)">Delete</button></b-col>
               <b-col><p>{{info.exercise}}</p></b-col>
               <b-col><b-form-input v-model="info.repetitions"></b-form-input></b-col>
               <b-col><b-form-input v-model="info.sets"></b-form-input></b-col>              
@@ -68,13 +68,30 @@ export default {
   },
   methods:{
     deleteExercise(info){
+      var deletedSet = this.current_exercises.filter((e)=>e._id==info._id)
+      this.current_exercises = this.current_exercises.filter((e)=>e._id!=info._id)
 
+        this.axios.post('http://localhost:3000/deleteExerciseSet', {
+              id: deletedSet._id,
+              exercise: deletedSet.exercise,
+              repetitions: deletedSet.repetitions,
+              sets: deletedSet.sets
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });      
     },
-    
+
     submitExercisePlan(info){
       Object.keys(this.selected_exercises).forEach(key=>{
         let val = this.selected_exercises[key]
+        val._id = val._id + this.current_exercises.length
+        this.current_exercises.push(val)
         this.axios.post('http://localhost:3000/createNewExerciseSet', {
+              id: val._id,
               exercise: val.exercise,
               repetitions: val.repetitions,
               sets: val.sets
@@ -85,7 +102,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-        router.push({path:"/doctor"});
         console.log("submitted")
       })
 
@@ -93,7 +109,7 @@ export default {
       {
         this.axios.post('http://localhost:3000/submitExercisePlan', {
               user:this.$session.get("selectedProfile"),
-              exercisePlan: this.selected_exercises,
+              exercisePlan: this.selected_exercises
             })
             .then(function (response) {
               console.log(response);
@@ -101,14 +117,13 @@ export default {
             .catch(function (error) {
               console.log(error);
             });
-            router.push({path:"/doctor"});
             console.log("submitted")
         
       } else
       {
         this.axios.post('http://localhost:3000/updateExercisePlan', {
               user:this.$session.get("selectedProfile"),
-              exercisePlan: this.selected_exercises.concat(this.current_exercises),
+              exercisePlan: this.current_exercises,
             })
             .then(function (response) {
               console.log(response);
@@ -116,10 +131,10 @@ export default {
             .catch(function (error) {
               console.log(error);
             });
-            router.push({path:"/doctor"});
             console.log("submitted")   
       }
-    }
+      location.reload();
+    }    
   },
   data () {
     return {
@@ -132,13 +147,11 @@ export default {
   created() {
     var self = this;
     this.axios.get('http://localhost:3000/getAllExercises')
-    .then(function (response) {
-      console.log(response.data)
+    .then(function (response) {   
       var responseData = response.data;
       for (var i=0; i < responseData.length; i++)
       {
-        self.exercises.push({exercise: responseData[i].name, repetitions: "0", sets: "0"})
-        console.log(self.exercises[i].repetitions)
+        self.exercises.push({_id: responseData[i]._id, exercise: responseData[i].name, repetitions: "0", sets: "0"})
       }
     })    
     .catch(function (error) {
@@ -152,7 +165,6 @@ export default {
       console.log(response.data)
       self.plan = response.data;
       self.current_exercises = self.plan[0].exercisePlan;
-      console.log(self.plan[0].exercisePlan[0].repetitions + " is the summary")
       })
     .catch(function (error) {
       console.log(error);

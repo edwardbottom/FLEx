@@ -263,15 +263,39 @@ app.post('/createNewExercise',function(req,res){
 })
 
 app.post('/createNewExerciseSet',function(req,res){
+    const id = req.body.id;
     const exercise = req.body.exercise;
     const repetitions = req.body.repetitions;
     const sets = req.body.sets;
 
     db.collection('ExerciseSet').insertOne(
     {
+        id:id,
         exercise:exercise,
         repetitions:repetitions,
         sets:sets
+    },
+    //catch errors
+    function (err, res) {
+        if (err) {
+          // db.close();
+          res.send("broken path")
+        }
+        // Success
+        // db.close();  
+    });
+    res.send("this path works")  
+})
+
+app.post('/deleteExerciseSet',function(req,res){
+    const id = req.body.id;
+    const exercise = req.body.exercise;
+    const repetitions = req.body.repetitions;
+    const sets = req.body.sets;
+
+    db.collection('ExerciseSet').deleteOne(
+    {
+        "id":id
     },
     //catch errors
     function (err, res) {
