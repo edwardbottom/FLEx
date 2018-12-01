@@ -244,7 +244,12 @@ app.post('/register',function(req,res){
 app.post('/createNewExercise',function(req,res){
     const name = req.body.name;
     const description = req.body.description;
-
+    if(name == undefined){
+      res.send("Exercise name is blank");
+    } else if(description == undefined)
+    {
+      res.send("Exercise description is blank");
+    }
     db.collection('Exercises').insertOne(
     {
         name:name,
@@ -259,7 +264,7 @@ app.post('/createNewExercise',function(req,res){
         // Success
         // db.close();  
     });
-    res.send("this path works")  
+    res.send("success")  
 })
 
 app.post('/createNewExerciseSet',function(req,res){
@@ -479,7 +484,13 @@ app.post('/sendMessage', function(req,res){
   const receiver = req.body.receiver;
   const id = genRandomString(30);
 
-  console.log("send messaged reached");
+  if (message == undefined)
+  {
+    res.send("Your message text is blank")
+  } else if (receiver == undefined)
+  {
+    res.send("Your message recipient is blank")
+  }
   db.collection('Messages').insertOne(
     {
         message:message,
@@ -493,9 +504,12 @@ app.post('/sendMessage', function(req,res){
           console.log("error reached")
           res.send("failure");
         }
-    })
+    });
+          console.log("error reached")
+        console.log(message)
+        console.log(sender)
+        console.log(receiver)
     res.send("success");
-
 })
 
 app.post('/createSummary', function(req,res){

@@ -54,12 +54,17 @@ export default {
         description: this.description
       })
       .then(function (response) {
-        console.log(response);
+        if (response.data != "success")
+        {
+          alert(response.data);
+        } else
+        {
+          router.push({path:"/doctor"});
+        }
       })
       .catch(function (error) {
         console.log(error);
-      });
-      router.push({path:"/doctor"});
+      });      
     },
     data(){
       return{
