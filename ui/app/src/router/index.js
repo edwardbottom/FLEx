@@ -11,6 +11,7 @@ import SendMessage from '../components/SendMessage'
 import CreateSummary from '../components/CreateSummary'
 import EditPatientProfile from '../components/EditPatientProfile'
 import PastExerciseDetail from '../components/PastExerciseDetail'
+import UpdateProfile from '../components/UpdateProfile'
 
 Vue.use(Router)
 export default new Router({
@@ -73,6 +74,11 @@ export default new Router({
       path: "/PastExerciseDetail",
       name: PastExerciseDetail,
       component: PastExerciseDetail
+    },
+    {
+      path: "/UpdateProfile",
+      name: UpdateProfile,
+      component: UpdateProfile
     }
   ]
 })

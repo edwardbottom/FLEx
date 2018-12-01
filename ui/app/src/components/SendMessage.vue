@@ -42,9 +42,12 @@ export default {
       isTherapist:Boolean
     }
   },
-  beforeMount(){
+  created(){
       if(this.$session.get("accountType") == "therapist"){
         this.isTherapist = true;
+      }
+      else{
+        this.isTherapist = false;
       }
   },
   methods:{

@@ -586,3 +586,60 @@ app.post('/updatePatientProfile', function(req,res){
   res.send("success");
 })
 
+app.post('/getPatientSummary', function(req,res){
+  const username = req.body.username;
+  console.log("REQUEST REACHED!!!!")
+  db.collection('UserDescription').find({'username':username}).toArray(function (err, result) {
+    if (err) throw err
+    console.log(result[0])
+    res.send(result[0]);
+  })
+})
+
+
+app.post('/updateSummary', function(req,res){
+    const patient = req.body.patient;
+    const username = req.body.username;
+    console.log("username is " + username)
+    const age = req.body.age;
+    const height = req.body.height;
+    const weight = req.body.weight;
+    const injury = req.body.injury;
+    const currentStatus = req.body.currentStatus;
+    const averageStatus = req.body.averageStatus;
+    const lastUsed = req.body.lastUsed;
+    const insuraceProvider = req.body.insuraceProvider;
+    const contact = req.body.contact;
+    const nextVisit = req.body.nextVisit;
+    const variant = req.body.variant;
+    const doctorID = req.body.doctorID;
+    const accordionId = genRandomString(30);
+
+    db.collection('UserDescription').update(
+    {username:username},
+    {
+        patient:patient, 
+        username:username, 
+        age:age,
+        height:height,
+        weight:weight, 
+        injury:injury,
+        currentStatus:currentStatus,
+        averageStatus:averageStatus, 
+        lastUsed:lastUsed, 
+        insuraceProvider:insuraceProvider, 
+        contact:contact, 
+        nextVisit:nextVisit, 
+        variant:variant, 
+        doctorID:doctorID,
+        accordionId:accordionId
+    },
+    //catch errors
+    function (err, res) {
+        if (err) {
+          res.send("broken path")
+        }
+    });
+    res.send("success")  
+})
+
