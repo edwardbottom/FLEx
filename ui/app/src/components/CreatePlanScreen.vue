@@ -134,7 +134,8 @@ export default {
             console.log("submitted")   
       }
       location.reload();
-    }    
+    },
+  
   },
   data () {
     return {
@@ -154,7 +155,14 @@ export default {
         self.exercises.push({_id: responseData[i]._id, exercise: responseData[i].name, repetitions: "0", sets: "0"})
       }
       console.log(self.exercises)
-      self.exercises.sort();
+      function compare(a,b) {
+      if (a.exercise < b.exercise)
+        return -1;
+      if (a.exercise > b.exercise)
+        return 1;
+      return 0;
+    }  
+      self.exercises.sort(compare);
       console.log(self.exercises)
     })    
     .catch(function (error) {
