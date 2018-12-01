@@ -245,9 +245,9 @@ app.post('/createNewExercise',function(req,res){
     const name = req.body.name;
     const description = req.body.description;
     const link = req.body.link;
-    if(name == undefined){
+    if(name == undefined || name == ''){
       res.send("Exercise name is blank");
-    } else if(description == undefined)
+    } else if(description == undefined || description == '')
     {
       res.send("Exercise description is blank");
     }
@@ -486,10 +486,10 @@ app.post('/sendMessage', function(req,res){
   const receiver = req.body.receiver;
   const id = genRandomString(30);
 
-  if (message == undefined)
+  if (message == undefined || message == '')
   {
     res.send("Your message text is blank")
-  } else if (receiver == undefined)
+  } else if (receiver == undefined || receiver == '')
   {
     res.send("Your message recipient is blank")
   }
@@ -507,10 +507,6 @@ app.post('/sendMessage', function(req,res){
           res.send("failure");
         }
     });
-          console.log("error reached")
-        console.log(message)
-        console.log(sender)
-        console.log(receiver)
     res.send("success");
 })
 

@@ -68,7 +68,7 @@ export default {
       .then(function (response) {
         if (response.data != "success")
         {
-          alert(response.data);
+          alert(response.data);          
         } else
         {
           router.push({path:"/doctor"});
