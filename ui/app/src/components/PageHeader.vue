@@ -12,12 +12,8 @@
       <b-button v-else v-on:click="updateProfile()" class="ml-2"> Update Profile</b-button>
       <b-button v-on:click="sendMessageScreen()" class="ml-2">Send Message</b-button>
       <b-collapse is-nav id="nav_collapse">
-
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-      
-          
-
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">

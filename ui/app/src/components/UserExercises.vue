@@ -22,8 +22,7 @@
                   </b-row>
                   <b-popover v-bind:target="info.exercise" triggers="hover focus" v-on:show="refreshPop()">
                      <template slot="title">Description</template>
-                     
-                      <b-img src="https://exerciseeggheads.files.wordpress.com/2015/02/exercise_jumping-jack.jpg" fluid alt="Responsive image" />
+                      <b-img width="250" height="250" v-bind:src= "exerciseLinks[info.exercise]"/>
                      {{exerciseDescriptions[info.exercise]}}
                   </b-popover>
                 </b-form-checkbox>
@@ -49,6 +48,7 @@ export default {
     //exerciseInfo: String,
     exerciseOptions: Array,
     exerciseDescriptions: {},
+    exerciseLinks: {}
   },
   methods:{
     exerciseUpdate(){

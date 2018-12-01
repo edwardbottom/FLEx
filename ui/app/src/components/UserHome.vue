@@ -5,12 +5,10 @@
     <b-container class="statusReports" >
     <b-row>
       <b-col>  
-
         <CurrentDoctor v-bind:doctorInfo="this.doctorInfo"></CurrentDoctor>
-
       </b-col>
       <b-col>    
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" @clicked="exerciseUpdated"></UserExercises>       
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" v-bind:exerciseLinks="this.exerciseLinks" @clicked="exerciseUpdated"></UserExercises>       
       </b-col>
         <b-col>
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
@@ -102,6 +100,7 @@ export default {
         ],
         exerciseOptions: [],
         exerciseDescriptions: {},
+        exerciseLinks: {},
       pastExercises:[],
       date: new Date(yyyy, mm,  dd), 
       
@@ -140,6 +139,8 @@ export default {
           .then(function (response2) {
             console.log(response2.data)
             self.exerciseDescriptions[response2.data.name] = (response2.data.description);
+            self.exerciseLinks[response2.data.name] = (response2.data.link);
+            console.log(self.exerciseLinks[response2.data.name] + " is the link in the hashmap")
           })
           .catch(function (error2) {
             console.log(error2);
