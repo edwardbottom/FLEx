@@ -9,17 +9,25 @@
                 
                 <b-container class="bv-example-row">
           <center>
+ 
             <b-form-group>
             <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
                 
                <div v-for="info in exerciseOptions" :key="info.exercise">
                 <b-form-checkbox :value="info">
-                  <b-row class="justify-content-left" v-b-popover.hover="exerciseDescriptions[info.exercise]" title=Description>
+                  <b-row class="justify-content-left" v-bind:id="info.exercise">
+                    <!-- v-b-popover.html="exerciseDescriptions[info.exercise]" title=Description -->
                     <b-col><p>{{info.exercise}}</p></b-col>
                     <b-col><p>R: {{info.repetitions}}</p></b-col><b-col><p>S: {{info.sets}}</p></b-col>    
                   </b-row>
+                  <b-popover v-bind:target="info.exercise" triggers="hover focus" v-on:show="refreshPop()">
+                     <template slot="title">Description</template>
+                     
+                      <b-img src="https://exerciseeggheads.files.wordpress.com/2015/02/exercise_jumping-jack.jpg" fluid alt="Responsive image" />
+                     {{exerciseDescriptions[info.exercise]}}
+                  </b-popover>
                 </b-form-checkbox>
-
+ 
               </div>     
             
             </b-form-checkbox-group> 
@@ -46,6 +54,9 @@ export default {
     exerciseUpdate(){
       this.$emit("clicked", this.selectedOption)
       console.log(this.selectedOption)
+    },
+    refreshPop(){
+      this.$forceUpdate()
     }
   },
   data () {
@@ -55,7 +66,7 @@ export default {
     }
   },
   mounted(){
-    
+    vm.$forceUpdate()
   }
 
   
