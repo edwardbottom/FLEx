@@ -56,12 +56,14 @@ export default {
         sender: self.$session.get("username")
       })
       .then(function (response) {
+        console.log("response!")
+        console.log(self.receiver)
         console.log(response);
         if(response.data == "success"){
           alert("message sent");
         }
         else{
-          alert("message not sent");
+          alert(response.data);
         }
       })
       .catch(function (error) {
