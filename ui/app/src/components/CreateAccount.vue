@@ -162,15 +162,21 @@ export default {
         provider_id: this.provider_id,
         therapist_id: this.therapist_id,
         account_type: this.account_type
-
       })
       .then(function (response) {
         console.log(response);
-        if(self.account_type == 'patient'){
-          router.push({path:"/CreateSummary"})
-        }
-        else{
-          router.push({path:"/Login"});
+        if (response.data != "success")
+        {
+          console.log(response.data);
+          alert(response.data);
+        } else 
+        {
+          if(self.account_type == 'patient'){
+            router.push({path:"/CreateSummary"})
+          }
+          else{
+            router.push({path:"/Login"});
+          }
         }
       })
       .catch(function (error) {

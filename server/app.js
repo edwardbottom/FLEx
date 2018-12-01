@@ -211,6 +211,9 @@ app.post('/register',function(req,res){
 
   if(password != re_password){
     res.send("passwords dont match")
+  } else if (first_name == undefined)
+  {
+    res.send("Please enter a first name")
   }
   else{
     var salt = genRandomString(16); /** Gives us salt of length 16 */
@@ -232,12 +235,12 @@ app.post('/register',function(req,res){
       function (err, res) {
           if (err) {
             // db.close();
-            res.send("it done fucked up")
+            res.send(err)
           }
           // Success
           // db.close();  
       });
-    res.send("this path works")
+    res.send("success")
     }
 })
 
