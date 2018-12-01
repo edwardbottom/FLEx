@@ -60,7 +60,12 @@ export default {
     },
     goToUserPage()
     {
-      if(this.username == "" || this.password == ""){
+      if(this.username == "")
+      {
+        alert("username is blank")
+        return;
+      } else if (this.password == ""){
+        alert("password is blank")
         return;
       }
       var self = this
