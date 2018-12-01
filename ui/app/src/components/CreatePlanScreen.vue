@@ -153,6 +153,9 @@ export default {
       {
         self.exercises.push({_id: responseData[i]._id, exercise: responseData[i].name, repetitions: "0", sets: "0"})
       }
+      console.log(self.exercises)
+      self.exercises.sort();
+      console.log(self.exercises)
     })    
     .catch(function (error) {
       console.log(error);
