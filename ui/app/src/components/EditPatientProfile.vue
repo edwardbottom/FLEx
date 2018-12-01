@@ -81,7 +81,6 @@ export default {
       averageStatus: "",
       worstStatus: "",
       bestStatus: "",
-      lastActive: "",
       contact: "",
       nextVisit: "",
       summary: "",
@@ -106,7 +105,6 @@ export default {
       self.averageStatus = response.data.averageStatus;
       self.worstStatus = response.data.worstStatus;
       self.bestStatus = response.data.bestStatus;
-      self.lastActive - response.data.lastActive;
       self.contact = response.data.contact;
       self.nextVisit = response.data.nextVisit;
       self.summary = response.data.summary;
@@ -134,7 +132,6 @@ export default {
         averageStatus: self.averageStatus,
         worstStatus: self.worstStatus,
         bestStatus: self.bestStatus,
-        lastActive: self.lastActive,
         contact: self.contact,
         nextVisit: self.nextVisit,
         summary: self.summary

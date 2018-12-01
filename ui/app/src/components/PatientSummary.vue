@@ -19,7 +19,6 @@
                   <li>injury: {{summary.injury}}</li>
                   <li>Current Status: {{summary.currentStatus}} </li>
                   <li>Average Status: {{summary.averageStatus}} </li>
-                  <li>last used app: {{summary.lastUsed}}</li>
                   <li>insurance provider: {{summary.insuranceProvider}}</li>
                   <li>Contact {{summary.contact}}</li>
                   <li>Next Visit: {{summary.nextVisit}}</li>

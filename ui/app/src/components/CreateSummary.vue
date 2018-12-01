@@ -1,10 +1,15 @@
 <template>
   <div class="CreateSummary">
-  </br>
+    <b-navbar toggleable="md" type="dark" variant="primary">
+
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+      <b-navbar-brand href="#">FLEx</b-navbar-brand>
+      </b-navbar>
     <b-row class="justify-content-md-center">
       <h3> Patient Profile </h3>
-      <br>
     </b-row>
+    <br>
     <div class="center-block">
     <b-container class="bv-example-row"> 
         <div class="FormRow">        
@@ -17,18 +22,7 @@
                 <b-form-input v-model="patient"></b-form-input>
               </b-col>
             </b-row>  
-        </div>       
-        <div class="FormRow">        
-            <b-row class="justify-content-md-center">
-              <b-col cols="2">
-                <p>Username</p>            
-              </b-col>
-              <b-col cols="1" align="center"><p>:</p></b-col>
-              <b-col cols="2">
-                <b-form-input v-model="username"></b-form-input>
-              </b-col>
-            </b-row>  
-        </div>  
+        </div>        
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -94,17 +88,6 @@
                 <b-form-input v-model="averageStatus"></b-form-input>
               </b-col>
             </b-row>  
-        </div>  
-        <div class="FormRow">        
-            <b-row class="justify-content-md-center">
-              <b-col cols="2">
-                <p>Last Used</p>            
-              </b-col>
-              <b-col cols="1" align="center"><p>:</p></b-col>
-              <b-col cols="2">
-                <b-form-input v-model="lastUsed"></b-form-input>
-              </b-col>
-            </b-row>  
         </div>          
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
@@ -150,17 +133,20 @@
               </b-col>
             </b-row>  
         </div>
+        <br>
         <b-row class="justify-content-md-center">
           <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
               <b-form-radio value="success">Good</b-form-radio>
               <b-form-radio value="warning">Average</b-form-radio> 
               <b-form-radio value="danger">Bad</b-form-radio>             
           </b-form-radio-group>
-        </b-row>            
+        </b-row>   
+        <br>         
     </b-container> 
     <b-row class="justify-content-md-center">
       <b-button v-on:click="submitInfo()">Submit Info</b-button>
-    </b-row>   
+    </b-row>
+    <br>   
   </div> 
   </div>
 </template>
@@ -186,7 +172,6 @@ export default {
       injury: '',
       currentStatus: '',
       averageStatus: '',
-      lastUsed: '',
       insuraceProvider: '',
       contact: '',
       nextVisit: '',
@@ -202,18 +187,16 @@ export default {
     },
     submitInfo()
     {
-      alert("callback reached")
       var self = this
       this.axios.post('http://localhost:3000/createSummary', {
         patient: this.patient,
-        username: this.username,
+        username: this.$session.get("username"),
         age: this.age,
         height: this.height,
         weight: this.weight,
         injury: this.injury,
         currentStatus: this.currentStatus,
         averageStatus: this.averageStatus,
-        lastUsed: this.lastUsed,
         insuraceProvider: this.insuraceProvider,
         contact: this.contact,
         nextVisit: this.nextVisit,
@@ -221,9 +204,14 @@ export default {
         doctorID: this.doctorID
       })
       .then(function (response) {
-        console.log(response)
-        router.push({path:"/login"});
-        alert("Account Created")
+        if (response.data == 'success')
+        {
+          router.push({path:"/login"});
+          alert("Account Created");
+        } else
+        {
+          alert(response.data);
+        }
       })
       .catch(function (error) {
         console.log(error);

@@ -211,9 +211,36 @@ app.post('/register',function(req,res){
 
   if(password != re_password){
     res.send("passwords dont match")
-  } else if (first_name == undefined)
+  } else if (first_name == undefined || first_name == '')
   {
     res.send("Please enter a first name")
+  } else if (middle_name == undefined || middle_name == '')
+  {
+    res.send("Please enter a middle name")
+  } else if (last_name == undefined || last_name == '')
+  {
+    res.send("Please enter a last name")
+  } else if (user_name == undefined || user_name == '')
+  {
+    res.send("Please enter a username")
+  } else if (password == undefined || password == '')
+  {
+    res.send("Please enter a password")
+  } else if (re_password == undefined || re_password == '')
+  {
+    res.send("Please enter your password a second time")
+  } else if (email_address == undefined || email_address == '')
+  {
+    res.send("Please enter an email address")
+  } else if (provider_id == undefined || provider_id == '')
+  {
+    res.send("Please enter a provider ID")
+  } else if (therapist_id == undefined || therapist_id == '')
+  {
+    res.send("Please enter a therapist ID")
+  } else if (account_type == undefined || account_type == '')
+  {
+    res.send("Please select an account type")
   }
   else{
     var salt = genRandomString(16); /** Gives us salt of length 16 */
@@ -516,14 +543,12 @@ app.post('/sendMessage', function(req,res){
 app.post('/createSummary', function(req,res){
     const patient = req.body.patient;
     const username = req.body.username;
-    console.log("username is " + username)
     const age = req.body.age;
     const height = req.body.height;
     const weight = req.body.weight;
     const injury = req.body.injury;
     const currentStatus = req.body.currentStatus;
     const averageStatus = req.body.averageStatus;
-    const lastUsed = req.body.lastUsed;
     const insuraceProvider = req.body.insuraceProvider;
     const contact = req.body.contact;
     const nextVisit = req.body.nextVisit;
@@ -531,6 +556,40 @@ app.post('/createSummary', function(req,res){
     const doctorID = req.body.doctorID;
     const accordionId = genRandomString(30);
 
+    if (patient == undefined || patient == '')
+    {
+      res.send('Please enter a patient name');
+    } else if (age == undefined || age == '')
+    {
+      res.send('Please enter your age');
+    } else if (height == undefined || height == '')
+    {
+      res.send('Please enter your height');
+    } else if (weight == undefined || weight == '')
+    {
+      res.send('Please enter your weight');
+    } else if (injury == undefined || injury == '')
+    {
+      res.send('Please enter your injury');
+    } else if (currentStatus == undefined || currentStatus == '')
+    {
+      res.send('Please enter your current status');
+    } else if (averageStatus == undefined || averageStatus == '')
+    {
+      res.send('Please enter your average status');
+    } else if (insuraceProvider == undefined || insuraceProvider == '')
+    {
+      res.send('Please enter your insurance provider');
+    } else if (contact == undefined || contact == '')
+    {
+      res.send('Please enter your emergency contact');
+    } else if (nextVisit == undefined || nextVisit == '')
+    {
+      res.send('Please enter your next visit');
+    } else if (doctorID == undefined || doctorID == '')
+    {
+      res.send('Please enter your doctor ID');
+    }
     db.collection('UserDescription').insertOne(
     {
         patient:patient, 
@@ -541,7 +600,6 @@ app.post('/createSummary', function(req,res){
         injury:injury,
         currentStatus:currentStatus,
         averageStatus:averageStatus, 
-        lastUsed:lastUsed, 
         insuraceProvider:insuraceProvider, 
         contact:contact, 
         nextVisit:nextVisit, 
@@ -610,7 +668,6 @@ app.post('/updateSummary', function(req,res){
     const injury = req.body.injury;
     const currentStatus = req.body.currentStatus;
     const averageStatus = req.body.averageStatus;
-    const lastUsed = req.body.lastUsed;
     const insuraceProvider = req.body.insuraceProvider;
     const contact = req.body.contact;
     const nextVisit = req.body.nextVisit;
@@ -628,8 +685,7 @@ app.post('/updateSummary', function(req,res){
         weight:weight, 
         injury:injury,
         currentStatus:currentStatus,
-        averageStatus:averageStatus, 
-        lastUsed:lastUsed, 
+        averageStatus:averageStatus,  
         insuraceProvider:insuraceProvider, 
         contact:contact, 
         nextVisit:nextVisit, 

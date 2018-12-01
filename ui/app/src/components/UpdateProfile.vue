@@ -4,8 +4,8 @@
     <PageHeader v-else></PageHeader>
     <b-row class="justify-content-md-center">
       <h3> Patient Profile </h3>
-      <br>
     </b-row>
+    <br>
     <div class="center-block">
     <b-container class="bv-example-row"> 
         <div class="FormRow">        
@@ -95,17 +95,6 @@
                 <b-form-input v-model="averageStatus"></b-form-input>
               </b-col>
             </b-row>  
-        </div>  
-        <div class="FormRow">        
-            <b-row class="justify-content-md-center">
-              <b-col cols="2">
-                <p>Last Used</p>            
-              </b-col>
-              <b-col cols="1" align="center"><p>:</p></b-col>
-              <b-col cols="2">
-                <b-form-input v-model="lastUsed"></b-form-input>
-              </b-col>
-            </b-row>  
         </div>          
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
@@ -151,6 +140,7 @@
               </b-col>
             </b-row>  
         </div>
+        <br>
         <b-row class="justify-content-md-center">
           <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
               <b-form-radio value="success">Good</b-form-radio>
@@ -159,9 +149,11 @@
           </b-form-radio-group>
         </b-row>            
     </b-container> 
+    <br>
     <b-row class="justify-content-md-center">
       <b-button v-on:click="submitInfo()">Submit Info</b-button>
-    </b-row>   
+    </b-row>  
+    <br> 
   </div> 
   </div>
 </template>
@@ -187,7 +179,6 @@ export default {
       injury: '',
       currentStatus: '',
       averageStatus: '',
-      lastUsed: '',
       insuraceProvider: '',
       contact: '',
       nextVisit: '',
@@ -211,7 +202,6 @@ export default {
         self.injury = response.data.injury
         self.currentStatus = response.data.currentStatus
         self.averageStatus = response.data.averageStatus
-        self.lastUsed = response.data.lastUsed
         self.insuraceProvider = response.data.insuraceProvider 
         self.contact = response.data.contact
         self.nextVisit = response.data.nextVisit 
@@ -241,7 +231,6 @@ export default {
         injury: this.injury,
         currentStatus: this.currentStatus,
         averageStatus: this.averageStatus,
-        lastUsed: this.lastUsed,
         insuraceProvider: this.insuraceProvider,
         contact: this.contact,
         nextVisit: this.nextVisit,
