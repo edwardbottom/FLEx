@@ -5,27 +5,38 @@
     <div class="center-block">
     <b-container class="bv-example-row">
       <div class="FormRow">        
-          <b-row class="justify-content-md-center">
-            <b-col cols="2">
-              <p>Exercise Name</p>            
-            </b-col>
-            <b-col cols="1" align="center"><p>:</p></b-col>
-            <b-col cols="2">
-              <b-form-input v-model="name"></b-form-input>
-            </b-col>
-          </b-row>  
+        <b-row class="justify-content-md-center">
+          <b-col cols="2">
+            <p>Exercise Name</p>            
+          </b-col>
+          <b-col cols="1" align="center"><p>:</p></b-col>
+          <b-col cols="2">
+            <b-form-input v-model="name"></b-form-input>
+          </b-col>
+        </b-row>  
       </div>   
       <div class="FormRow">        
-          <b-row class="justify-content-md-center">
-            <b-col cols="2">
-              <p>Description</p>            
-            </b-col>
-            <b-col cols="1" align="center"><p>:</p></b-col>
-            <b-col cols="2">
-              <b-form-input v-model="description"></b-form-input>
-            </b-col>
-          </b-row>  
-      </div>     
+        <b-row class="justify-content-md-center">
+          <b-col cols="2">
+            <p>Description</p>            
+          </b-col>
+          <b-col cols="1" align="center"><p>:</p></b-col>
+          <b-col cols="2">
+            <b-form-input v-model="description"></b-form-input>
+          </b-col>
+        </b-row>  
+      </div>
+      <div class="FormRow">        
+        <b-row class="justify-content-md-center">
+          <b-col cols="2">
+            <p>Diagram Link</p>            
+          </b-col>
+          <b-col cols="1" align="center"><p>:</p></b-col>
+          <b-col cols="2">
+            <b-form-input v-model="link"></b-form-input>
+          </b-col>
+        </b-row>  
+      </div>      
       <br>        
       <b-row class="justify-content-md-center">
           <b-button v-on:click="createNewExercise()">Submit</b-button>
@@ -51,7 +62,8 @@ export default {
     {
       this.axios.post('http://localhost:3000/createNewExercise', {
         name: this.name,
-        description: this.description
+        description: this.description,
+        link: this.link
       })
       .then(function (response) {
         if (response.data != "success")
@@ -69,7 +81,8 @@ export default {
     data(){
       return{
         name:'',
-        description:''
+        description:'',
+        link:''
       }
     },    
   }   

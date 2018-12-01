@@ -244,6 +244,7 @@ app.post('/register',function(req,res){
 app.post('/createNewExercise',function(req,res){
     const name = req.body.name;
     const description = req.body.description;
+    const link = req.body.link;
     if(name == undefined){
       res.send("Exercise name is blank");
     } else if(description == undefined)
@@ -253,7 +254,8 @@ app.post('/createNewExercise',function(req,res){
     db.collection('Exercises').insertOne(
     {
         name:name,
-        description:description
+        description:description,
+        link:link
     },
     //catch errors
     function (err, res) {
