@@ -22,7 +22,18 @@
                 <b-form-input v-model="patient"></b-form-input>
               </b-col>
             </b-row>  
-        </div>        
+        </div>  
+        <div class="FormRow">        
+            <b-row class="justify-content-md-center">
+              <b-col cols="2">
+                <p>Username</p>            
+              </b-col>
+              <b-col cols="1" align="center"><p>:</p></b-col>
+              <b-col cols="2">
+                <b-form-input v-model="username" type="text"></b-form-input>
+              </b-col>
+            </b-row>  
+        </div>                
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -37,7 +48,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>height</p>            
+                <p>Height</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -48,7 +59,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>weight</p>            
+                <p>Weight</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -189,19 +200,19 @@ export default {
     {
       var self = this
       this.axios.post('http://localhost:3000/createSummary', {
-        patient: this.patient,
-        username: this.$session.get("username"),
-        age: this.age,
-        height: this.height,
-        weight: this.weight,
-        injury: this.injury,
-        currentStatus: this.currentStatus,
-        averageStatus: this.averageStatus,
-        insuraceProvider: this.insuraceProvider,
-        contact: this.contact,
-        nextVisit: this.nextVisit,
-        variant: this.variant,
-        doctorID: this.doctorID
+        patient: self.patient,
+        username: self.username,
+        age: self.age,
+        height: self.height,
+        weight: self.weight,
+        injury: self.injury,
+        currentStatus: self.currentStatus,
+        averageStatus: self.averageStatus,
+        insuraceProvider: self.insuraceProvider,
+        contact: self.contact,
+        nextVisit: self.nextVisit,
+        variant: self.variant,
+        doctorID: self.doctorID
       })
       .then(function (response) {
         if (response.data == 'success')
