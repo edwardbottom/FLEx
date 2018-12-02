@@ -193,7 +193,7 @@ export default {
       username: self.$session.get("username")
     })
     .then(function (response) {
-        console.log(response)
+        console.log(JSON.stringify(response) + " Is the patient data from the response")
         self.patient = response.data.patient
         self.username = response.data.username
         self.age = response.data. age
@@ -239,7 +239,7 @@ export default {
       })
       .then(function (response) {
         console.log(response)
-        router.push({path:"/login"});
+        router.push({path:"/UserHome"});
         alert("Information updated")
       })
       .catch(function (error) {

@@ -617,8 +617,6 @@ app.post('/createSummary', function(req,res){
 })
 
 app.post('/updatePatientProfile', function(req,res){
-  console.log("request reached")
-  console.log(req.body.user + " is the username");
   db.collection("PatientProfile").update(
    { user:req.body.user},
    {
@@ -650,6 +648,7 @@ app.post('/updatePatientProfile', function(req,res){
 app.post('/getPatientSummary', function(req,res){
   const username = req.body.username;
   console.log("REQUEST REACHED!!!!")
+  console.log(username + " is the username")
   db.collection('UserDescription').find({'username':username}).toArray(function (err, result) {
     if (err) throw err
     console.log(result[0])
