@@ -48,7 +48,6 @@ export default {
   methods: {
     loadPatientProfile: function(username) {
       this.$session.set("selectedProfile", username)
-      console.log(username + " is the selected username!!!!!!!!!!!1")
       router.push({path:'/PatientProfile'});
     }
   },

@@ -14,8 +14,6 @@
                         <b>{{info.date.substring(0,info.date.indexOf("T"))}}</b><br>
                         
                         <b>Rating:</b> {{info.value}}<br>
-                        
-                      <!--   <b>Comments:</b> {{info.reportText}}<br> -->
 
                         <b>Completed Exercises:</b><br>
                         {{Math.round(info.completedExercises.length/info.exerciseOptions.length * 100)}}%<br>
@@ -43,7 +41,6 @@ export default {
   methods:{
     fullReportOpen(info){
       this.$session.set("exerciseDetail", info)
-      console.log(info + " is the selected info!!!!!!!!!!!1")
       router.push({path:'/PastExerciseDetail'});    }
   }
 
