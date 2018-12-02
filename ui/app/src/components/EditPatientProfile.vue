@@ -108,7 +108,6 @@ export default {
       self.contact = response.data.contact;
       self.nextVisit = response.data.nextVisit;
       self.summary = response.data.summary;
-      console.log(self.summary);
       })
     .catch(function (error) {
       console.log(error);
@@ -137,7 +136,6 @@ export default {
         summary: self.summary
     })
     .then(function (response) {
-      console.log(response.data)
       router.push({path:"/PatientProfile"});
       alert("Profile updated");
       })

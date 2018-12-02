@@ -74,7 +74,6 @@ export default {
         password: this.password
       })
       .then(function (response) {
-        console.log(response);
         if(response.data.status == "success"){
           self.$session.start();
           self.$session.set("username", response.data.username);
@@ -82,7 +81,7 @@ export default {
           self.$session.set("accountType", response.data.accountType);
           self.$session.set("therapistId", response.data.therapistId);
           self.$session.set("providerId", response.data.providerId);
-
+          
           if(response.data.accountType == "therapist"){
             router.push({path:"/doctor"});
           }

@@ -1,8 +1,6 @@
 <template>
 	<b-card>
         <h2>Today's Report</h2>              
-
-
     <div>
       <div class="FormRow">        
             <b-row class="justify-content-md-center">

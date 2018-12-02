@@ -150,7 +150,6 @@ export default {
     register()
     {
       self = this
-      console.log("accont type is " + this.account_type)
       this.axios.post('http://localhost:3000/register', {
         first_name: this.first_name,
         middle_name: this.middle_name,
@@ -164,10 +163,8 @@ export default {
         account_type: this.account_type
       })
       .then(function (response) {
-        console.log(response);
         if (response.data != "success")
         {
-          console.log(response.data);
           alert(response.data);
         } else 
         {

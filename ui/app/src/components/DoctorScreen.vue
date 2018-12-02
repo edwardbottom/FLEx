@@ -49,7 +49,6 @@ export default {
       doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
-      console.log(response);
       self.$session.set("patientNames", response.data);
 
       //get updates
@@ -57,7 +56,6 @@ export default {
         patientNames : self.$session.get("patientNames")
       })
       .then(function (response) {
-        console.log(response.data)
         self.updates = response.data;
       })
       .catch(function (error) {
@@ -73,9 +71,7 @@ export default {
       doctorId: self.$session.get("therapistId")
     })
     .then(function (response) {
-      console.log(response.data)
       self.summaries = response.data;
-      console.log(self.summaries + "is the summary")
       })
     .catch(function (error) {
       console.log(error);
@@ -86,9 +82,7 @@ export default {
       rec: self.$session.get("username")
     })
     .then(function (response) {
-      console.log(response.data)
       self.messages = response.data;
-      console.log(self.summaries + "is the summary")
       })
     .catch(function (error) {
       console.log(error);

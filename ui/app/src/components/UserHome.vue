@@ -59,8 +59,7 @@ export default {
                 date: this.date
           })
           .then(function (response) {
-            console.log(response.data)
-            if(response.data == "1"){
+            if(response.data == "1"){//if successful in posting data
               if(alert("Submitted!")){}
               else {window.location.reload()}
             }
@@ -127,27 +126,20 @@ export default {
       .then(function (response) {
         // console.log(response)
         self.exerciseOptions = response.data.exercisePlan;
-        console.log(JSON.stringify(self.exerciseOptions))
 
-        
-        
         for(var i=0; i < self.exerciseOptions.length; ++i){
           console.log("sending " + self.exerciseOptions[i].exercise)
           self.axios.post('http://localhost:3000/exerciseDescriptions', {
           exercises: self.exerciseOptions[i]
           })
-          .then(function (response2) {
-            console.log(response2.data)
+          .then(function (response2) {//get the descriptions and links
             self.exerciseDescriptions[response2.data.name] = (response2.data.description);
             self.exerciseLinks[response2.data.name] = (response2.data.link);
-            console.log(self.exerciseLinks[response2.data.name] + " is the link in the hashmap")
           })
           .catch(function (error2) {
             console.log(error2);
           });
-        }
-        console.log(self.exerciseDescriptions)
-        
+        }        
       })
       .catch(function (error) {
         console.log(error);

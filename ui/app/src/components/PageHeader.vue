@@ -58,9 +58,6 @@ export default {
     {
       router.push({path:"/CreateExercise"});
     },
-    // dateChanged(){
-    //   this.$emit("closed", this.date)
-    // },
     returnHome(){
       if(this.$session.get("accountType") == "therapist"){
         router.push({path:"/doctor"});
@@ -76,16 +73,7 @@ export default {
       router.push({path:"/UpdateProfile"});
     }
   },
-  // data () {
-  //   var today = new Date();
-  //   var dd = today.getDate();
-  //   var mm = today.getMonth(); //January is 0!
-  //   var yyyy = today.getFullYear();
-  //   return {
-  //     date: new Date(yyyy, mm,  dd), // Must be an array reference!
 
-  //   }
-  // }
 }
 </script>
 
