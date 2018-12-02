@@ -78,7 +78,6 @@ export default {
       },
       reportText:'',
       date: new Date(yyyy,mm,dd), // Must be an array reference!
-
     }
 }
 
