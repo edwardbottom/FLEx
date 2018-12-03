@@ -7,6 +7,7 @@
     <b-row class="justify-content-md-center">
       <img width="100px" height="80px" src="../images/dumbbell.png"></img>
     </b-row>
+    <!--username input -->
     <b-row class="justify-content-md-center">
       <b-card border-variant="secondary">
           <p>Username or email address</p>
@@ -17,6 +18,7 @@
           <p align="left">Password</p>
         </b-col>
       </b-row>
+        <!--password input -->
           <b-form-input v-on:keyup.enter="goToUserPage" v-model="password" type="password"></b-form-input> 
         <br>
           <b-button class="btn-block" 
@@ -28,6 +30,7 @@
           <p>New to FLEx?</p>
         </b-col>
         <b-col>
+          <!--register button -->
           <b-button variant="success" v-on:click="goToCreateAccount()" v-on:keyup.enter="goToUserPage()">Create an account</b-button>
         </b-col>
       </b-row>
@@ -54,12 +57,14 @@ export default {
     }
   },
   methods:{
+    //go to register page
     goToCreateAccount()
     {
       router.push({path:"/CreateAccount"});
     },
     goToUserPage()
     {
+      //if username or password are blank
       if(this.username == "")
       {
         alert("username is blank")
@@ -68,12 +73,14 @@ export default {
         alert("password is blank")
         return;
       }
+      //check if login is vlaud
       var self = this
       this.axios.post('http://localhost:3000/login', {
         username: this.username,
         password: this.password
       })
       .then(function (response) {
+        //if success, create a session
         if(response.data.status == "success"){
           self.$session.start();
           self.$session.set("username", response.data.username);
@@ -81,7 +88,7 @@ export default {
           self.$session.set("accountType", response.data.accountType);
           self.$session.set("therapistId", response.data.therapistId);
           self.$session.set("providerId", response.data.providerId);
-          
+          //determine which account is logging in 
           if(response.data.accountType == "therapist"){
             router.push({path:"/doctor"});
           }
@@ -89,12 +96,13 @@ export default {
             router.push({path:"/UserHome"});
           }
         }
+        //invalud login
         else{
           alert("not a valid login");
         }
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
     }
   }  

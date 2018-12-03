@@ -1,4 +1,5 @@
 <template>
+  <!--renders a single form input box -->
   <div class="FormRow">        
         <b-row class="justify-content-md-center">
           <b-col cols="2">

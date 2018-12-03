@@ -1,16 +1,19 @@
 <template>
   <div class="userHome">
+    <!--header and formatting -->
     <PageHeader></PageHeader>
     <br>
     <b-container class="statusReports" >
     <b-row>
       <b-col>  
+        <!--information  about the doctor -->
         <CurrentDoctor v-bind:doctorInfo="this.doctorInfo"></CurrentDoctor>
       </b-col>
       <b-col>    
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" v-bind:exerciseLinks="this.exerciseLinks" @clicked="exerciseUpdated"></UserExercises>       
-      </b-col>
+        <!--display users exercises -->
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" v-bind:exerciseLinks="this.exerciseLinks" @clicked="exerciseUpdated"></UserExercises>  </b-col>
         <b-col>
+          <!--display past exercises -->
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
           <PastExercises v-bind:pastExercises="this.pastExercises" @closed="dateUpdated"></PastExercises>
           </b-card-body>
@@ -18,8 +21,8 @@
     </b-row>
 </b-container>
     <center>
+      <!--submit report button -->
       <UserExerciseReport @clicked="submitReport" @closed="dateUpdated"></UserExerciseReport>
-        
     </center>
   </div>
 </template>
@@ -35,9 +38,6 @@
 export default {
   name: 'UserHome',
   props: {
-    //selectedOption: Array,
-    //value2: String,
-    // reportText: String
   },
   components: {
     PageHeader,
@@ -48,36 +48,39 @@ export default {
     Datepicker,
   },
   methods:
-      {
-        submitReport(info){
-              this.axios.post('http://localhost:3000/submitReport', {
-                user:this.$session.get("username"),
-                value: info.value2,
-                reportText: info.reportText,
-                completedExercises: this.selectedOption,
-                exerciseOptions: this.exerciseOptions,
-                date: this.date
-          })
-          .then(function (response) {
-            if(response.data == "1"){//if successful in posting data
-              if(alert("Submitted!")){}
-              else {window.location.reload()}
-            }
-            else {alert("Submission already recieved for this date.")}
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
-
-        },
-        exerciseUpdated(info){
-          this.selectedOption = info;
-        },
-        dateUpdated(info){
-          this.date = info;
+  {
+    //submit report info
+    submitReport(info){
+          this.axios.post('http://localhost:3000/submitReport', {
+            user:this.$session.get("username"),
+            value: info.value2,
+            reportText: info.reportText,
+            completedExercises: this.selectedOption,
+            exerciseOptions: this.exerciseOptions,
+            date: this.date
+      })
+      .then(function (response) {
+        if(response.data == "1"){//if successful in posting data
+          if(alert("Submitted!")){}
+          else {window.location.reload()}
         }
-      },
+        else {alert("Submission already recieved for this date.")}
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+      
+
+    },
+    //choose selected exercise
+    exerciseUpdated(info){
+      this.selectedOption = info;
+    },
+    //updates the current date
+    dateUpdated(info){
+      this.date = info;
+    }
+  },
   data(){
     var today = new Date();
     var dd = today.getDate();
@@ -108,8 +111,8 @@ export default {
     }
   },
   beforeMount(){
+    //request to userhome information
       var self = this
-      console.log(self.$session.get("username"))
       this.axios.post('http://localhost:3000/UserHome', {
         username: self.$session.get("username")
       })
@@ -119,16 +122,16 @@ export default {
       .catch(function (error) {
         console.log(error);
       });   
-
+    //request the exercise plan
       this.axios.post('http://localhost:3000/exercisePlan', {
         username: self.$session.get("username")
       })
       .then(function (response) {
         // console.log(response)
         self.exerciseOptions = response.data.exercisePlan;
-
+        //request each exercise description
         for(var i=0; i < self.exerciseOptions.length; ++i){
-          console.log("sending " + self.exerciseOptions[i].exercise)
+          //console.log("sending " + self.exerciseOptions[i].exercise)
           self.axios.post('http://localhost:3000/exerciseDescriptions', {
           exercises: self.exerciseOptions[i]
           })
@@ -137,12 +140,12 @@ export default {
             self.exerciseLinks[response2.data.name] = (response2.data.link);
           })
           .catch(function (error2) {
-            console.log(error2);
+            //console.log(error2);
           });
         }        
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       }); 
 
 

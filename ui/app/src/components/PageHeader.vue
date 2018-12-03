@@ -1,12 +1,12 @@
 <template>
   <div class="topBar">
     <b-navbar toggleable="md" type="dark" variant="primary">
-
+      <!--header title and formatting -->
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
 
-      <!-- <datepicker placeholder="Select Date" v-model="date" @closed="dateChanged"></datepicker> -->
+      <!--navigation bar buttons and routes -->
       <b-button v-on:click="returnHome()" class="ml-2">HOME</b-button>
       <b-button v-if="ok" v-on:click="createExercise()" class="ml-2">Add Exercise</b-button>
       <b-button v-else v-on:click="updateProfile()" class="ml-2"> Update Profile</b-button>
@@ -19,7 +19,6 @@
             <template slot="button-content">
               <em>{{this.$session.get("username")}}</em>
             </template>
-            <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
             <b-dropdown-item href="#"
             v-on:click="logout()"
             >Signout</b-dropdown-item>
@@ -49,15 +48,18 @@ export default {
     Datepicker
   },
   methods:{
+    //logout and destroy session
     logout()
     {
       this.$session.destroy();
       router.push({path:"/Login"});
     },
+    //go to create exercise page
     createExercise()
     {
       router.push({path:"/CreateExercise"});
     },
+    //go to the home page
     returnHome(){
       if(this.$session.get("accountType") == "therapist"){
         router.push({path:"/doctor"});
@@ -66,9 +68,11 @@ export default {
         router.push({path:"/UserHome"});
       }
     },
+    //go to the send message screen
     sendMessageScreen(){
       router.push({path:"/SendMessage"});
     },
+    //go to update profile screen
     updateProfile(){
       router.push({path:"/UpdateProfile"});
     }

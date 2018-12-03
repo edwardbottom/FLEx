@@ -1,15 +1,15 @@
 <template>
   <div class="CreateSummary">
+    <!--nav bar -->
     <b-navbar toggleable="md" type="dark" variant="primary">
-
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-
       <b-navbar-brand href="#">FLEx</b-navbar-brand>
       </b-navbar>
     <b-row class="justify-content-md-center">
       <h3> Patient Profile </h3>
     </b-row>
     <br>
+    <!--input for patient name -->
     <div class="center-block">
     <b-container class="bv-example-row"> 
         <div class="FormRow">        
@@ -23,6 +23,7 @@
               </b-col>
             </b-row>  
         </div>  
+        <!--input for username -->
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -33,7 +34,8 @@
                 <b-form-input v-model="username" type="text"></b-form-input>
               </b-col>
             </b-row>  
-        </div>                
+        </div>  
+        <!--age input-->              
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -44,7 +46,8 @@
                 <b-form-input v-model="age"></b-form-input>
               </b-col>
             </b-row>  
-        </div>      
+        </div>  
+        <!--height input-->    
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -55,7 +58,8 @@
                 <b-form-input v-model="height"></b-form-input>
               </b-col>
             </b-row>  
-        </div>     
+        </div> 
+        <!--weight input-->    
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -66,7 +70,8 @@
                 <b-form-input v-model="weight" type="text"></b-form-input>
               </b-col>
             </b-row>  
-        </div>    
+        </div>  
+        <!--injury input-->  
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -77,7 +82,8 @@
                 <b-form-input v-model="injury" type="text"></b-form-input>
               </b-col>
             </b-row>  
-        </div>    
+        </div> 
+        <!--current status input-->   
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -99,7 +105,8 @@
                 <b-form-input v-model="averageStatus"></b-form-input>
               </b-col>
             </b-row>  
-        </div>          
+        </div>  
+        <!--insurance provider input-->        
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -111,6 +118,7 @@
               </b-col>
             </b-row>  
         </div>
+        <!--contact input-->
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -121,7 +129,8 @@
                 <b-form-input v-model="contact"></b-form-input>
               </b-col>
             </b-row>  
-        </div>   
+        </div>  
+        <!--next visit input--> 
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -133,6 +142,7 @@
               </b-col>
             </b-row>  
         </div>
+        <!--doctor id input-->
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -145,6 +155,7 @@
             </b-row>  
         </div>
         <br>
+        <!--account type input-->
         <b-row class="justify-content-md-center">
           <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
               <b-form-radio value="success">Good</b-form-radio>
@@ -152,7 +163,8 @@
               <b-form-radio value="danger">Bad</b-form-radio>             
           </b-form-radio-group>
         </b-row>   
-        <br>         
+        <br>   
+    <!--submit input-->      
     </b-container> 
     <b-row class="justify-content-md-center">
       <b-button v-on:click="submitInfo()">Submit Info</b-button>
@@ -192,10 +204,12 @@ export default {
     }
   },
   methods:{
+    //return to login page
     cancel()
     {
       router.push({path:"/login"});
     },
+    //store the summary in the database and returns to login
     submitInfo()
     {
       var self = this
@@ -214,6 +228,7 @@ export default {
         variant: self.variant,
         doctorID: self.doctorID
       })
+      //success and return to login
       .then(function (response) {
         if (response.data == 'success')
         {
@@ -225,7 +240,7 @@ export default {
         }
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
         alert("callback failed")
       });
     }

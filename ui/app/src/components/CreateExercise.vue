@@ -1,5 +1,6 @@
 <template>
-  <div class="CreateExercise">    
+  <div class="CreateExercise">  
+    <!--page header and formatting-->  
     <PageHeader ok="true">Yes</PageHeader>
     <br>
     <div class="center-block">
@@ -11,6 +12,7 @@
           </b-col>
           <b-col cols="1" align="center"><p>:</p></b-col>
           <b-col cols="2">
+            <!--exercise name input-->
             <b-form-input v-model="name"></b-form-input>
           </b-col>
         </b-row>  
@@ -22,6 +24,7 @@
           </b-col>
           <b-col cols="1" align="center"><p>:</p></b-col>
           <b-col cols="2">
+            <!--exercise description input-->
             <b-form-input v-model="description"></b-form-input>
           </b-col>
         </b-row>  
@@ -33,11 +36,13 @@
           </b-col>
           <b-col cols="1" align="center"><p>:</p></b-col>
           <b-col cols="2">
+            <!--link to image input input-->
             <b-form-input v-model="link"></b-form-input>
           </b-col>
         </b-row>  
       </div>      
-      <br>        
+      <br> 
+      <!--submit exercise button-->       
       <b-row class="justify-content-md-center">
           <b-button v-on:click="createNewExercise()">Submit</b-button>
       </b-row>              
@@ -58,6 +63,7 @@ export default {
   },
   methods: 
   {
+    //submits a new exercise to the database
     createNewExercise()
     {
       this.axios.post('http://localhost:3000/createNewExercise', {
@@ -65,6 +71,7 @@ export default {
         description: this.description,
         link: this.link
       })
+      //success case
       .then(function (response) {
         if (response.data != "success")
         {
@@ -74,10 +81,12 @@ export default {
           router.push({path:"/doctor"});
         }
       })
+      //failure case
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });      
     },
+    //data and vue state
     data(){
       return{
         name:'',

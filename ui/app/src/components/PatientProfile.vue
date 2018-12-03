@@ -1,7 +1,9 @@
 <template>
   <div>
+    <!--page header and formatting -->
     <PageHeader ok="true"></PageHeader>
     <br/>
+    <!--display user data -->
     <h2>{{this.userData.name}}
       <b-button size="small" variant="primary" v-on:click="createPlan()">
         Create New Plan
@@ -18,6 +20,7 @@
     <p> Contact: {{this.userData.contact}} </p>
     <p> Next Visit: {{this.userData.nextVisit}} </p>
     <p> Summary: {{this.userData.summary}} </p>
+    <!--edit profile button -->
     <b-button size="small" variant="primary" v-on:click="edit()">
         Edit Profile
       </b-button>
@@ -46,6 +49,7 @@ export default {
   },
   created() {
     var self = this;
+    //get the profile data
     this.axios.post('http://localhost:3000/getProfile', {
       reqUser: this.$session.get("selectedProfile")
     })
@@ -53,7 +57,7 @@ export default {
       self.userData = response.data;
       })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
       });
 
       this.axios.post('http://localhost:3000/UserHome', {
@@ -63,15 +67,17 @@ export default {
         self.pastExercises = response.data;
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
 
   },
    methods:{
+    //go to the create plan page
     createPlan()
     {
       router.push({path:"/CreatePlan"});
     },
+    //go to the edit patient profile
     edit()
     {
       router.push({path:"/EditPatientProfile"});

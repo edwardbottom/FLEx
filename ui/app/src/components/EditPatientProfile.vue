@@ -1,11 +1,13 @@
 <template>
   <div class="CreateSummary">
+  <!--page header -->
   <PageHeader ok="true"></PageHeader>
   </br>
     <b-row class="justify-content-md-center">
       <h3> {{this.name}}'s Profile </h3>
       <br>
     </b-row>
+    <!--height input-->
     <div class="center-block">
     <b-container class="bv-example-row">          
         <div class="FormRow">        
@@ -18,7 +20,8 @@
                 <b-form-input v-model="height"></b-form-input>
               </b-col>
             </b-row>  
-        </div>     
+        </div>   
+        <!--weight input-->  
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -30,6 +33,7 @@
               </b-col>
             </b-row>  
         </div>    
+        <!--injury input-->
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -41,6 +45,7 @@
               </b-col>
             </b-row>  
         </div> 
+        <!--summary input-->
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
@@ -55,6 +60,7 @@
         <br>          
     </b-container> 
     <b-row class="justify-content-md-center">
+      <!--cancel and submit buttons -->
       <b-button v-on:click="cancel()">Cancel</b-button>
       <b-button v-on:click="submitChanges()">Submit Changes</b-button>
     </b-row>   
@@ -89,12 +95,13 @@ export default {
     }
   },
   created() {
+    //request the profile information
     var self = this;
     this.axios.post('http://localhost:3000/getProfile', {
       reqUser: this.$session.get("selectedProfile")
     })
     .then(function (response) {
-      console.log(response.data)
+      //console.log(response.data)
       self.userData = response.data;
       self.user = response.data.user;
       self.name = response.data.name;
@@ -110,14 +117,16 @@ export default {
       self.summary = response.data.summary;
       })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
       });
   },
    methods:{
+    //return to mainpage
     cancel()
     {
       router.push({path:"/PatientProfile"})
     },
+    //submit changes
     submitChanges(){
       var self = this;
       this.axios.post('http://localhost:3000/updatePatientProfile', {
@@ -140,7 +149,7 @@ export default {
       alert("Profile updated");
       })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
       });
     }
   }

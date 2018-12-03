@@ -6,6 +6,7 @@
       </b-nav>
       <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
         <p class="card-text">
+          <!--iterate through list of summaries -->
           <b-card v-for="summary in this.summaries" >
             <b-card no-body class="mb-1">
               <b-card-header header-tag="header" class="p-1" role="tab">
@@ -13,6 +14,7 @@
               </b-card-header>
               <b-collapse v-bind:id="summary.accordionId" visible accordion="my-accordion" role="tabpanel">
               <b-card-body>
+                <!--display patient information -->
                 <ul class="card-text">
                   <li>Age: {{summary.age}}</li>
                   <li>Height: {{summary.height}} Weight: {{summary.weight}} lbs</li>
@@ -46,6 +48,7 @@ export default {
     summaries: Array
   },
   methods: {
+    //loads the patient profile
     loadPatientProfile: function(username) {
       this.$session.set("selectedProfile", username)
       router.push({path:'/PatientProfile'});

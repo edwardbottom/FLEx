@@ -1,7 +1,8 @@
 <template>
 	<b-card>
-        <h2>Today's Report</h2>              
+    <h2>Today's Report</h2>              
     <div>
+      <!--select a date on calendar -->
       <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="1">
@@ -12,7 +13,7 @@
               </b-col>
             </b-row>  
         </div>       
-
+      <!--vuejs slider bar -->
       <VueSlideBar
         v-model="value2"
         :min="1"
@@ -23,7 +24,7 @@
       </VueSlideBar>
       <center><h2>Pain Rating: {{value2}}</h2></center>
     </div>
-
+    <!--text box for report -->
     <div>
     <b-form-textarea id="textarea1"
                      v-model="reportText"
@@ -32,10 +33,10 @@
                      :max-rows="6">
     </b-form-textarea>
     <pre class="mt-3">{{ reportText }}</pre>
-    
   </div>
-<b-button v-on:click="submitReport()">Submit Report</b-button>
-</b-card>
+  <!--submit report button -->
+  <b-button v-on:click="submitReport()">Submit Report</b-button>
+  </b-card>
 </template>
 
 <script>
@@ -52,6 +53,7 @@ export default {
     Datepicker
   },
   methods:{
+    //ends the report to the parent class
     submitReport(){
       var info = {
         value2: this.value2,
@@ -59,10 +61,12 @@ export default {
       }
       this.$emit("clicked", info);
     },
+    //closes data with change
     dateChanged(){
       this.$emit("closed", this.date)
     },
   },
+  //sets date based on current date
   data () {
     var today = new Date();
     var dd = today.getDate();

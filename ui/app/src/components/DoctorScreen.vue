@@ -1,16 +1,20 @@
 <template>
   <div>
+    <!--page header and formatting -->
     <PageHeader ok="true"></PageHeader>
     <br/>
     <b-container class="bv-example-row">
       <b-row>
         <b-col cols="6">
+          <!--summaries component -->
           <PatientSummary v-bind:summaries="this.summaries"></PatientSummary>
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="4">
+          <!--update feed component -->
           <UpdateFeed v-bind:updates= "this.updates"></UpdateFeed>
           <br/>
+          <!--patient message componenet -->
           <PatientMessages v-bind:messages="this.messages"></PatientMessages>
           <br/>
         </b-col>
@@ -59,11 +63,11 @@ export default {
         self.updates = response.data;
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
     })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
     });
 
     //get patient profiles
@@ -74,7 +78,7 @@ export default {
       self.summaries = response.data;
       })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
       });
     
     //get messages
@@ -85,7 +89,7 @@ export default {
       self.messages = response.data;
       })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
       });
   }
 }

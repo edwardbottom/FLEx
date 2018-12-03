@@ -1,40 +1,41 @@
 <template>
-   <!-- TODO THING -->
-   <div> 
-    <b-card title="Assigned Exercises"
-                    tag="article"
-                    style="max-width: 100%;"
-                    class="mb-2">
-              <p class="card-text">
-                
-                <b-container class="bv-example-row">
-          <center>
- 
-            <b-form-group>
-            <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
-                
-               <div v-for="info in exerciseOptions" :key="info.exercise">
-                <b-form-checkbox :value="info">
-                  <b-row class="justify-content-left" v-bind:id="info.exercise">
-                    <b-col><p>{{info.exercise}}</p></b-col>
-                    <b-col><p>R: {{info.repetitions}}</p></b-col><b-col><p>S: {{info.sets}}</p></b-col>    
-                  </b-row>
-                  <b-popover v-bind:target="info.exercise" triggers="hover focus" v-on:show="refreshPop()">
-                     <template slot="title">Description</template>
-                      <b-img width="250" height="250" v-bind:src= "exerciseLinks[info.exercise]"/>
-                     {{exerciseDescriptions[info.exercise]}}
-                  </b-popover>
-                </b-form-checkbox>
- 
-              </div>     
-            
-            </b-form-checkbox-group> 
-            </b-form-group>               
-          </center>
-        </b-container>
-      </p>
-        </b-card>
-    </div>
+ <div> 
+  <!--title card -->
+  <b-card title="Assigned Exercises"
+                  tag="article"
+                  style="max-width: 100%;"
+                  class="mb-2">
+            <p class="card-text">
+              
+              <b-container class="bv-example-row">
+        <center>
+
+          <b-form-group>
+          <b-form-checkbox-group buttons class="d-block" stacked v-model="selectedOption" v-on:input="exerciseUpdate()">
+            <!--iterate through and display user exercises -->
+             <div v-for="info in exerciseOptions" :key="info.exercise">
+              <b-form-checkbox :value="info">
+                <b-row class="justify-content-left" v-bind:id="info.exercise">
+                  <!--display each exercises info -->
+                  <b-col><p>{{info.exercise}}</p></b-col>
+                  <b-col><p>R: {{info.repetitions}}</p></b-col><b-col><p>S: {{info.sets}}</p></b-col>    
+                </b-row>
+                <b-popover v-bind:target="info.exercise" triggers="hover focus" v-on:show="refreshPop()">
+                   <template slot="title">Description</template>
+                    <b-img width="250" height="250" v-bind:src= "exerciseLinks[info.exercise]"/>
+                   {{exerciseDescriptions[info.exercise]}}
+                </b-popover>
+              </b-form-checkbox>
+
+            </div>     
+          
+          </b-form-checkbox-group> 
+          </b-form-group>               
+        </center>
+      </b-container>
+    </p>
+      </b-card>
+  </div>
 </template>
 
 
@@ -49,9 +50,11 @@ export default {
     exerciseLinks: {}
   },
   methods:{
+    //send selected option to parent
     exerciseUpdate(){
       this.$emit("clicked", this.selectedOption)
     },
+    //refrest the page
     refreshPop(){
       this.$forceUpdate()
     }
