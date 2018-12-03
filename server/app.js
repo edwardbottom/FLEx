@@ -1,3 +1,4 @@
+//nodejs dependencies and external libraries
 const express = require('express')
 var cors = require('cors')
 const app = express()
@@ -79,62 +80,47 @@ var sha512 = function(password, salt){
     };
 };
 
-//hello world get request
+//sample encrpytion of data
 var testCipher = encrypt('Hello World!')
-//app.get('/', (req, res) => res.send(testCipher))
-//app.get('/', (req, res) => res.send(decrypt(testCipher)))
 
 
+
+//gets the reports for the user home
 app.post('/UserHome', function(req,res) {
   const username_text=req.body.username;
-  // console.log(username_text + " is the username searched for")
-  console.log(username_text)
+  //gets the report and send the reports to the user
   db.collection('Reports').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
-      const collator = new Intl.Collator('en', {numeric: true, sensitivity: 'base'})
+    const collator = new Intl.Collator('en', {numeric: true, sensitivity: 'base'})
     const sorted = result.sort((a,b) => collator.compare(b.date,a.date))
-      console.log(sorted + " is the result")
       res.send(sorted)
   });
 });
 
+//retreive a patients exercise plan
 app.post('/exercisePlan', function(req,res) {
   const username_text=req.body.username;
-  console.log(username_text + " is the username searched for")
+  //query the database
   db.collection('ExercisePlans').find({user : username_text}).toArray(function (err, result) 
   {
     if (err) throw err
       
-      console.log(result[0] + " is the result!!!!!")
       res.send(result[0])
   });
 });
 
+//get the descriptions of each exercise
 app.post('/exerciseDescriptions',function(req,res){
-  console.log("MADESS" + JSON.stringify(req.body))
-  console.log("MADESxx" + req.body.exercises.exercise)
+  //create a list to store exedrcise names
   var exerciseNames = []
-
-  console.log(req.body.exercises.exercise + "is the item")
+  //query the database
   db.collection('Exercises').find({name : req.body.exercises.exercise}).toArray(function (err, result) 
   {
     if (err) throw err
     console.log(result[0].description + " is the result! (desc)")
     res.send(result[0])
   });
-  
-  // for(var i = 0; i <req.body.exercises.length; ++){
-  //   exerciseNames.push(req.body.exercises[i].exercise)
-  // }
-  // var item = req.body.exercises[0].exercise
-  // var stuff = db.collection('Exercises').find({
-  //   exercise: item
-  // })
-
-  // res.send(stuff)
-  // console.log("!!!" + exerciseDescriptions.length)
-  // res.send(exerciseDescriptions)
 })
 
 //places a single json object in the database
@@ -148,7 +134,7 @@ app.get('/db', (req, res) =>{
     function (err, res) {
       	if (err) {
         	db.close();
-        	res.send("it done fucked up")
+        	res.send("path is not valid")
       	}
       	// Success
       	db.close();  
@@ -156,23 +142,31 @@ app.get('/db', (req, res) =>{
 	res.send("this path works")
 })
 
-
+//veriffies if a login is valid
 app.post('/login',function(req,res){
+  //set user input to constants
   const username_text=req.body.username;
   const password_guess=req.body.password;
+
+  //catch error if values are blank
   if(username_text == undefined || username_text == '' || password_guess == undefined){
     res.send("user not found");
   }
+
+  //query the database
   db.collection('UserProfile').find({user : username_text}).toArray(function (err, result) {
     if (err) throw err
     
+    //if the user does not exit
     if(result.length == 0){
       res.send("user not found");
     }
+    //if the user exists
     else{
       let salt = result[0].passwordData.salt;
       let password_hash = result[0].passwordData.passwordHash;
       let password_guess_hash = sha512(password_guess, salt).passwordHash;
+      //if the password is invalid
       if(password_guess_hash != password_hash){
         console.log("login FAILED");
         let loginObject = new Object();
@@ -180,6 +174,7 @@ app.post('/login',function(req,res){
         loginObject.status = "failed";
         res.send("user not found")
       }
+      //if the password is valid
       else{
         //if login works
         console.log("LOGIN WORKED");
@@ -197,7 +192,9 @@ app.post('/login',function(req,res){
   })
 })
 
+//register an account
 app.post('/register',function(req,res){
+  //store user data
   const first_name = req.body.first_name;
   const middle_name = req.body.middle_name;
   const last_name = req.body.last_name;
@@ -209,6 +206,7 @@ app.post('/register',function(req,res){
   const therapist_id = req.body.therapist_id;
   const account_type = req.body.account_type;
 
+  //return false if any of the fields are blank
   if(password != re_password){
     res.send("passwords dont match")
   } else if (first_name == undefined || first_name == '')
@@ -243,9 +241,11 @@ app.post('/register',function(req,res){
     res.send("Please select an account type")
   }
   else{
+    //ecrpyt the password
     var salt = genRandomString(16); /** Gives us salt of length 16 */
     var passwordData = sha512(password, salt);
 
+    //create user in database
     db.collection('UserProfile').insertOne(
     {
           user:user_name,
@@ -261,26 +261,27 @@ app.post('/register',function(req,res){
       //catch errors
       function (err, res) {
           if (err) {
-            // db.close();
-            res.send(err)
-          }
-          // Success
-          // db.close();  
+          res.send(err)
+          }  
       });
     res.send("success")
     }
 })
 
+//create a new exercise in the database
 app.post('/createNewExercise',function(req,res){
+    //store data
     const name = req.body.name;
     const description = req.body.description;
     const link = req.body.link;
+    //send errors if values are null
     if(name == undefined || name == ''){
       res.send("Exercise name is blank");
     } else if(description == undefined || description == '')
     {
       res.send("Exercise description is blank");
     }
+    //store the exercise in the database
     db.collection('Exercises').insertOne(
     {
         name:name,
@@ -290,21 +291,21 @@ app.post('/createNewExercise',function(req,res){
     //catch errors
     function (err, res) {
         if (err) {
-          // db.close();
-          res.send("broken path")
+        res.send("broken path")
         }
-        // Success
-        // db.close();  
     });
     res.send("success")  
 })
 
+//creates a new set for an exercise
 app.post('/createNewExerciseSet',function(req,res){
+    //store the values
     const id = req.body.id;
     const exercise = req.body.exercise;
     const repetitions = req.body.repetitions;
     const sets = req.body.sets;
 
+    //store the values in the database
     db.collection('ExerciseSet').insertOne(
     {
         id:id,
@@ -315,21 +316,22 @@ app.post('/createNewExerciseSet',function(req,res){
     //catch errors
     function (err, res) {
         if (err) {
-          // db.close();
+          
           res.send("broken path")
-        }
-        // Success
-        // db.close();  
+        }  
     });
     res.send("this path works")  
 })
 
+//delete an exercise from the database
 app.post('/deleteExerciseSet',function(req,res){
+    //store values
     const id = req.body.id;
     const exercise = req.body.exercise;
     const repetitions = req.body.repetitions;
     const sets = req.body.sets;
 
+    //delete the value from the database
     db.collection('ExerciseSet').deleteOne(
     {
         "id":id
@@ -337,16 +339,15 @@ app.post('/deleteExerciseSet',function(req,res){
     //catch errors
     function (err, res) {
         if (err) {
-          // db.close();
           res.send("broken path")
-        }
-        // Success
-        // db.close();  
+        } 
     });
     res.send("this path works")  
 })
 
+//submit a a patient report to the database
 app.post('/submitReport',function(req,res){
+  //store values
   const value = req.body.value;
   const reportText = req.body.reportText;
   const completedExercises = req.body.completedExercises;
@@ -354,11 +355,14 @@ app.post('/submitReport',function(req,res){
   const user = req.body.user;
   const exerciseOptions = req.body.exerciseOptions;
   var length;
+
+  //find a report in the database
   db.collection('Reports').find({date: date, user:user}).toArray(function (err, result) {
     if (err){throw err}
     // console.log(result)
     else{
       if (result.length == 0){
+    //insert a report in the database
     db.collection('Reports').insertOne(
     {
           user:user,
@@ -371,17 +375,12 @@ app.post('/submitReport',function(req,res){
       //catch errors
       function (err, res) {
           if (err) {
-            // db.close();
             res.send("broken path")
-          }
-          // Success
-          // db.close();  
+          } 
       });
-    console.log("sending success")
     res.send("1")
   }
   else{
-    console.log("sending fail")
     res.send("0")
   }
     }
@@ -390,10 +389,13 @@ app.post('/submitReport',function(req,res){
   
 })
 
+//submit an exercise plan for a patient
 app.post('/submitExercisePlan',function(req,res){
+  //store values in the database
   const user = req.body.user;
   const exercisePlan = req.body.exercisePlan;
-  // console.log(user)
+  
+  //store the plan in the database
   db.collection('ExercisePlans').insertOne(
     {
           user:user,
@@ -402,70 +404,71 @@ app.post('/submitExercisePlan',function(req,res){
       },
   function (err, res) {
           if (err) {
-            // db.close();
             res.send("broken path")
           }
-          // Success
-          // db.close();  
       });
     res.send("this path works")
-
 })
 
+//update a patients exercise plan
 app.post('/updateExercisePlan',function(req,res){
+  //store values
   const user = req.body.user;
   const exercisePlan = req.body.exercisePlan;
-  // console.log(user)
+  
+  //update the plan inthe database
   db.collection('ExercisePlans').update(
     {user:user},
     {
           user:user,
           exercisePlan:exercisePlan
     },
+    //catch errors
   function (err, res) {
           if (err) {
-            // db.close();
             res.send("broken path")
           }
-          // Success
-          // db.close();  
       });
     res.send("this path works")
 
 })
 
+//get all of a docctors patients
 app.post('/getPatients',function(req,res){
   const doctorIdVal = req.body.doctorId;
+  //query and return a list of patients
    db.collection('UserDescription').find({doctorID:doctorIdVal}).toArray(function (err, result) {
     if (err) throw err
-    // console.log(result)
     res.send(result);
   })
 })
 
+//get a users plan
 app.post('/getPlan', function(req,res){
   const userVal = req.body.user;
+  //get and send the users plan
   db.collection('ExercisePlans').find({user:userVal}).toArray(function (err, result) {
     if (err) throw err
-    // console.log(result)
     res.send(result);
   })
 })
 
+//get a doctors messages
 app.post('/getMessages', function(req,res){
   const rec = req.body.rec;
+  //retreived and send all of the users messages
   db.collection('Messages').find({receiver:rec}).toArray(function (err, result) {
     if (err) throw err
-    // console.log(result)
     res.send(result.reverse());
   })
 })
 
-//working
+//get a patients names from the database
 app.post('/getPatientNames', function(req,res){
   const doctorIdVal = req.body.doctorId;
   var updates = [];
   let hasRun = false;
+  //find and send the patient's profiles for a therapist
   db.collection('UserProfile').find({therapist_id:doctorIdVal}).toArray(function(err,result){
     if(err) throw err
       console.log("results sent");
@@ -473,14 +476,17 @@ app.post('/getPatientNames', function(req,res){
   })
 })
 
+//get the updates for the doctor
 app.post('/getDoctorUpdates', function(req,res){
   let patientNames = req.body.patientNames;
-  console.log("the updates request was received and the patient names array is " + patientNames.toString())
+
+  //get all of the patients names
   for(let i = 0; i < patientNames.length; i++){
     patientNames[i] = patientNames[i].user;
   }
 
   let returnArray = [];
+  //requery the reports and extract the patients updates
   db.collection('Reports').find().toArray(function (err, result) {
     if (err) throw err
     for(let i = 0; i < result.length; i++){
@@ -490,12 +496,12 @@ app.post('/getDoctorUpdates', function(req,res){
     }
     res.send(returnArray.reverse());
   })
-
-  //res.send("words");
 })
 
+//get the profile for a patient
 app.post('/getProfile', function(req,res){
   const reqUser = req.body.reqUser;
+  //query and send a patients profile
   db.collection('PatientProfile').find({'user':reqUser}).toArray(function (err, result) {
     if (err) throw err
     console.log(result[0])
@@ -503,19 +509,24 @@ app.post('/getProfile', function(req,res){
   })
 })
 
+//get all the exericses in the database
 app.get('/getAllExercises', (req, res) =>{
+  //query and send all exercises
   db.collection('Exercises').find().toArray(function (err, result) {
     if (err) throw err
     res.send(result);
   })
 })
 
+//send a message to a user
 app.post('/sendMessage', function(req,res){
+  //store values as consts
   const message = req.body.message;
   const sender = req.body.sender;
   const receiver = req.body.receiver;
   const id = genRandomString(30);
 
+  //catch blank data in forms
   if (message == undefined || message == '')
   {
     res.send("Your message text is blank")
@@ -523,6 +534,8 @@ app.post('/sendMessage', function(req,res){
   {
     res.send("Your message recipient is blank")
   }
+
+  //query the database
   db.collection('Messages').insertOne(
     {
         message:message,
@@ -533,14 +546,15 @@ app.post('/sendMessage', function(req,res){
     //catch errors
     function (err, res) {
         if (err) {
-          console.log("error reached")
           res.send("failure");
         }
     });
     res.send("success");
 })
 
+//create a summary for a patient
 app.post('/createSummary', function(req,res){
+    //stores calues an consts
     const patient = req.body.patient;
     const username = req.body.username;
     const age = req.body.age;
@@ -556,6 +570,7 @@ app.post('/createSummary', function(req,res){
     const doctorID = req.body.doctorID;
     const accordionId = genRandomString(30);
 
+    //catch an blank values
     if (patient == undefined || patient == '')
     {
       res.send('Please enter a patient name');
@@ -590,6 +605,8 @@ app.post('/createSummary', function(req,res){
     {
       res.send('Please enter your doctor ID');
     }
+
+    //insert object into the database
     db.collection('UserDescription').insertOne(
     {
         patient:patient, 
@@ -616,7 +633,9 @@ app.post('/createSummary', function(req,res){
     res.send("success")  
 })
 
+//update the patient profule
 app.post('/updatePatientProfile', function(req,res){
+  //store the object in the database
   db.collection("PatientProfile").update(
    { user:req.body.user},
    {
@@ -637,18 +656,16 @@ app.post('/updatePatientProfile', function(req,res){
    //catch errors
    function (err, res) {
         if (err) {
-          console.log("error reached")
           res.send("broken path")
         }
     });
-  console.log("success reached")
   res.send("success");
 })
 
+//get the patient summary
 app.post('/getPatientSummary', function(req,res){
   const username = req.body.username;
-  console.log("REQUEST REACHED!!!!")
-  console.log(username + " is the username")
+  //query the database and send the result
   db.collection('UserDescription').find({'username':username}).toArray(function (err, result) {
     if (err) throw err
     console.log(result[0])
@@ -656,11 +673,11 @@ app.post('/getPatientSummary', function(req,res){
   })
 })
 
-
+//update a patient summary
 app.post('/updateSummary', function(req,res){
+    //store the values as consts
     const patient = req.body.patient;
     const username = req.body.username;
-    console.log("username is " + username)
     const age = req.body.age;
     const height = req.body.height;
     const weight = req.body.weight;
@@ -674,6 +691,7 @@ app.post('/updateSummary', function(req,res){
     const doctorID = req.body.doctorID;
     const accordionId = genRandomString(30);
 
+    //update the value in the database
     db.collection('UserDescription').update(
     {username:username},
     {
