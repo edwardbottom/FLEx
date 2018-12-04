@@ -6,6 +6,7 @@
       <b-nav pills slot="header" v-b-scrollspy:nav-scroller>
         <h3>{{info.date.substring(0,info.date.indexOf("T"))}}</h3>
       </b-nav>
+      <center><h3>Pain Rating: {{info.value}}</h3></center>
       <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
   <b-container class="bv-example-row" >
     <b-row>
