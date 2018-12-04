@@ -28,7 +28,7 @@
                       View Profile
                   </b-button>
                   <div class="vl"></div>
-                  <b-button size="small" variant="secondary" v-on:click="createPlan()">
+                  <b-button size="small" variant="secondary" v-on:click="createPlan(summary.username)">
                     View Exercise Plan
                   </b-button>                
                 </ul>
@@ -63,8 +63,9 @@ export default {
       this.$session.set("selectedProfile", username)
       router.push({path:'/PatientProfile'});
     },
-    createPlan()
+    createPlan: function(username)
     {
+      this.$session.set("selectedProfile", username)
       router.push({path:"/CreatePlan"});
     }    
   },
