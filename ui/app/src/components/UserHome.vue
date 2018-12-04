@@ -94,13 +94,9 @@ export default {
       doctorInfo: 
         [
         {
-          firstVisit:'2/22/1997',
-          lastVisit:'2/22/2018',
-          nextVisit: '9/30/2018',
-          daysSinceVisit: '217',
-          visit: '13',
-          provider: 'Stretch Physical Therapy',
-          phone: '(555)555-5555'
+          nextVisit: '',
+          provider: '',
+          phone: ''
         }
         ],
         exerciseOptions: [],
@@ -125,6 +121,18 @@ export default {
       .catch(function (error) {
         console.log(error);
       });   
+
+      this.axios.post('http://localhost:3000/getPatientSummary', {
+        username: self.$session.get("username")
+      })
+      .then(function (response) {
+        self.doctorInfo[0].nextVisit = response.data.nextVisit;
+        self.doctorInfo[0].phone = response.data.contact;
+        self.doctorInfo[0].provider = response.data.insuraceProvider;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });       
     //request the exercise plan
       this.axios.post('http://localhost:3000/exercisePlan', {
         username: self.$session.get("username")

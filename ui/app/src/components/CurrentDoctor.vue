@@ -9,31 +9,15 @@
     <div>
     </div>  
     <!--renders the patient information -->
-    <b>First Visit</b>
-    <br>
-    {{info.firstVisit}}
-    <br>
-    <b>Last Visit</b>
-    <br>
-    {{info.lastVisit}}
-    <br>
     <b>Next Visit</b>
     <br>
     {{info.nextVisit}}
-    <br>
-    <b>Days Since Last Visit</b>
-    <br>
-    {{info.daysSinceVisit}}
-    <br>
-    <b># of Visit</b>
-    <br>
-    {{info.visit}}
     <br>
     <b>Provider</b>
     <br>
     {{info.provider}}
     <br>
-    <b>Phone #</b>
+    <b>Emergency Contact Phone #</b>
     <br>
     {{info.phone}}
     <br>
