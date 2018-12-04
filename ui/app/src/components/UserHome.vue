@@ -11,7 +11,10 @@
       </b-col>
       <b-col>    
         <!--display users exercises -->
-        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" v-bind:exerciseLinks="this.exerciseLinks" @clicked="exerciseUpdated"></UserExercises>  </b-col>
+        <b-card-body id="nav-scroller1" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
+        <UserExercises v-bind:exerciseOptions="this.exerciseOptions" v-bind:exerciseDescriptions="this.exerciseDescriptions" v-bind:exerciseLinks="this.exerciseLinks" @clicked="exerciseUpdated"></UserExercises>  
+      </b-card-body>
+      </b-col>
         <b-col>
           <!--display past exercises -->
           <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
