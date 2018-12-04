@@ -156,7 +156,7 @@
         <br>
         <!--average status input -->
         <b-row class="justify-content-md-center">
-          <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
+          <b-form-radio-group id="account_type" v-model="variant" name="radioSubComponent">
               <b-form-radio value="success">Good</b-form-radio>
               <b-form-radio value="warning">Average</b-form-radio> 
               <b-form-radio value="danger">Bad</b-form-radio>             
@@ -241,6 +241,7 @@ export default {
     {
       //update summary request
       var self = this
+      console.log("variant vlaue is " + this.variant)
       this.axios.post('http://localhost:3000/updateSummary', {
         patient: this.patient,
         username: this.username,
