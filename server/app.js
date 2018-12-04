@@ -651,7 +651,8 @@ app.post('/updatePatientProfile', function(req,res){
       lastActive: req.body.lastActive,
       contact: req.body.contact,
       nextVisit: req.body.nextVisit,
-      summary: req.body.summary
+      summary: req.body.summary,
+      variant: req.body.variant
    },
    //catch errors
    function (err, res) {
