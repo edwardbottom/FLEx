@@ -61,8 +61,8 @@
     </b-container> 
     <b-row class="justify-content-md-center">
       <!--cancel and submit buttons -->
-      <b-button v-on:click="cancel()">Cancel</b-button>
-      <b-button v-on:click="submitChanges()">Submit Changes</b-button>
+      <b-button class="spacingClass" v-on:click="cancel()">Cancel</b-button>
+      <b-button class="spacingClass" v-on:click="submitChanges()">Submit Changes</b-button>
     </b-row>   
   </div> 
   </div>
@@ -157,6 +157,8 @@ export default {
 }
 </script>
 <style>
-
+.spacingClass  {
+  margin: 10px;
+}
 </style>
 

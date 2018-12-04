@@ -51,7 +51,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Height</p>            
+                <p>Height (ft' in'')</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -63,7 +63,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Weight</p>            
+                <p>Weight (lbs.)</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -87,7 +87,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Current Status</p>            
+                <p>Current Pain (1-10)</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -98,7 +98,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Average Status</p>            
+                <p>Average Pain (1-10)</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -122,7 +122,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Contact</p>            
+                <p>Emergency Contact</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -134,7 +134,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Next Visit</p>            
+                <p>Next Visit (mm/dd/yyyy)</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -146,7 +146,7 @@
         <div class="FormRow">        
             <b-row class="justify-content-md-center">
               <b-col cols="2">
-                <p>Doctor ID</p>            
+                <p>Therapist ID</p>            
               </b-col>
               <b-col cols="1" align="center"><p>:</p></b-col>
               <b-col cols="2">
@@ -157,6 +157,7 @@
         <br>
         <!--account type input-->
         <b-row class="justify-content-md-center">
+          <p class="spacingClass">Current Status:</p>
           <b-form-radio-group id="account_type" v-model="account_type" name="radioSubComponent">
               <b-form-radio value="success">Good</b-form-radio>
               <b-form-radio value="warning">Average</b-form-radio> 
@@ -250,7 +251,7 @@ export default {
 
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  margin: 20px 0 0;
 }
 ul {
   list-style-type: none;
@@ -258,9 +259,12 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 a {
   color: #42b983;
+}
+.spacingClass  {
+  margin: 0 20px 0 0;
 }
 </style>
