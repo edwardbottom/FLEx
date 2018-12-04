@@ -4,10 +4,9 @@
     <PageHeader ok="true"></PageHeader>
     <br/>
     <!--display user data -->
+    <b-col class="v1"></b-col>
+    <b-col>    
     <h2>{{this.userData.name}}
-      <b-button size="small" variant="primary" v-on:click="createPlan()">
-        Create New Plan
-      </b-button>
     </h2>
     <p> Height: {{this.userData.height}} </p>
     <p> Weight: {{this.userData.weight}} </p>
@@ -27,6 +26,7 @@
     <b-card-body id="nav-scroller" ref="content" style="position:relative; height:500px; overflow-y:scroll;">
           <PastExercises v-bind:pastExercises="this.pastExercises"></PastExercises>
     </b-card-body>
+    </b-col>
   </div>
 </template>
 
@@ -65,6 +65,8 @@ export default {
       })
       .then(function (response) {
         self.pastExercises = response.data;
+        console.log("past")
+        console.log(response.data)
       })
       .catch(function (error) {
         //console.log(error);
@@ -87,6 +89,8 @@ export default {
 }
 </script>
 <style>
-
+.vl {
+    margin-left: 10px;
+}
 </style>
 

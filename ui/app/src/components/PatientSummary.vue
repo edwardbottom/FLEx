@@ -27,6 +27,10 @@
                   <b-button :size="sm" :variant="secondary" v-on:click="loadPatientProfile(summary.username)">
                       View Profile
                   </b-button>
+                  <div class="vl"></div>
+                  <b-button size="small" variant="secondary" v-on:click="createPlan()">
+                    View Exercise Plan
+                  </b-button>                
                 </ul>
             </b-card-body>
             </b-collapse>
@@ -38,6 +42,12 @@
   </div>
 </template>
 
+<style>
+.vl {
+    border-left: 6px;
+    height: 10px;
+}
+</style>
 
 <script>
 import router from '../router';
@@ -52,7 +62,11 @@ export default {
     loadPatientProfile: function(username) {
       this.$session.set("selectedProfile", username)
       router.push({path:'/PatientProfile'});
-    }
+    },
+    createPlan()
+    {
+      router.push({path:"/CreatePlan"});
+    }    
   },
   
 }
